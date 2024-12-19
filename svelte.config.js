@@ -12,7 +12,7 @@ const config = {
       strict: true
     }),
     paths: {
-      base: '/river-valley-loop', // This should match your repository name
+      base: '',
     }
   },
   preprocess: vitePreprocess()
