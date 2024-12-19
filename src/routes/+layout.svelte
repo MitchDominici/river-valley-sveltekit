@@ -4,12 +4,13 @@
     import Footer from '$lib/components/Footer.svelte';
     import {page} from '$app/stores';
     import {onMount} from 'svelte';
+    import {base} from '$app/paths';
 
     let riverContainer;
-
+    console.log($page.url.pathname);
     // Hide river container on home page
-    $: shouldShowRiver = $page.url.pathname !== '/';
-
+    $: shouldShowRiver = $page.url.pathname !== '/river-valley-loop/';
+    console.log(shouldShowRiver);
     onMount(() => {
         if (riverContainer) {
             riverContainer.style.visibility = shouldShowRiver ? 'visible' : 'hidden';
@@ -30,7 +31,7 @@
                     <defs>
                         <pattern height="1200" id="riverPattern" patternUnits="userSpaceOnUse" width="1200">
                             <rect fill="white" height="1200" opacity="0.2" width="1200" x="0" y="0"/>
-                            <image class="w-full h-full" href="images/river-valley.jpg" opacity="0.2"/>
+                            <image class="w-full h-full" href="{base}/images/river-valley.jpg" opacity="0.2"/>
                         </pattern>
                     </defs>
 
