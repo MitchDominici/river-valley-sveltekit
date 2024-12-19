@@ -7,7 +7,8 @@ export const nodes = [
     () => import('./nodes/3'),
     () => import('./nodes/4'),
     () => import('./nodes/5'),
-    () => import('./nodes/6')
+    () => import('./nodes/6'),
+    () => import('./nodes/7')
 ];
 
 export const server_loads = [];
@@ -17,7 +18,8 @@ export const dictionary = {
     "/about": [3],
     "/events": [4],
     "/maps": [5],
-    "/towns": [6]
+    "/towns": [~6],
+    "/towns/[slug]": [7]
 };
 
 export const hooks = {
@@ -34,4 +36,4 @@ export const decoders = Object.fromEntries(Object.entries(hooks.transport).map((
 
 export const decode = (type, value) => decoders[type](value);
 
-export {default as root} from '../root.js';
+export {default as root} from '../root.svelte';
