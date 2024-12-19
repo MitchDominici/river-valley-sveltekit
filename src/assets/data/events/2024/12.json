@@ -1,0 +1,47 @@
+[
+  {
+    "Event Name": "Annual Band Winter Market",
+    "Date and Time": "2024-12-07 08:00:00",
+    "Location": "Owensville High School, Owensville, MO",
+    "Description": "A winter market featuring local bands and vendors.",
+    "Tags": "Winter Market, Local Bands",
+    "Duration": "7 hours",
+    "Price": "Free"
+  },
+  {
+    "Event Name": "Annual Kristkindl Markt (Day 1)",
+    "Date and Time": "2024-12-07 10:00:00",
+    "Location": "Stone Hill Winery, Hermann, MO",
+    "Description": "A traditional German Christmas market with crafts, food, and entertainment.",
+    "Tags": "Christmas Market, Crafts",
+    "Duration": "7 hours",
+    "Price": "Free"
+  },
+  {
+    "Event Name": "Annual Kristkindl Markt (Day 2)",
+    "Date and Time": "2024-12-08 10:00:00",
+    "Location": "Stone Hill Winery, Hermann, MO",
+    "Description": "A continuation of the traditional German Christmas market with crafts, food, and entertainment.",
+    "Tags": "Christmas Market, Crafts",
+    "Duration": "5 hours",
+    "Price": "Free"
+  },
+  {
+    "Event Name": "New Year's Eve Bash",
+    "Date and Time": "2024-12-31 19:30:00",
+    "Location": "Triple 3 Vineyard, Washington, MO",
+    "Description": "A festive New Year's Eve celebration with live music, food, and drinks.",
+    "Tags": "New Year's Eve, Celebration",
+    "Duration": "4 hours",
+    "Price": "$25"
+  },
+  {
+    "Event Name": "Cherry & Jerry: Ragtime at Scenic Regional Library",
+    "Date and Time": "2024-12-03 18:30:00",
+    "Location": "Scenic Regional Library - Hermann Branch, Hermann, MO",
+    "Description": "A ragtime music performance by Cherry & Jerry.",
+    "Tags": "Music, Ragtime",
+    "Duration": "1 hour",
+    "Price": "Free"
+  }
+]
