@@ -17,7 +17,7 @@
                 <img
                         alt="Missouri River Valley Loop logo"
                         class="h-28 hover:cursor-pointer"
-                        src="src/assets/images/main/logo-alt-1.png"
+                        src="images/main/logo-alt-1.png"
                 />
             </a>
 

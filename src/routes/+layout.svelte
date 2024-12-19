@@ -30,7 +30,7 @@
                     <defs>
                         <pattern height="1200" id="riverPattern" patternUnits="userSpaceOnUse" width="1200">
                             <rect fill="white" height="1200" opacity="0.2" width="1200" x="0" y="0"/>
-                            <image class="w-full h-full" href="src/assets/images/river-valley.jpg" opacity="0.2"/>
+                            <image class="w-full h-full" href="images/river-valley.jpg" opacity="0.2"/>
                         </pattern>
                     </defs>
 

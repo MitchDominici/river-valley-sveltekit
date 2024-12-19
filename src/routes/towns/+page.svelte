@@ -1,6 +1,25 @@
 <script lang="ts">
-    export let data
-    const {towns, businessesCount, townsCount} = data;
+    import {onMount} from 'svelte';
+    import {townStore} from '$lib/stores/townStore';
+
+    let loaded;
+    let towns = [];
+    let businessesCount = 0;
+    let townsCount = 0;
+
+    townStore.subscribe(state => {
+        loaded = state.loaded;
+        towns = state.towns;
+        businessesCount = state.businesses.length;
+        townsCount = towns.length;
+
+    });
+
+    onMount(async () => {
+        if (!loaded) {
+            await townStore.loadData();
+        }
+    });
 </script>
 
 <div id="towns-page">

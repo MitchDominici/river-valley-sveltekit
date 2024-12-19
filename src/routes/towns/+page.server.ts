@@ -1,10 +1,19 @@
 import {parse} from 'csv-parse/sync';
 import {promises as fs} from 'fs';
 
+async function loadTown() {
+    const response = await fetch('data/towns.csv');
+    const csvText = await response.text();
+    console.log(csvText);
+    // const towns = parseCSV(csvText);
+    // town = towns.find((t) => t.name.toLowerCase() === townName.toLowerCase());
+}
+
 export async function load() {
     try {
-        const townsData = await fs.readFile('src/assets/data/towns.csv', 'utf-8');
-        const businessesData = await fs.readFile('src/assets/data/businesses.csv', 'utf-8');
+        await loadTown();
+        const townsData = await fs.readFile('data/towns.csv', 'utf-8');
+        const businessesData = await fs.readFile('data/businesses.csv', 'utf-8');
 
         const towns = parse(townsData, {
             columns: true,
