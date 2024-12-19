@@ -3,5 +3,7 @@
 	"/about": [],
 	"/events": [],
 	"/maps": [],
-	"/towns": []
+  "/towns": [
+    "src/routes/towns/+page.server.ts"
+  ]
 }

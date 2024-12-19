@@ -1,7 +1,6 @@
 <script lang="ts">
     // Import page store properly
     import {page} from '$app/stores';
-    import {browser} from '$app/environment';
 
     // State for mobile menu
     let isMobileMenuOpen = false;
@@ -18,42 +17,42 @@
                 <img
                         alt="Missouri River Valley Loop logo"
                         class="h-28 hover:cursor-pointer"
-                        src="https://mitchdominici.github.io/river-valley-loop/images/main/logo-alt-1.png"
+                        src="src/assets/images/main/logo-alt-1.png"
                 />
             </a>
 
             <div class="hidden md:flex space-x-6">
                 <a
-                        class="text-gray-600 hover:text-gray-900"
-                        class:active={browser && $page.url.pathname === '/'}
+                        class="text-gray-600 hover:text-earthy-brown active:text-primary-blue"
+                        class:active={$page.url.pathname === '/'}
                         href="/"
                 >
                     Home
                 </a>
                 <a
-                        class="text-gray-600 hover:text-gray-900"
-                        class:active={browser && $page.url.pathname === '/towns'}
+                        class="text-gray-600 hover:text-gray-900 active:text-primary-blue"
+                        class:active={$page.url.pathname === '/towns'}
                         href="/towns"
                 >
                     Towns
                 </a>
                 <a
-                        class="text-gray-600 hover:text-gray-900"
-                        class:active={browser && $page.url.pathname === '/events'}
+                        class="text-gray-600 hover:text-gray-900 active:text-primary-blue"
+                        class:active={$page.url.pathname === '/events'}
                         href="/events"
                 >
                     Events
                 </a>
                 <a
-                        class="text-gray-600 hover:text-gray-900"
-                        class:active={browser && $page.url.pathname === '/map'}
+                        class="text-gray-600 hover:text-gray-900 active:text-primary-blue"
+                        class:active={$page.url.pathname === '/map'}
                         href="/map"
                 >
                     Map
                 </a>
                 <a
-                        class="text-gray-600 hover:text-gray-900"
-                        class:active={browser && $page.url.pathname === '/about'}
+                        class="text-gray-600 hover:text-gray-900 active:text-primary-blue"
+                        class:active={$page.url.pathname === '/about'}
                         href="/about"
                 >
                     About

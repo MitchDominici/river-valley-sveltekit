@@ -17,7 +17,7 @@ export const dictionary = {
     "/about": [3],
     "/events": [4],
     "/maps": [5],
-    "/towns": [6]
+    "/towns": [~6]
 };
 
 export const hooks = {
@@ -34,4 +34,4 @@ export const decoders = Object.fromEntries(Object.entries(hooks.transport).map((
 
 export const decode = (type, value) => decoders[type](value);
 
-export {default as root} from '../root.js';
+export {default as root} from '../root.svelte';
