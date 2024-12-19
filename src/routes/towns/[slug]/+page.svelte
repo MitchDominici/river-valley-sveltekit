@@ -2,6 +2,7 @@
     import {onMount} from 'svelte';
     import {townStore} from '$lib/stores/townStore';
     import {page} from '$app/stores';
+    import {base} from '$app/paths';
 
     let town = null;
     let businesses = [];
@@ -36,7 +37,7 @@
                         <div class="absolute inset-0 p-4">
                             <div class="relative h-full transform hover:scale-105 transition-transform duration-300">
                                 <img
-                                        src=../{town.main_image}
+                                        src={base}/{town.main_image}
                                         alt={town.name}
                                         class="w-full h-full object-cover rounded-lg border-4 border-primary-blue shadow-xl"
                                 />
@@ -76,7 +77,7 @@
                 {#each town.images as image}
                     <div class="overflow-hidden rounded-lg shadow-lg">
                         <img
-                                src=../{image}
+                                src={base}/{image}
                                 alt={town.name}
                                 class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300"
                         />

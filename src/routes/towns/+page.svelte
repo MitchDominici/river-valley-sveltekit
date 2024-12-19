@@ -1,6 +1,7 @@
 <script lang="ts">
     import {onMount} from 'svelte';
     import {townStore} from '$lib/stores/townStore';
+    import {base} from '$app/paths';
 
     let loaded;
     let towns = [];
@@ -53,7 +54,7 @@
         {#each towns as town}
             <div class="town-wrapper">
                 <a
-                        href="/towns/{town.name.toLowerCase()}"
+                        href="{base}/towns/{town.name.toLowerCase()}"
                         class="town-container block"
                 >
                     <div class="town-image-container">

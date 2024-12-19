@@ -1,4 +1,5 @@
 import {writable} from 'svelte/store';
+import {base} from '$app/paths';
 
 type Event = {
     'Event Name': string;
@@ -41,7 +42,7 @@ function createEventStore() {
         try {
             const year = date.getFullYear();
             const monthNum = date.getMonth() + 1;
-            const response = await fetch(`/data/events/${year}/${monthNum}.csv`);
+            const response = await fetch(`${base}/data/events/${year}/${monthNum}.csv`);
             const csvText = await response.text();
             const events = await parseCSV(csvText);
 

@@ -1,5 +1,6 @@
 <script>
     import {onMount} from 'svelte';
+    import {base} from '$app/paths';
 
     onMount(() => {
         // Any JavaScript initialization for animations can go here
@@ -90,7 +91,7 @@
                 </p>
                 <a
                         class="mt-8 px-10 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors opacity-0 transform -translate-y-4 animate-fade-in animation-delay-600 font-fun text-2xl md:text-3xl inline-block"
-                        href="/towns"
+                        href="{base}/towns"
                 >
                     Start The Loop
                 </a>
