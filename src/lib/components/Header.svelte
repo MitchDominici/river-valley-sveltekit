@@ -1,6 +1,7 @@
 <script lang="ts">
     // Import page store properly
     import {page} from '$app/stores';
+    import {base} from '$app/paths';
 
     // State for mobile menu
     let isMobileMenuOpen = false;
@@ -25,35 +26,35 @@
                 <a
                         class="text-gray-600 hover:text-earthy-brown active:text-primary-blue"
                         class:active={$page.url.pathname === '/'}
-                        href="/"
+                        href="{base}/"
                 >
                     Home
                 </a>
                 <a
                         class="text-gray-600 hover:text-gray-900 active:text-primary-blue"
                         class:active={$page.url.pathname === '/towns'}
-                        href="/towns"
+                        href="{base}/towns"
                 >
                     Towns
                 </a>
                 <a
                         class="text-gray-600 hover:text-gray-900 active:text-primary-blue"
                         class:active={$page.url.pathname === '/events'}
-                        href="/events"
+                        href="{base}/events"
                 >
                     Events
                 </a>
                 <a
                         class="text-gray-600 hover:text-gray-900 active:text-primary-blue"
                         class:active={$page.url.pathname === '/map'}
-                        href="/map"
+                        href="{base}/map"
                 >
                     Map
                 </a>
                 <a
                         class="text-gray-600 hover:text-gray-900 active:text-primary-blue"
                         class:active={$page.url.pathname === '/about'}
-                        href="/about"
+                        href="{base}/about"
                 >
                     About
                 </a>

@@ -1,4 +1,5 @@
 import {writable} from 'svelte/store';
+import {base} from '$app/paths';
 
 type Town = {
     name: string;
@@ -35,26 +36,6 @@ function createTownStore() {
         businesses: [],
         loaded: false
     });
-
-    // async function parseCSV(csvText: string) {
-    //     const lines = csvText.split('\n');
-    //     const headers = lines[0].split(',');
-    //     return lines
-    //         .slice(1)
-    //         .filter((line) => line.trim())
-    //         .map((line) => {
-    //             const values = line.split(',');
-    //             const obj: any = {};
-    //             headers.forEach((header, index) => {
-    //                 obj[header.trim()] = values[index]?.trim();
-    //                 if (header === 'images') {
-    //                     // Remove quotes and split by pipe
-    //                     obj[header] = values[index].replace(/"/g, '').split('|');
-    //                 }
-    //             });
-    //             return obj;
-    //         });
-    // }
 
     function parseCSVLine(line: string) {
         const result = [];
@@ -100,8 +81,8 @@ function createTownStore() {
     async function loadData() {
         try {
             const [townsResponse, businessesResponse] = await Promise.all([
-                fetch('/data/towns.csv'),
-                fetch('/data/businesses.csv')
+                fetch(`${base}/data/towns.csv`),
+                fetch(`${base}/data/businesses.csv`)
             ]);
 
             const [townsText, businessesText] = await Promise.all([
