@@ -1,4 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
+import {vitePreprocess} from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -11,10 +12,10 @@ const config = {
       strict: true
     }),
     paths: {
-      base: process.env.NODE_ENV === 'production' ? '/river-valley-loop' : ''
-    },
+      base: '/river-valley-loop', // This should match your repository name
+    }
   },
-
+  preprocess: vitePreprocess()
 };
 
 export default config;
