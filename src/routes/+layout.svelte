@@ -7,10 +7,8 @@
     import {base} from '$app/paths';
 
     let riverContainer;
-    console.log($page.url.pathname);
     // Hide river container on home page
-    $: shouldShowRiver = $page.url.pathname !== '/river-valley-loop/';
-    console.log(shouldShowRiver);
+    $: shouldShowRiver = $page.url.pathname !== '/river-valley-loop/' && $page.url.pathname !== '/';
     onMount(() => {
         if (riverContainer) {
             riverContainer.style.visibility = shouldShowRiver ? 'visible' : 'hidden';
