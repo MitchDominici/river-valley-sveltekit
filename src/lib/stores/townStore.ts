@@ -105,11 +105,9 @@ function createTownStore() {
     }
 
     function getTown(townName: string) {
-        console.log('getTown', townName);
         return new Promise<Town>((resolve, reject) => {
             subscribe(({towns, loaded}) => {
                 if (loaded) {
-                    console.log('getTown', towns);
                     const town = towns.find(
                         t => t.name.toLowerCase() === townName.toLowerCase()
                     );
