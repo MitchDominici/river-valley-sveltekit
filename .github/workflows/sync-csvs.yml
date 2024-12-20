@@ -1,3 +1,4 @@
+#sync-csvs.yml
 name: Sync CSVs
 on:
   schedule:
