@@ -1,6 +1,6 @@
 <script lang="ts">
     import {onMount} from 'svelte';
-    import {parse} from 'csv-parse/sync';
+    import {townStore} from '$lib/stores/townStore';
     import {base} from '$app/paths';
 
     let loaded = false;
@@ -8,37 +8,16 @@
     let businessesCount = 0;
     let townsCount = 0;
 
-    async function loadData() {
-        try {
-            const townsResponse = await fetch('/data/towns.csv');
-            const townsData = await townsResponse.text();
-            const businessesResponse = await fetch('/data/businesses.csv');
-            const businessesData = await businessesResponse.text();
-
-            towns = parse(townsData, {
-                columns: true,
-                skip_empty_lines: true
-            });
-
-            const businesses = parse(businessesData, {
-                columns: true,
-                skip_empty_lines: true
-            });
-
-            businessesCount = businesses.length;
-            townsCount = towns.length;
-            loaded = true;
-        } catch (error) {
-            console.error('Error loading data:', error);
-            towns = [];
-            businessesCount = 0;
-            townsCount = 0;
-        }
+    // Subscribe to the store
+    $: ({towns, businesses: allBusinesses, loaded} = $townStore);
+    $: if (loaded) {
+        businessesCount = allBusinesses.length;
+        townsCount = towns.length;
     }
 
     onMount(async () => {
         if (!loaded) {
-            await loadData();
+            await townStore.loadData();
         }
     });
 </script>
