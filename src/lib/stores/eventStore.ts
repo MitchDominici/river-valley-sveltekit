@@ -69,7 +69,6 @@ function createEventStore() {
             const monthNum = date.getMonth() + 1;
             const response = await fetch(`${base}/data/events/${year}_${monthNum}.csv`);
             const csvText = await response.text();
-            console.log('Loaded events:', csvText);
             const events = await parseCSV(csvText);
 
             update(state => ({
