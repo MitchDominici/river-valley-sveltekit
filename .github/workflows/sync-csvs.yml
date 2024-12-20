@@ -59,6 +59,7 @@ jobs:
                 `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`,
                 (res) => {
                   const filePath = path.join('static/data/events', fileName);
+                  console.log(`Downloading ${fileName} to ${filePath}`);
                   const fileStream = fs.createWriteStream(filePath);
                   res.pipe(fileStream);
                   fileStream.on('finish', resolve);
