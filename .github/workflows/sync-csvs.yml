@@ -18,72 +18,73 @@ jobs:
           curl -L "https://docs.google.com/spreadsheets/d/1WYtDTG0mg_jcCBrjHs53rflPrVQLN-xlU0UBdIYFnFg/export?format=csv" -o static/data/towns.csv
           curl -L "https://docs.google.com/spreadsheets/d/1ixfJDFK1FRsSfAkbebQxMbhpFaeb-C3jit0IoVRnKyo/export?format=csv" -o static/data/businesses.csv
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Download Event CSVs
-        env:
-          FOLDER_ID: '18lzxsWJFhZz0RBmPrkPVBMiOdG-g4SFj'
-          DRIVE_API_KEY: ${{ secrets.DRIVE_API_KEY }}
-        run: |
-          # Create events directory
-          mkdir -p static/data/events
-
-          # Download file list and CSVs
-          node - <<'EOF'
-          const https = require('https');
-          const fs = require('fs');
-          const path = require('path');
-
-          const folderId = process.env.FOLDER_ID;
-          const apiKey = process.env.DRIVE_API_KEY;
-
-          async function listFiles() {
-            return new Promise((resolve, reject) => {
-              https.get(
-                `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${apiKey}`,
-                (res) => {
-                  let data = '';
-                  res.on('data', chunk => data += chunk);
-                  res.on('end', () => resolve(JSON.parse(data).files));
-                }
-              ).on('error', reject);
-            });
-          }
-
-          async function downloadFile(fileId, fileName) {
-            return new Promise((resolve, reject) => {
-              https.get(
-                `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`,
-                (res) => {
-                  const filePath = path.join('static/data/events', fileName);
-                  const fileStream = fs.createWriteStream(filePath);
-                  res.pipe(fileStream);
-                  fileStream.on('finish', resolve);
-                }
-              ).on('error', reject);
-            });
-          }
-
-          async function main() {
-            try {
-              const files = await listFiles();
-              for (const file of files) {
-                if (file.name.endsWith('.csv')) {
-                  await downloadFile(file.id, file.name);
-                  console.log(`Downloaded ${file.name}`);
-                }
-              }
-            } catch (error) {
-              console.error('Error:', error);
-              process.exit(1);
-            }
-          }
-
-          main();
-          EOF
+#      - name: Setup Node.js
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: '18'
+#
+#      - name: Download Event CSVs
+#        env:
+#          FOLDER_ID: '18lzxsWJFhZz0RBmPrkPVBMiOdG-g4SFj'
+#          DRIVE_API_KEY: ${{ secrets.DRIVE_API_KEY }}
+#        run: |
+#          # Create events directory
+#          mkdir -p static/data/events
+#
+#          # Download file list and CSVs
+#          node - <<'EOF'
+#          const https = require('https');
+#          const fs = require('fs');
+#          const path = require('path');
+#
+#          const folderId = process.env.FOLDER_ID;
+#          const apiKey = process.env.DRIVE_API_KEY;
+#
+#          async function listFiles() {
+#            return new Promise((resolve, reject) => {
+#              https.get(
+#                `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${apiKey}`,
+#                (res) => {
+#                  let data = '';
+#                  res.on('data', chunk => data += chunk);
+#                  res.on('end', () => resolve(JSON.parse(data).files));
+#                }
+#              ).on('error', reject);
+#            });
+#          }
+#
+#          async function downloadFile(fileId, fileName) {
+#            return new Promise((resolve, reject) => {
+#              https.get(
+#                `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`,
+#                (res) => {
+#                  const filePath = path.join('static/data/events', fileName);
+#                  const fileStream = fs.createWriteStream(filePath);
+#                  res.pipe(fileStream);
+#                  fileStream.on('finish', resolve);
+#                }
+#              ).on('error', reject);
+#            });
+#          }
+#
+#          async function main() {
+#            try {
+#              const files = await listFiles();
+#              for (const file of files) {
+#                if (file.name.endsWith('.csv')) {
+#                  await downloadFile(file.id, file.name);
+#                  console.log(`Downloaded ${file.name}`);
+#                }
+#              }
+#            } catch (error) {
+#              console.error('Error:', error);
+#              process.exit(1);
+#            }
+#          }
+#
+#          main();
+#          EOF
+#
 
 
       - name: Commit changes
