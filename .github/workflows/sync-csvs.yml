@@ -2,7 +2,7 @@
 name: Sync CSVs
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Runs every 6 hours
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -18,14 +18,59 @@ jobs:
           curl -L "https://docs.google.com/spreadsheets/d/1WYtDTG0mg_jcCBrjHs53rflPrVQLN-xlU0UBdIYFnFg/export?format=csv" -o static/data/towns.csv
           curl -L "https://docs.google.com/spreadsheets/d/1ixfJDFK1FRsSfAkbebQxMbhpFaeb-C3jit0IoVRnKyo/export?format=csv" -o static/data/businesses.csv
 
-      - name: Download Events CSV
+      - name: Install Google Drive API Python package
+        run: pip install google-api-python-client oauth2client
+
+      - name: Download Events from Drive
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
         run: |
-            mkdir -p static/data/events
-            files=$(gcloud storage ls gs://18lzxsWJFhZz0RBmPrkPVBMiOdG-g4SFj/*.csv)
-            for file in $files; do
-            filename=$(basename $file)
-            gcloud storage cp $file static/data/events/$filename
-            done
+          # Save credentials
+          echo "$GOOGLE_CREDENTIALS" > credentials.json
+          
+          # Python script to download files
+          python - <<EOF
+          from google.oauth2.credentials import Credentials
+          from googleapiclient.discovery import build
+          from googleapiclient.http import MediaIoBaseDownload
+          import io
+          import os
+          import json
+
+          # Setup credentials
+          creds = Credentials.from_authorized_user_info(
+              json.load(open('credentials.json')), 
+              ['https://www.googleapis.com/auth/drive.readonly']
+          )
+
+          # Create Drive API client
+          service = build('drive', 'v3', credentials=creds)
+
+          # List all files in folder
+          folder_id = os.environ['FOLDER_ID']
+          results = service.files().list(
+              q=f"'{folder_id}' in parents and mimeType='text/csv'",
+              fields="files(id, name)"
+          ).execute()
+          
+          # Create events directory if it doesn't exist
+          os.makedirs('static/data/events', exist_ok=True)
+
+          # Download each file
+          for file in results.get('files', []):
+              request = service.files().get_media(fileId=file['name'])
+              fh = io.BytesIO()
+              downloader = MediaIoBaseDownload(fh, request)
+              done = False
+              while done is False:
+                  status, done = downloader.next_chunk()
+          
+              # Save file
+              fh.seek(0)
+              with open(f"static/data/events/{file['name']}", 'wb') as f:
+                  f.write(fh.read())
+          EOF
 
       - name: Commit changes
         run: |
