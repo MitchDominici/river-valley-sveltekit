@@ -13,66 +13,78 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Download CSVs
+      - name: Download Main CSVs
         run: |
           curl -L "https://docs.google.com/spreadsheets/d/1WYtDTG0mg_jcCBrjHs53rflPrVQLN-xlU0UBdIYFnFg/export?format=csv" -o static/data/towns.csv
           curl -L "https://docs.google.com/spreadsheets/d/1ixfJDFK1FRsSfAkbebQxMbhpFaeb-C3jit0IoVRnKyo/export?format=csv" -o static/data/businesses.csv
-          curl -L "https://docs.google.com/spreadsheets/d/1WYtDTG0mg_jcCBrjHs53rflPrVQLN-xlU0UBdIYFnFg/export?format=csv" -o static/data/towns.csv
-          curl -L "https://docs.google.com/spreadsheets/d/1ixfJDFK1FRsSfAkbebQxMbhpFaeb-C3jit0IoVRnKyo/export?format=csv" -o static/data/businesses.csv
 
-      - name: Install Google Drive API Python package
-        run: pip install google-api-python-client oauth2client
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-      - name: Download Events from Drive
+      - name: Download Event CSVs
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-          FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
+          FOLDER_ID: '18lzxsWJFhZz0RBmPrkPVBMiOdG-g4SFj'
+          DRIVE_API_KEY: ${{ secrets.DRIVE_API_KEY }}
         run: |
-          # Save credentials
-          echo "$GOOGLE_CREDENTIALS" > credentials.json
-          
-          # Python script to download files
-          python - <<EOF
-          from google.oauth2.credentials import Credentials
-          from googleapiclient.discovery import build
-          from googleapiclient.http import MediaIoBaseDownload
-          import io
-          import os
-          import json
+          # Create events directory
+          mkdir -p static/data/events
 
-          # Setup credentials
-          creds = Credentials.from_authorized_user_info(
-              json.load(open('credentials.json')), 
-              ['https://www.googleapis.com/auth/drive.readonly']
-          )
+          # Download file list and CSVs
+          node - <<'EOF'
+          const https = require('https');
+          const fs = require('fs');
+          const path = require('path');
 
-          # Create Drive API client
-          service = build('drive', 'v3', credentials=creds)
+          const folderId = process.env.FOLDER_ID;
+          const apiKey = process.env.DRIVE_API_KEY;
 
-          # List all files in folder
-          folder_id = os.environ['FOLDER_ID']
-          results = service.files().list(
-              q=f"'{folder_id}' in parents and mimeType='text/csv'",
-              fields="files(id, name)"
-          ).execute()
-          
-          # Create events directory if it doesn't exist
-          os.makedirs('static/data/events', exist_ok=True)
+          async function listFiles() {
+            return new Promise((resolve, reject) => {
+              https.get(
+                `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${apiKey}`,
+                (res) => {
+                  let data = '';
+                  res.on('data', chunk => data += chunk);
+                  res.on('end', () => resolve(JSON.parse(data).files));
+                }
+              ).on('error', reject);
+            });
+          }
 
-          # Download each file
-          for file in results.get('files', []):
-              request = service.files().get_media(fileId=file['name'])
-              fh = io.BytesIO()
-              downloader = MediaIoBaseDownload(fh, request)
-              done = False
-              while done is False:
-                  status, done = downloader.next_chunk()
-          
-              # Save file
-              fh.seek(0)
-              with open(f"static/data/events/{file['name']}", 'wb') as f:
-                  f.write(fh.read())
+          async function downloadFile(fileId, fileName) {
+            return new Promise((resolve, reject) => {
+              https.get(
+                `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`,
+                (res) => {
+                  const filePath = path.join('static/data/events', fileName);
+                  const fileStream = fs.createWriteStream(filePath);
+                  res.pipe(fileStream);
+                  fileStream.on('finish', resolve);
+                }
+              ).on('error', reject);
+            });
+          }
+
+          async function main() {
+            try {
+              const files = await listFiles();
+              for (const file of files) {
+                if (file.name.endsWith('.csv')) {
+                  await downloadFile(file.id, file.name);
+                  console.log(`Downloaded ${file.name}`);
+                }
+              }
+            } catch (error) {
+              console.error('Error:', error);
+              process.exit(1);
+            }
+          }
+
+          main();
           EOF
+
 
       - name: Commit changes
         run: |
