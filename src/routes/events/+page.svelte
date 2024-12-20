@@ -28,6 +28,8 @@
     }
 
     function getDaysInMonth(date) {
+        console.log('getDaysInMonth');
+        console.log('events', events);
         const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         const days = [];
@@ -43,6 +45,7 @@
             const dayEvents = events.filter(
                 (event) => new Date(event['Date and Time']).toDateString() === currentDate.toDateString()
             );
+            console.log('dayEvents', dayEvents);
             days.push({day, events: dayEvents, date: currentDate});
         }
 
