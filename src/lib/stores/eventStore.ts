@@ -22,19 +22,44 @@ function createEventStore() {
         loaded: false
     });
 
+    function parseCSVLine(line: string) {
+        const result = [];
+        let current = '';
+        let inQuotes = false;
+
+        for (let i = 0; i < line.length; i++) {
+            if (line[i] === '"') {
+                inQuotes = !inQuotes;
+                continue;
+            }
+            if (line[i] === ',' && !inQuotes) {
+                result.push(current);
+                current = '';
+                continue;
+            }
+            current += line[i];
+        }
+        result.push(current);
+        return result;
+    }
+
     async function parseCSV(csvText: string) {
         const lines = csvText.split('\n');
-        const headers = lines[0].split('|');
+        const headers = parseCSVLine(lines[0]);
+
         return lines
             .slice(1)
             .filter((line) => line.trim())
             .map((line) => {
-                const values = line.split('|');
-                const event: any = {};
+                const values = parseCSVLine(line);
+                const obj: any = {};
                 headers.forEach((header, index) => {
-                    event[header.trim()] = values[index]?.trim();
+                    obj[header.trim()] = values[index]?.trim();
+                    if (header === 'images') {
+                        obj[header] = values[index].split('|');
+                    }
                 });
-                return event;
+                return obj;
             });
     }
 
@@ -42,8 +67,9 @@ function createEventStore() {
         try {
             const year = date.getFullYear();
             const monthNum = date.getMonth() + 1;
-            const response = await fetch(`${base}/data/events/${year}/${monthNum}.csv`);
+            const response = await fetch(`${base}/data/events/${year}_${monthNum}.csv`);
             const csvText = await response.text();
+            console.log('Loaded events:', csvText);
             const events = await parseCSV(csvText);
 
             update(state => ({
