@@ -1,11 +1,13 @@
 function exportEventCSV() {
     var sheet = SpreadsheetApp.getActiveSpreadsheet();
-    var eventSheet = sheet.getSheetByName('Sheet1');
-    var folder = DriveApp.getFolderById('1ps4F-XPCVRSur-hS7aRiiuZILUMtdPiE');
+    var folder = DriveApp.getFolderById('18lzxsWJFhZz0RBmPrkPVBMiOdG-g4SFj');
 
     var year = new Date().getFullYear();
     var month = String(new Date().getMonth() + 1).padStart(2, '0');
     var fileName = `${year}_${month}.csv`;
+
+    var eventSheet = sheet.getSheetByName(`${year}_${month}`);
+
 
     var csvContent = convertToCSV(eventSheet);
 

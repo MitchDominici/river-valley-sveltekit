@@ -1,7 +1,7 @@
 function exportSheetToCSV() {
     var sheet = SpreadsheetApp.getActiveSpreadsheet();
     var sheets = sheet.getSheets();
-    var folder = DriveApp.getFolderById('1cNuhUlknoi-l4uwnUMP_norxrg1EYMfJ');
+    var folder = DriveApp.getFolderById('1lFnxG53DmyHbgo6MVYMy7aT7XrGONLyf');
 
     if (!folder) {
         throw new Error('Invalid folder ID');
