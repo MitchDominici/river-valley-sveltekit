@@ -24,6 +24,10 @@ type Business = {
     facebook?: string;
     instagram?: string;
     tiktok?: string;
+    sunday?: string;
+    monday?: string;
+    tuesday?: string;
+    wednesday?: string;
 };
 
 function createTownStore() {
