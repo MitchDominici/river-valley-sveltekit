@@ -4,21 +4,44 @@
     import {page} from '$app/stores';
     import {base} from '$app/paths';
 
+
     let town = null;
     let businesses = [];
+    let filteredBusinesses = [];
+    let isFilterMenuOpen = false;
+
+    const ALL_DAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    let availableDays: string[] = [];
+    let selectedDay: string | null = null;
+
+    function toggleDayFilter(day: string) {
+        selectedDay = selectedDay === day ? null : day;
+        filterBusinesses();
+    }
+
+    function filterBusinesses() {
+        if (!selectedDay) {
+            filteredBusinesses = businesses;
+            return;
+        }
+
+        filteredBusinesses = businesses.filter(business =>
+            business[selectedDay] && business[selectedDay].toLowerCase() !== 'closed'
+        );
+    }
 
     onMount(async () => {
         const townName = $page.params.slug;
 
-        // If data isn't loaded yet, load it
         if (!$townStore.loaded) {
             await townStore.loadData();
         }
 
-        // Get town and business data
         try {
             town = await townStore.getTown(townName);
             businesses = await townStore.getTownBusinesses(townName);
+            availableDays = ALL_DAYS.filter(day => businesses.some(business => business[day]));
+            filteredBusinesses = businesses;
         } catch (error) {
             console.error('Error loading town:', error);
         }
@@ -94,8 +117,35 @@
             <div class="mb-4 text-gray-600 font-display text-xl">
                 These are businesses we have personally visited and will vouch for their great service!
             </div>
+
+            <div class="flex justify-end mb-4">
+                <button
+                        class="bg-primary-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                        on:click={() => isFilterMenuOpen = !isFilterMenuOpen}
+                >
+                    Filter
+                </button>
+            </div>
+
+            {#if isFilterMenuOpen}
+                <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Open On:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {#each availableDays as day}
+                            <button
+                                    class="px-3 py-1 rounded-full text-sm {selectedDay === day ? 'bg-primary-blue text-white' : 'bg-gray-200 text-gray-700'}
+                hover:bg-blue-700 hover:text-white transition-colors"
+                                    on:click={() => toggleDayFilter(day)}
+                            >
+                                {day.charAt(0).toUpperCase() + day.slice(1)}
+                            </button>
+                        {/each}
+                    </div>
+                </div>
+            {/if}
+
             <div class="space-y-4">
-                {#each businesses as business}
+                {#each filteredBusinesses as business}
                     <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                         <div class="flex items-center justify-between">
                             <div class="flex-1">
