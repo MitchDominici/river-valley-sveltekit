@@ -15,6 +15,9 @@
     let filteredEndTowns = [];
     let showStartDropdown = false;
     let showEndDropdown = false;
+    let googleMapsUrl = '';
+
+    $: isDirectionsDisabled = !start || !end;
 
     $: {
         townStore.subscribe(state => {
@@ -142,7 +145,6 @@
 
         townStore.loadData();
     }
-
     const getDirections = () => {
         if (!start || !end) return alert('Please specify both start and end locations.');
 
@@ -156,6 +158,8 @@
                 if (status === window.google.maps.DirectionsStatus.OK) {
                     directionsRenderer.setDirections(result);
                     hasDirections = true;
+                    // Create Google Maps URL
+                    googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(start)}&destination=${encodeURIComponent(end)}`;
                 } else {
                     alert('Could not fetch directions: ' + status);
                 }
@@ -168,6 +172,7 @@
         hasDirections = false;
         start = '';
         end = '';
+        googleMapsUrl = '';
         map.setZoom(10);
         map.setCenter({ lat: 38.70416299155045, lng: -91.43934350849095 });
     };
@@ -287,16 +292,27 @@
         {/if}
     </div>
     {#if hasDirections}
-        <button
-                class="px-4 py-2 rounded-full text-sm hover:bg-red-700 hover:text-white transition-colors bg-red-500 text-white"
-                on:click={clearDirections}
-        >
-            Clear Directions
-        </button>
+        <div class="flex gap-2">
+            <button
+                    class="px-4 py-2 rounded-full text-sm hover:bg-red-700 hover:text-white transition-colors bg-red-500 text-white"
+                    on:click={clearDirections}
+            >
+                Clear Directions
+            </button>
+            <a
+                    href={googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-4 py-2 rounded-full text-sm hover:bg-green-700 hover:text-white transition-colors bg-green-600 text-white"
+            >
+                Open in Google Maps
+            </a>
+        </div>
     {:else}
         <button
-                class="px-4 py-2 rounded-full text-sm hover:bg-blue-700 hover:text-white transition-colors bg-steel-blue text-white"
+                class="px-4 py-2 rounded-full text-sm hover:bg-blue-700 hover:text-white transition-colors bg-steel-blue text-white disabled:opacity-50 disabled:cursor-not-allowed"
                 on:click={getDirections}
+                disabled={isDirectionsDisabled}
         >
             Get Directions
         </button>
