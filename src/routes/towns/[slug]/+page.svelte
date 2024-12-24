@@ -4,21 +4,52 @@
     import {page} from '$app/stores';
     import {base} from '$app/paths';
 
+
     let town = null;
     let businesses = [];
+    let filteredBusinesses = [];
+    let isFilterMenuOpen = false;
+
+    const ALL_DAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    let availableDays: string[] = [];
+    let selectedDay: string | null = null;
+    let selectedType: string | null = null;
+    let availableTypes: string[] = [];
+
+    function toggleDayFilter(day: string) {
+        selectedDay = selectedDay === day ? null : day;
+        filterBusinesses();
+    }
+
+    function filterBusinesses() {
+        filteredBusinesses = businesses.filter(business => {
+            const matchesDay = !selectedDay || (business[selectedDay] && business[selectedDay].toLowerCase() !== 'closed');
+            const matchesType = !selectedType || business.type.toLowerCase() === selectedType.toLowerCase();
+            return matchesDay && matchesType;
+        });
+    }
+
+    // Add type filter toggle
+    function toggleTypeFilter(type: string) {
+        selectedType = selectedType === type ? null : type;
+        filterBusinesses();
+    }
 
     onMount(async () => {
         const townName = $page.params.slug;
 
-        // If data isn't loaded yet, load it
         if (!$townStore.loaded) {
             await townStore.loadData();
         }
 
-        // Get town and business data
         try {
             town = await townStore.getTown(townName);
             businesses = await townStore.getTownBusinesses(townName);
+            availableTypes = [...new Set(businesses.map(b => b.type.toLowerCase()))]
+                .sort()
+                .map(type => type.charAt(0).toUpperCase() + type.slice(1));
+            availableDays = ALL_DAYS.filter(day => businesses.some(business => business[day]));
+            filteredBusinesses = businesses;
         } catch (error) {
             console.error('Error loading town:', error);
         }
@@ -94,8 +125,51 @@
             <div class="mb-4 text-gray-600 font-display text-xl">
                 These are businesses we have personally visited and will vouch for their great service!
             </div>
+
+            <div class="flex justify-end mb-4">
+                <button
+                        class="bg-primary-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                        on:click={() => isFilterMenuOpen = !isFilterMenuOpen}
+                >
+                    Filter
+                </button>
+            </div>
+
+            {#if isFilterMenuOpen}
+                <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Open On:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {#each availableDays as day}
+                            <button
+                                    class="px-3 py-1 rounded-full text-sm {selectedDay === day ? 'bg-primary-blue text-white' : 'bg-gray-200 text-gray-700'}
+                hover:bg-blue-700 hover:text-white transition-colors"
+                                    on:click={() => toggleDayFilter(day)}
+                            >
+                                {day.charAt(0).toUpperCase() + day.slice(1)}
+                            </button>
+                        {/each}
+                    </div>
+
+                    <div class="mt-4">
+                        <h3 class="text-lg font-semibold mb-2">Business Type:</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {#each availableTypes as type}
+                                <button
+                                        class="px-3 py-1 rounded-full text-sm {selectedType === type ? 'bg-primary-blue text-white' : 'bg-gray-200 text-gray-700'}
+                hover:bg-blue-700 hover:text-white transition-colors"
+                                        on:click={() => toggleTypeFilter(type)}
+                                >
+                                    {type}
+                                </button>
+                            {/each}
+                        </div>
+                    </div>
+                </div>
+
+            {/if}
+
             <div class="space-y-4">
-                {#each businesses as business}
+                {#each filteredBusinesses as business}
                     <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                         <div class="flex items-center justify-between">
                             <div class="flex-1">
@@ -116,6 +190,17 @@
                                         {business.address} {business.town}, {business.state} {business.zip}
                                     </p>
                                 {/if}
+
+                                <div class="flex gap-4 mt-3 text-sm text-gray-600">
+                                    {#each ['sunday', 'monday', 'tuesday', 'wednesday'] as day}
+                                        {#if business[day]}
+                                            <div>
+                                                <span class="font-medium text-primary-blue"><strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong> </span>
+                                                <span>{business[day]}</span>
+                                            </div>
+                                        {/if}
+                                    {/each}
+                                </div>
                             </div>
                             <div class="flex items-center gap-4">
                                 <div class="flex gap-3">
