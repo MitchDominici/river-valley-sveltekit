@@ -11,6 +11,7 @@ type Town = {
     main_image: string;
     images: string[];
     description: string;
+    state: string;
 };
 
 type Business = {
