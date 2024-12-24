@@ -280,7 +280,7 @@
             <div class="dropdown">
                 {#each filteredEndTowns as town}
                     <div class="dropdown-item" on:click={() => selectEndTown(town)}>
-                        {town.name}, MO
+                        {town.name}, {town.state ?? 'MO'}
                     </div>
                 {/each}
             </div>
