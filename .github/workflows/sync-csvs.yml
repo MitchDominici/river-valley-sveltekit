@@ -71,6 +71,7 @@ jobs:
           async function main() {
             try {
               const files = await listFiles();
+              console.log(files);
               for (const file of files) {
                 if (file.name.endsWith('.csv')) {
                   await downloadFile(file.id, file.name);
