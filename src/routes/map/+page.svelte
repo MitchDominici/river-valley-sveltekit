@@ -240,7 +240,7 @@
                 type="text"
                 bind:value={start}
                 placeholder="Start location (Hermann)"
-                class="pr-10 w-64 px-4 py-2 border-2 border-earthy-brown rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="pr-10 w-64 px-4 py-2 border-2 border-primary-blue rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {#if showStartDropdown}
             <div class="dropdown">
@@ -269,7 +269,7 @@
                 type="text"
                 bind:value={end}
                 placeholder="End location (Berger)"
-                class="w-64 px-4 py-2 border-2 border-earthy-brown rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-64 px-4 py-2 border-2 border-primary-blue rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {#if showEndDropdown}
             <div class="dropdown">
@@ -300,7 +300,7 @@
         </div>
     {:else}
         <button
-                class="px-4 py-2 rounded-full text-sm hover:bg-blue-700 hover:text-white transition-colors bg-earthy-brown text-white disabled:opacity-80 disabled:cursor-not-allowed"
+                class="px-4 py-2 rounded-full text-sm hover:bg-primary-blue hover:text-white transition-colors bg-primary-blue text-white disabled:opacity-80 disabled:cursor-not-allowed"
                 on:click={getDirections}
                 disabled={isDirectionsDisabled}
         >
