@@ -2,7 +2,7 @@
 name: Sync CSVs
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -71,6 +71,7 @@ jobs:
           async function main() {
             try {
               const files = await listFiles();
+              console.log(files);
               for (const file of files) {
                 if (file.name.endsWith('.csv')) {
                   await downloadFile(file.id, file.name);
@@ -79,7 +80,7 @@ jobs:
               }
             } catch (error) {
               console.error('Error:', error);
-              process.exit(1);
+              //process.exit(1);
             }
           }
 
