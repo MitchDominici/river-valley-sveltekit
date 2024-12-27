@@ -135,7 +135,7 @@
 
     function initializeMap() {
         map = new window.google.maps.Map(document.getElementById('map'), {
-            center: { lat: 38.70416299155045, lng: -91.43934350849095 },
+            center: { lat: 38.55, lng: -91.43934350849095 },
             zoom: 10
         });
 
@@ -174,7 +174,7 @@
         end = '';
         googleMapsUrl = '';
         map.setZoom(10);
-        map.setCenter({ lat: 38.70416299155045, lng: -91.43934350849095 });
+        map.setCenter({ lat: 38.55, lng: -91.43934350849095 });
     };
 </script>
 
