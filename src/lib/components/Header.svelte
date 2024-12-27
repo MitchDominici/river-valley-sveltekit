@@ -32,7 +32,7 @@
                 </a>
                 <a
                         class="mt-2 px-10 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors opacity-0 transform -translate-y-4 animate-fade-in animation-delay-600 font-fun text-2xl md:text-3xl inline-block"
-                        class:active={$page.url.pathname === '/towns'}
+                        class:active={$page.url.pathname.includes('/towns')}
                         href="{base}/towns"
                 >
                     Towns
