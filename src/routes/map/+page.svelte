@@ -135,7 +135,7 @@
 
     function initializeMap() {
         map = new window.google.maps.Map(document.getElementById('map'), {
-            center: { lat: 38.70416299155045, lng: -91.43934350849095 },
+            center: { lat: 38.55, lng: -91.43934350849095 },
             zoom: 10
         });
 
@@ -174,7 +174,7 @@
         end = '';
         googleMapsUrl = '';
         map.setZoom(10);
-        map.setCenter({ lat: 38.70416299155045, lng: -91.43934350849095 });
+        map.setCenter({ lat: 38.55, lng: -91.43934350849095 });
     };
 </script>
 
@@ -182,7 +182,7 @@
     #map {
         min-height: calc(100vh - 13rem);
         max-width: 90%;
-        margin: 50px auto 0 auto;
+        margin: 10px auto 0 auto;
     }
     .controls {
         display: flex;
@@ -234,23 +234,13 @@
         background-color: #f7fafc;
     }
 </style>
-
-<div class="map-container h-full w-full flex-1 relative">
-    {#if isLoading}
-        <div class="absolute inset-0 flex items-center justify-center bg-white">
-            <div class="loader"></div>
-        </div>
-    {/if}
-    <div id="map"></div>
-</div>
-
-<div class="controls">
+<div class="controls mt-4">
     <div class="relative">
         <input
                 type="text"
                 bind:value={start}
                 placeholder="Start location (Hermann)"
-                class="pr-10 w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="pr-10 w-64 px-4 py-2 border-2 border-primary-blue rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {#if showStartDropdown}
             <div class="dropdown">
@@ -279,7 +269,7 @@
                 type="text"
                 bind:value={end}
                 placeholder="End location (Berger)"
-                class="w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-64 px-4 py-2 border-2 border-primary-blue rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {#if showEndDropdown}
             <div class="dropdown">
@@ -310,7 +300,7 @@
         </div>
     {:else}
         <button
-                class="px-4 py-2 rounded-full text-sm hover:bg-blue-700 hover:text-white transition-colors bg-steel-blue text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                class="px-4 py-2 rounded-full text-sm hover:bg-primary-blue hover:text-white transition-colors bg-primary-blue text-white disabled:opacity-80 disabled:cursor-not-allowed"
                 on:click={getDirections}
                 disabled={isDirectionsDisabled}
         >
@@ -318,3 +308,14 @@
         </button>
     {/if}
 </div>
+
+
+<div class="map-container h-full w-full flex-1 relative">
+    {#if isLoading}
+        <div class="absolute inset-0 flex items-center justify-center bg-white">
+            <div class="loader"></div>
+        </div>
+    {/if}
+    <div id="map"></div>
+</div>
+

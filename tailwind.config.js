@@ -6,10 +6,10 @@ export default {
             colors: {
                 'primary-blue': '#0871e4',
                 'neutral-gray': '#bbb3b3',
-                'secondary-yellow': '#da9c4d',
+                'secondary-yellow': '#e6a450',
                 'earthy-brown': '#6f430e',
                 'muted-gold': '#cf9c67',
-                'soft-sky-blue': '#c7eaf3',
+                'soft-sky-blue': '#bfe5ef', //#bfe5ef
                 'steel-blue': '#7087bb',
                 'soft-periwinkle': '#adb4e1',
                 'warm-taupe': '#977b5d',

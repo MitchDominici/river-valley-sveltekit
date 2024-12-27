@@ -61,7 +61,7 @@
     {#if town}
         <!-- Town Header Info -->
         <div class="container mx-auto px-4 pt-16">
-            <div class="town-card bg-soft-periwinkle rounded-lg shadow-lg p-8 mt-8 relative overflow-hidden border-2 border-dashed border-earthy-brown hover:border-warm-taupe transition-colors duration-300">
+            <div class="town-card bg-secondary-yellow rounded-lg shadow-lg p-8 mt-8 relative overflow-hidden border-2 border-dashed border-earthy-brown hover:border-warm-taupe transition-colors duration-300">
                 <div class="flex flex-col md:flex-row gap-8">
                     <!-- Town Shape with Main Image -->
                     <div class="relative w-full md:w-1/2 aspect-square">

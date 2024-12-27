@@ -61,7 +61,7 @@
 >
     <div class="relative top-20 mx-auto p-5 border w-full max-w-xl bg-white rounded-lg shadow-xl m-4">
         <div class="flex justify-between items-center border-b pb-4">
-            <h3 class="text-xl md:text-2xl font-fun text-earthy-brown">
+            <h3 class="text-xl md:text-2xl font-fun text-primary-blue">
                 {selectedEvents[0] ? new Date(selectedEvents[0]['Date and Time']).toLocaleDateString() : ''}
             </h3>
             <button class="text-gray-600 hover:text-gray-800 text-2xl" on:click={closeModal}>&times;</button>
@@ -100,12 +100,12 @@
 </div>
 
 <div class="px-4" id="events-page">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-screen-2xl mx-auto min-h-full">
         <div class="mb-8 space-y-4 text-center relative">
             <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4" id="left-decoration"/>
             <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4" id="right-decoration"/>
 
-            <h1 class="text-3xl md:text-5xl font-fun text-earthy-brown">Upcoming Events</h1>
+            <h1 class="text-3xl md:text-5xl font-fun text-primary-blue">Upcoming Events</h1>
             <p class="text-base md:text-xl text-gray-700 max-w-3xl mx-auto">
                 Discover the heart and soul of Missouri's river communities through our vibrant local
                 events. From seasonal festivals to farmers' markets, experience the best of our historic
@@ -113,7 +113,7 @@
             </p>
         </div>
 
-        <div class="bg-white rounded-lg shadow-lg p-4 md:p-6 border-2 border-dashed border-soft-sky-blue hover:border-primary-blue transition-colors duration-300">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-6 border-4 border-dashed border-primary-blue hover:border-primary-blue transition-colors duration-300">
             <div class="flex justify-between items-center mb-4">
                 <button
                         class="text-primary-blue hover:text-blue-800 font-semibold"
@@ -121,7 +121,7 @@
                 >
                     &lt; Previous
                 </button>
-                <h2 class="text-xl md:text-3xl font-fun text-earthy-brown">{monthYearText}</h2>
+                <h2 class="text-xl md:text-3xl font-fun text-primary-blue">{monthYearText}</h2>
                 <button
                         class="text-primary-blue hover:text-blue-800 font-semibold"
                         on:click={() => eventStore.changeMonth(1)}
