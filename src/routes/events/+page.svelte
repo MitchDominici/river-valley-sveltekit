@@ -100,7 +100,7 @@
 </div>
 
 <div class="px-4" id="events-page">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-screen-2xl mx-auto min-h-full">
         <div class="mb-8 space-y-4 text-center relative">
             <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4" id="left-decoration"/>
             <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4" id="right-decoration"/>
@@ -113,7 +113,7 @@
             </p>
         </div>
 
-        <div class="bg-white rounded-lg shadow-lg p-4 md:p-6 border-2 border-dashed border-soft-sky-blue hover:border-primary-blue transition-colors duration-300">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-6 border-4 border-dashed border-primary-blue hover:border-primary-blue transition-colors duration-300">
             <div class="flex justify-between items-center mb-4">
                 <button
                         class="text-primary-blue hover:text-blue-800 font-semibold"
