@@ -99,56 +99,61 @@
     </div>
 </div>
 
-<div class="px-4" id="events-page">
-    <div class="max-w-screen-2xl mx-auto min-h-full">
-        <div class="mb-8 space-y-4 text-center relative">
+<div class="px-4 py-8 md:py-12" id="events-page">
+    <!-- Increase max width and add more padding on larger screens -->
+    <div class="max-w-[1920px] mx-auto min-h-full">
+        <!-- Adjust header spacing -->
+        <div class="mb-12 space-y-6 text-center relative">
             <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4" id="left-decoration"/>
             <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4" id="right-decoration"/>
 
-            <h1 class="text-3xl md:text-5xl font-fun text-primary-blue">Upcoming Events</h1>
-            <p class="text-base md:text-xl text-gray-700 max-w-3xl mx-auto">
+            <h1 class="text-3xl md:text-6xl font-fun text-primary-blue">Upcoming Events</h1>
+            <p class="text-base md:text-xl text-gray-700 max-w-4xl mx-auto">
                 Discover the heart and soul of Missouri's river communities through our vibrant local
                 events. From seasonal festivals to farmers' markets, experience the best of our historic
                 towns.
             </p>
         </div>
 
-        <div class="bg-white rounded-lg shadow-lg p-4 md:p-6 border-4 border-dashed border-primary-blue hover:border-primary-blue transition-colors duration-300">
-            <div class="flex justify-between items-center mb-4">
+        <!-- Increase padding and sizing for the calendar container -->
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-8 lg:p-12 border-4 border-dashed border-primary-blue hover:border-primary-blue transition-colors duration-300">
+            <div class="flex justify-between items-center mb-6 md:mb-8">
                 <button
-                        class="text-primary-blue hover:text-blue-800 font-semibold"
+                        class="text-primary-blue hover:text-blue-800 font-semibold text-lg md:text-xl"
                         on:click={() => eventStore.changeMonth(-1)}
                 >
                     &lt; Previous
                 </button>
-                <h2 class="text-xl md:text-3xl font-fun text-primary-blue">{monthYearText}</h2>
+                <h2 class="text-2xl md:text-4xl font-fun text-primary-blue">{monthYearText}</h2>
                 <button
-                        class="text-primary-blue hover:text-blue-800 font-semibold"
+                        class="text-primary-blue hover:text-blue-800 font-semibold text-lg md:text-xl"
                         on:click={() => eventStore.changeMonth(1)}
                 >
                     Next &gt;
                 </button>
             </div>
 
-            <!-- Calendar Container with horizontal scroll -->
+            <!-- Adjust the calendar grid sizing -->
             <div class="overflow-x-auto">
-                <div class="min-w-[768px]"> <!-- Minimum width to prevent squishing -->
-                    <div class="grid grid-cols-7 gap-2">
+                <!-- Add px-1 for slight padding and overflow-visible to prevent border cutoff -->
+                <div class="min-w-[768px] md:min-w-full px-1 overflow-visible">
+                    <!-- Add a small padding to the grid itself -->
+                    <div class="grid grid-cols-7 gap-2 md:gap-4 p-0.5">
                         {#each weekDays as day}
-                            <div class="text-center font-semibold py-2 text-primary-blue">{day}</div>
+                            <div class="text-center font-semibold py-2 md:py-4 text-primary-blue text-base md:text-xl">{day}</div>
                         {/each}
 
                         {#each days as dayInfo}
                             {#if dayInfo === null}
-                                <div class="p-4 bg-gray-50 rounded-lg border border-gray-100"/>
+                                <div class="p-4 md:p-6 lg:p-8 bg-gray-50 rounded-lg border border-gray-100 min-h-[100px] md:min-h-[150px]"/>
                             {:else}
                                 <div
-                                        class="p-4 rounded-lg border transition-all duration-300 {dayInfo.events.length ? 'has-events cursor-pointer' : 'bg-gray-50 border-gray-100'} {dayInfo.date.toDateString() === new Date().toDateString() ? 'ring-2 ring-primary-blue' : ''}"
+                                        class="p-4 md:p-6 lg:p-8 rounded-lg border transition-all duration-300 min-h-[100px] md:min-h-[150px] {dayInfo.events.length ? 'has-events cursor-pointer' : 'bg-gray-50 border-gray-100'} {dayInfo.date.toDateString() === new Date().toDateString() ? 'ring-2 ring-primary-blue' : ''}"
                                         on:click={() => dayInfo.events.length && showEvents(dayInfo.events)}
                                 >
-                                    <div class="font-medium {dayInfo.date.toDateString() === new Date().toDateString() ? 'text-primary-blue' : ''}">{dayInfo.day}</div>
+                                    <div class="font-medium text-lg md:text-xl {dayInfo.date.toDateString() === new Date().toDateString() ? 'text-primary-blue' : ''}">{dayInfo.day}</div>
                                     {#if dayInfo.events.length}
-                                        <div class="text-sm text-primary-blue mt-1">
+                                        <div class="text-sm md:text-base text-primary-blue mt-2">
                                             {dayInfo.events.length} event{dayInfo.events.length > 1 ? 's' : ''}
                                         </div>
                                     {/if}

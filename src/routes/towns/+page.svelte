@@ -22,7 +22,7 @@
     });
 </script>
 
-<div id="towns-page">
+<div id="towns-page" class="px-4 py-8">
     <!-- Header section -->
     <div class="text-center my-8">
         <h1 class="text-6xl mb-6 font-fun text-primary-blue">Historic River Towns</h1>
