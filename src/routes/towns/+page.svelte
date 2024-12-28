@@ -7,6 +7,7 @@
     let towns = [];
     let businessesCount = 0;
     let townsCount = 0;
+    let selectedView = 'medium'; // Default to medium view (3 per row)
 
     // Subscribe to the store
     $: ({towns, businesses: allBusinesses, loaded} = $townStore);
@@ -14,6 +15,28 @@
         businessesCount = allBusinesses.length;
         townsCount = towns.length;
     }
+
+    // View options with their configurations
+    const viewOptions = {
+        small: {
+            name: 'Small Cards',
+            cols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
+            height: 'h-48',
+            textSize: 'text-xl'
+        },
+        medium: {
+            name: 'Medium Cards',
+            cols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+            height: 'h-72',
+            textSize: 'text-4xl'
+        },
+        large: {
+            name: 'Large Cards',
+            cols: 'grid-cols-1 lg:grid-cols-2',
+            height: 'h-96',
+            textSize: 'text-5xl'
+        }
+    };
 
     onMount(async () => {
         if (!loaded) {
@@ -48,26 +71,45 @@
         </div>
     </div>
 
+    <!-- View Selector -->
+    <div class="max-w-4xl mx-auto mb-8">
+        <div class="bg-white rounded-lg shadow p-4 border-2 border-primary-blue">
+            <h3 class="text-xl font-semibold text-primary-blue mb-4">Choose View Style</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {#each Object.entries(viewOptions) as [key, option]}
+                    <button
+                            class="p-3 rounded-lg border-2 transition-all duration-200 {selectedView === key ? 'border-primary-blue bg-blue-50' : 'border-gray-200 hover:border-primary-blue'}"
+                            on:click={() => selectedView = key}
+                    >
+                        <span class="block text-sm font-medium text-gray-700">{option.name}</span>
+                    </button>
+                {/each}
+            </div>
+        </div>
+    </div>
+
     <!-- Towns grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 px-16">
+    <div class="grid {viewOptions[selectedView].cols} gap-4 px-4 md:px-8 lg:px-16">
         {#each towns as town}
             <div class="town-wrapper">
                 <a
-                        href="{base}/towns/{town.name.toLowerCase()}"
-                        class="town-container block"
+                href="{base}/towns/{town.name.toLowerCase()}"
+                class="town-container block {viewOptions[selectedView].height}"
+                class:list-view={selectedView === 'list'}
                 >
-                    <div class="town-image-container">
-                        <img
-                                src={town.main_image}
-                                alt={town.name}
-                                class="town-image"
-                                width="200"
-                                height="200"
-                        />
-                        <div class="town-overlay">
-                            <h2 class="text-4xl font-bold font-display">{town.name}</h2>
-                        </div>
+                <div class="town-image-container">
+                    <img
+                            src={town.main_image}
+                            alt={town.name}
+                            class="town-image"
+                    />
+                    <div class="town-overlay">
+                        <h2 class="{viewOptions[selectedView].textSize} font-bold font-display">{town.name}</h2>
+                        {#if selectedView === 'list'}
+                            <p class="text-white text-lg mt-1">{town.county} County</p>
+                        {/if}
                     </div>
+                </div>
                 </a>
             </div>
         {/each}
@@ -76,24 +118,34 @@
 
 <style>
     .town-wrapper {
-        padding: 8px;
+        padding: 4px;
         border-radius: 12px;
         overflow: hidden;
     }
 
     .town-container {
         position: relative;
-        width: 90%;
-        height: 300px;
-        margin: 20px auto;
+        width: 100%;
+        margin: 0 auto;
         border-radius: 12px;
         overflow: hidden;
         border: #0871e4 4px dashed;
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease;
     }
 
     .town-container:hover {
         transform: scale(1.02);
+    }
+
+    .town-container.list-view {
+        height: 8rem;
+    }
+
+    .town-container.list-view .town-overlay {
+        display: flex;
+        align-items: center;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+        padding: 1rem 2rem;
     }
 
     .town-image-container {

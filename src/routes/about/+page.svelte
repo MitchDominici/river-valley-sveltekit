@@ -1,4 +1,4 @@
-<div id="about-page">
+<div id="about-page" class="mt-4 px-4 pt-8">
     <div class="max-w-3xl mx-auto text-center mb-16">
         <h1 class="text-6xl font-fun text-primary-blue mb-6">Why the LOOP?</h1>
         <p class="text-gray-700 text-xl">

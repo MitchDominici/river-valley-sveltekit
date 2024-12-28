@@ -3,6 +3,7 @@
     import {townStore} from '$lib/stores/townStore';
     import {page} from '$app/stores';
     import {base} from '$app/paths';
+    import ImageSlideshow from "$lib/components/ImageSlideshow.svelte";
 
 
     let town = null;
@@ -57,7 +58,7 @@
 </script>
 
 <!-- Main content -->
-<div id="town-page">
+<div id="town-page"  class="py-8 mt-4 ">
     {#if town}
         <!-- Town Header Info -->
         <div class="container mx-auto px-4 pt-16">
@@ -68,7 +69,8 @@
                         <div class="absolute inset-0 p-4">
                             <div class="relative h-full transform hover:scale-105 transition-transform duration-300">
                                 <img
-                                        src={base}/{town.main_image}
+                                        id="{town.name}-main-image"
+                                        src="{town.main_image}"
                                         alt={town.name}
                                         class="w-full h-full object-cover rounded-lg border-4 border-primary-blue shadow-xl"
                                 />
@@ -103,18 +105,13 @@
 
         <!-- Image Gallery -->
         <div class="container mx-auto px-4 py-12">
-            <h2 class="text-3xl font-fun text-primary-blue mb-6">Gallery</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {#each town.images as image}
-                    <div class="overflow-hidden rounded-lg shadow-lg">
-                        <img
-                                src={base}/{image}
-                                alt={town.name}
-                                class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300"
-                        />
-                    </div>
-                {/each}
-            </div>
+            {#if town && town.images && town.images.length > 0}
+                <ImageSlideshow
+                        images={town.images.map(image => `${base}${image}`)}
+                        townName={town.name}
+                        interval={5000}
+                />
+            {/if}
         </div>
 
         <!-- Things to Do -->
