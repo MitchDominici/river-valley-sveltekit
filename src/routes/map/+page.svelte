@@ -234,7 +234,7 @@
         background-color: #f7fafc;
     }
 </style>
-<div class="controls mt-4">
+<div class="controls mt-4 px-4 pt-8">
     <div class="relative">
         <input
                 type="text"

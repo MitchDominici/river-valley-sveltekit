@@ -83,6 +83,22 @@ function createTownStore() {
             });
     }
 
+    function getImagePathsForTown(townName: string): string[] {
+        // Use Vite's import.meta.glob to get all images in the town's folder
+        const imageFiles = import.meta.glob('/static/images/towns/**/*.{jpg,jpeg,png,gif}', {
+            eager: true,
+            as: 'url'
+        });
+
+        // Filter and format the paths for the specific town
+        const townFolderPath = `/images/towns/${townName.toLowerCase()}`;
+        const imagePaths = Object.keys(imageFiles)
+            .filter(path => path.startsWith(`/static${townFolderPath}`))
+            .map(path => path.replace('/static', ''))
+            .sort();
+
+        return imagePaths;
+    }
     async function loadData() {
         try {
             const [townsResponse, businessesResponse] = await Promise.all([
@@ -95,8 +111,18 @@ function createTownStore() {
                 businessesResponse.text()
             ]);
 
-            const towns = await parseCSV(townsText);
+            const rawTowns = await parseCSV(townsText);
             const businesses = await parseCSV(businessesText);
+
+            // Enhance towns with image paths
+            const towns = rawTowns.map(town => ({
+                ...town,
+                images: getImagePathsForTown(town.name.toLowerCase().replace(' ', '-'))
+            }));
+
+            towns.forEach(town => {
+                town.main_image = `/images/towns/${town.name.toLowerCase().replace(' ', '-')}/main.jpg`;
+            });
 
             update(state => ({
                 ...state,
