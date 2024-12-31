@@ -99,9 +99,9 @@
     </div>
 </div>
 
-<div class="px-4 py-8 md:py-12" id="events-page">
+<div class="px-4 py-8" id="events-page">
     <!-- Increase max width and add more padding on larger screens -->
-    <div class="max-w-[1920px] mx-auto min-h-full">
+    <div class="max-w-full mx-auto min-h-full md:max-w-[950px] sm:max-w-[680px]">
         <!-- Adjust header spacing -->
         <div class="mb-12 space-y-6 text-center relative">
             <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4" id="left-decoration"/>
