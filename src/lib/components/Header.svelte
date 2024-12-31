@@ -99,6 +99,12 @@
                     </a>
                     <a
                             class="text-left text-gray-600 hover:text-gray-900"
+                            href="/map"
+                    >
+                        Map
+                    </a>
+                    <a
+                            class="text-left text-gray-600 hover:text-gray-900"
                             href="/about"
                     >
                         About

@@ -21,6 +21,9 @@
                         <a class="text-black hover:text-white" href="/events">Events</a>
                     </li>
                     <li>
+                        <a class="text-black hover:text-white" href="/map">Map</a>
+                    </li>
+                    <li>
                         <a class="text-black hover:text-white" href="/about">About</a>
                     </li>
                 </ul>
