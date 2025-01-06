@@ -17,7 +17,7 @@ jobs:
         run: |
           curl -L "https://docs.google.com/spreadsheets/d/1WYtDTG0mg_jcCBrjHs53rflPrVQLN-xlU0UBdIYFnFg/export?format=csv" -o static/data/towns.csv
           curl -L "https://docs.google.com/spreadsheets/d/1ixfJDFK1FRsSfAkbebQxMbhpFaeb-C3jit0IoVRnKyo/export?format=csv" -o static/data/businesses.csv
-          curl -L "https://drive.google.com/file/d/1Ed2efzGw1W936BFz91Hq-xbt3nNFy7iG/view?usp=sharing" -o static/data/events.json
+          curl -L "https://drive.google.com/uc?export=download&id=1Ed2efzGw1W936BFz91Hq-xbt3nNFy7iG" -o static/data/events.json
 
 
       - name: Commit changes
