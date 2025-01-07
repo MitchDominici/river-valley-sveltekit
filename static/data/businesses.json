@@ -988,6 +988,7 @@
   },
   {
     "name": "Edward Jones Investments, Don Ruzicka - Financial Advisor ",
+    "type": "Corporate Sponsor",
     "address": "102 Dwayne Von Behren Dr.",
     "town": "New Haven ",
     "state": "MO ",
@@ -1005,6 +1006,7 @@
   },
   {
     "name": "Citizens Bank",
+    "type": "Corporate Sponsor",
     "address": "100 Circle Cr",
     "town": "New Haven ",
     "state": "MO ",
@@ -1022,6 +1024,7 @@
   },
   {
     "name": "New Beginnings Church",
+    "type": "Church",
     "address": "1010 Olive St",
     "town": "New Haven ",
     "state": "MO ",
@@ -1041,6 +1044,7 @@
   },
   {
     "name": "St. Louis Quick Salvation Drive-Thru Church",
+    "type": "Church",
     "address": "12321 Hwy 100",
     "town": "Berger ",
     "state": "MO ",
@@ -1060,6 +1064,7 @@
   },
   {
     "name": "Rosebud United Methodist Church",
+    "type": "Church",
     "address": "120 Hwy T",
     "town": "Rosebud ",
     "state": "MO ",
@@ -1079,6 +1084,7 @@
   },
   {
     "name": "Seasons of Faith Fellowship Church",
+    "type": "Church",
     "address": "525 E. Washington St",
     "town": "Owensville ",
     "state": "MO ",
@@ -1098,6 +1104,7 @@
   },
   {
     "name": "Trinity Luthern Church",
+    "type": "Church",
     "address": "9521 Highway 100",
     "town": "New Haven ",
     "state": "MO ",
@@ -1117,6 +1124,7 @@
   },
   {
     "name": "Gasconade County Historical Society",
+    "type": "Non-Profit",
     "address": "105 W. McFadden",
     "town": "Owensville",
     "state": "MO",
@@ -1134,6 +1142,7 @@
   },
   {
     "name": "Rock Island Visitor Center",
+    "type": "Non-Profit",
     "address": "360 S. Main St",
     "town": "Gerald ",
     "state": "MO ",
