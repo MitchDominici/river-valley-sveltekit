@@ -49,6 +49,14 @@
             availableTypes = [...new Set(businesses.map(b => b.type.toLowerCase()))]
                 .sort()
                 .map(type => type.charAt(0).toUpperCase() + type.slice(1)).filter(type => type !== 'null' && type !== 'undefined' && type !== '');
+            for (const type of availableTypes) {
+                console.log(type);
+                if (type.includes(',')) {
+                    const subtypes = type.split(',');
+                    availableTypes = availableTypes.filter(t => t !== type);
+                    availableTypes.push(...subtypes);
+                }
+            }
             availableDays = ALL_DAYS.filter(day => businesses.some(business => business[day]));
             filteredBusinesses = businesses;
         } catch (error) {
