@@ -1,45 +1,73 @@
-function exportEventCSV() {
-    var ui = SpreadsheetApp.getUi();
-
-    var yearResponse = ui.prompt('Enter Year (YYYY):', ui.ButtonSet.OK_CANCEL);
-    if (yearResponse.getSelectedButton() == ui.Button.CANCEL) return;
-    var year = yearResponse.getResponseText();
-
-    var monthResponse = ui.prompt('Enter Month (1-12):', ui.ButtonSet.OK_CANCEL);
-    if (monthResponse.getSelectedButton() == ui.Button.CANCEL) return;
-    var month = String(monthResponse.getResponseText()).padStart(2, '0');
-
+function exportEventJSON() {
     var sheet = SpreadsheetApp.getActiveSpreadsheet();
-    var folder = DriveApp.getFolderById('18lzxsWJFhZz0RBmPrkPVBMiOdG-g4SFj');
 
-    var fileName = `${year}_${month}.csv`;
-    var eventSheet = sheet.getSheetByName(`${year}_${month}`);
+    console.log('sheet:', sheet.getName());
 
-    if (!eventSheet) {
-        ui.alert(`Sheet ${year}_${month} not found`);
-        return;
-    }
+    var folder = DriveApp.getFolderById('1lFnxG53DmyHbgo6MVYMy7aT7XrGONLyf');
 
-    var csvContent = convertToCSV(eventSheet);
-
-    var files = folder.getFilesByName(fileName);
-    if (files.hasNext()) {
-        files.next().setContent(csvContent);
-        ui.alert('File updated successfully');
-    } else {
-        folder.createFile(fileName, csvContent);
-        ui.alert('File created successfully');
-    }
+    publishSheetToJson(sheet, folder)
 }
 
-function convertToCSV(sheet) {
-    var data = sheet.getDataRange().getValues();
-    return data.map(row => row.map(str => `"${str}"`).join(',')).join('\n');
+
+function publishSheetToJson(sheet, folder) {
+    try {
+        const data = sheet.getDataRange().getValues();
+        const headers = data.shift();
+        const newJsonData = data.map(row => {
+            let obj = {};
+            headers.forEach((header, index) => {
+                obj[header] = row[index];
+            });
+            return obj;
+        });
+
+
+        const fileName = `${sheet.getName()}.json`;
+        const existingFile = getFileByName(folder, fileName);
+
+        let combinedJsonData = [];
+        if (existingFile) {
+            const content = existingFile.getBlob().getDataAsString();
+            combinedJsonData = JSON.parse(content); // Parse existing JSON data
+        }
+
+        combinedJsonData = combinedJsonData.concat(newJsonData); // Add new data
+
+        combinedJsonData = combinedJsonData.filter((value, index, self) =>
+            index === self.findIndex((t) => (
+                t['Event Name'] === value['Event Name']
+            ))
+        )
+
+
+        const fileContent = JSON.stringify(combinedJsonData, null, 2);
+
+        if (existingFile) {
+            existingFile.setContent(fileContent); // Update existing file
+            SpreadsheetApp.getUi().alert(`JSON file updated: ${fileName}`);
+        } else {
+            folder.createFile(fileName, fileContent); // Create new file
+            SpreadsheetApp.getUi().alert(`JSON file created: ${fileName}`);
+        }
+    } catch (error) {
+        SpreadsheetApp.getUi().alert(`Error: ${error.message}`);
+    }
 }
 
 function onOpen() {
     var ui = SpreadsheetApp.getUi();
     ui.createMenu('Publish')
-        .addItem('Publish to site', 'exportEventCSV')
+        .addItem('Publish to site', 'exportEventJSON')
         .addToUi();
 }
+
+
+function getFileByName(folder, fileName) {
+    const files = folder.getFilesByName(fileName);
+    return files.hasNext() ? files.next() : null;
+}
+
+
+
+
+

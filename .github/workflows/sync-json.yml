@@ -1,0 +1,37 @@
+#sync-json.yml
+name: Sync JSON files
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download Main JSON
+        run: |
+          curl -c /tmp/cookies "https://drive.google.com/uc?export=download&id=1LKTfbNJFvTpYJwNKZAZi5Et0xhio7izt" > /tmp/intermediate.html
+          CONFIRM=$(grep -oP 'confirm=\K[^&]*' /tmp/intermediate.html)
+          curl -L -b /tmp/cookies "https://drive.google.com/uc?export=download&confirm=${CONFIRM}&id=1LKTfbNJFvTpYJwNKZAZi5Et0xhio7izt" -o static/data/towns.json
+
+          curl -c /tmp/cookies "https://drive.google.com/uc?export=download&id=1n9lq1_OFQxLN_lGmsKisfcGgD9_iiPJ2" > /tmp/intermediate.html
+          CONFIRM=$(grep -oP 'confirm=\K[^&]*' /tmp/intermediate.html)
+          curl -L -b /tmp/cookies "https://drive.google.com/uc?export=download&confirm=${CONFIRM}&id=1n9lq1_OFQxLN_lGmsKisfcGgD9_iiPJ2" -o static/data/businesses.json
+
+          curl -c /tmp/cookies "https://drive.google.com/uc?export=download&id=1Sv-9H8K10OLbo4-inWcSrUeaSmu2fzgh" > /tmp/intermediate.html
+          CONFIRM=$(grep -oP 'confirm=\K[^&]*' /tmp/intermediate.html)
+          curl -L -b /tmp/cookies "https://drive.google.com/uc?export=download&confirm=${CONFIRM}&id=1Sv-9H8K10OLbo4-inWcSrUeaSmu2fzgh" -o static/data/events.json
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git remote set-url origin https://${{ secrets.EVENTS_EXPORT }}@github.com/${{ github.repository }}
+          git add .
+          git commit -m "Auto-sync CSVs" || exit 0
+          git push
