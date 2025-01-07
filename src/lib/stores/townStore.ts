@@ -71,6 +71,11 @@ function createTownStore() {
                 businessesResponse.json()
             ]);
 
+            // trim whitespace from business town
+            businesses.forEach(business => {
+                business.town = business.town.trim();
+            });
+
             // Enhance towns with image paths
             const towns = rawTowns.map(town => ({
                 ...town,
