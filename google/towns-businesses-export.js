@@ -44,13 +44,11 @@ function publishSheetToJson(sheet, folder, newJsonData) {
             combinedJsonData = JSON.parse(content); // Parse existing JSON data
         }
 
-        combinedJsonData = combinedJsonData.concat(newJsonData); // Add new data
+        // update existing data
+        const existingData = combinedJsonData.filter(data => !newJsonData.some(newData => newData.name === data.name));
 
-        combinedJsonData = combinedJsonData.filter((value, index, self) =>
-                index === self.findIndex((t) => (
-                    t.name === value.name
-                ))
-        )
+        combinedJsonData = existingData.concat(newJsonData);
+
 
         const fileContent = JSON.stringify(combinedJsonData, null, 2);
 

@@ -1,0 +1,42 @@
+[
+  {
+    "Event Name": "test 1",
+    "Date and Time": "2025-01-06T23:00:00.000Z",
+    "Location": "Hermann ",
+    "Description": "test",
+    "Tags": "test",
+    "Duration": "5 hours",
+    "Price": "free",
+    "id": ""
+  },
+  {
+    "Event Name": "test2",
+    "Date and Time": "2025-01-06T23:00:00.000Z",
+    "Location": "Hermann ",
+    "Description": "test",
+    "Tags": "test",
+    "Duration": "5 hours",
+    "Price": "free",
+    "id": ""
+  },
+  {
+    "Event Name": "test3",
+    "Date and Time": "2025-02-06T23:00:00.000Z",
+    "Location": "Hermann ",
+    "Description": "test",
+    "Tags": "test",
+    "Duration": "5 hours",
+    "Price": "free",
+    "id": ""
+  },
+  {
+    "Event Name": "test4",
+    "Date and Time": "2025-02-07T23:00:00.000Z",
+    "Location": "Hermann ",
+    "Description": "test",
+    "Tags": "test",
+    "Duration": "5 hours",
+    "Price": "free",
+    "id": ""
+  }
+]

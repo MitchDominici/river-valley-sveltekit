@@ -1,5 +1,5 @@
-import {writable} from 'svelte/store';
-import {base} from '$app/paths';
+import { writable } from 'svelte/store';
+import { base } from '$app/paths';
 
 type Town = {
     name: string;
@@ -32,7 +32,7 @@ type Business = {
 };
 
 function createTownStore() {
-    const {subscribe, set, update} = writable<{
+    const { subscribe, set, update } = writable<{
         towns: Town[];
         businesses: Business[];
         loaded: boolean;
@@ -41,47 +41,6 @@ function createTownStore() {
         businesses: [],
         loaded: false
     });
-
-    function parseCSVLine(line: string) {
-        const result = [];
-        let current = '';
-        let inQuotes = false;
-
-        for (let i = 0; i < line.length; i++) {
-            if (line[i] === '"') {
-                inQuotes = !inQuotes;
-                continue;
-            }
-            if (line[i] === ',' && !inQuotes) {
-                result.push(current);
-                current = '';
-                continue;
-            }
-            current += line[i];
-        }
-        result.push(current);
-        return result;
-    }
-
-    async function parseCSV(csvText: string) {
-        const lines = csvText.split('\n');
-        const headers = parseCSVLine(lines[0]);
-
-        return lines
-            .slice(1)
-            .filter((line) => line.trim())
-            .map((line) => {
-                const values = parseCSVLine(line);
-                const obj: any = {};
-                headers.forEach((header, index) => {
-                    obj[header.trim()] = values[index]?.trim();
-                    if (header === 'images') {
-                        obj[header] = values[index].split('|');
-                    }
-                });
-                return obj;
-            });
-    }
 
     function getImagePathsForTown(townName: string): string[] {
         // Use Vite's import.meta.glob to get all images in the town's folder
@@ -99,20 +58,18 @@ function createTownStore() {
 
         return imagePaths;
     }
+
     async function loadData() {
         try {
             const [townsResponse, businessesResponse] = await Promise.all([
-                fetch(`${base}/data/towns.csv`),
-                fetch(`${base}/data/businesses.csv`)
+                fetch(`${base}/data/towns.json`),
+                fetch(`${base}/data/businesses.json`)
             ]);
 
-            const [townsText, businessesText] = await Promise.all([
-                townsResponse.text(),
-                businessesResponse.text()
+            const [rawTowns, businesses] = await Promise.all([
+                townsResponse.json(),
+                businessesResponse.json()
             ]);
-
-            const rawTowns = await parseCSV(townsText);
-            const businesses = await parseCSV(businessesText);
 
             // Enhance towns with image paths
             const towns = rawTowns.map(town => ({
@@ -120,8 +77,21 @@ function createTownStore() {
                 images: getImagePathsForTown(town.name.toLowerCase().replace(' ', '-'))
             }));
 
+            // Add main image path for each town
             towns.forEach(town => {
                 town.main_image = `/images/towns/${town.name.toLowerCase().replace(' ', '-')}/main.jpg`;
+            });
+
+            // Sort towns alphabetically by name
+            towns.sort((a, b) => a.name.localeCompare(b.name));
+
+            // Sort businesses alphabetically by name within each town
+            businesses.sort((a, b) => {
+                const townCompare = a.town.localeCompare(b.town);
+                if (townCompare === 0) {
+                    return a.name.localeCompare(b.name);
+                }
+                return townCompare;
             });
 
             update(state => ({
@@ -132,12 +102,16 @@ function createTownStore() {
             }));
         } catch (error) {
             console.error('Error loading data:', error);
+            update(state => ({
+                ...state,
+                loaded: true
+            }));
         }
     }
 
     function getTown(townName: string) {
         return new Promise<Town>((resolve, reject) => {
-            subscribe(({towns, loaded}) => {
+            subscribe(({ towns, loaded }) => {
                 if (loaded) {
                     const town = towns.find(
                         t => t.name.toLowerCase() === townName.toLowerCase()
@@ -151,7 +125,7 @@ function createTownStore() {
 
     function getTownBusinesses(townName: string) {
         return new Promise<Business[]>((resolve) => {
-            subscribe(({businesses, loaded}) => {
+            subscribe(({ businesses, loaded }) => {
                 if (loaded) {
                     resolve(
                         businesses.filter(

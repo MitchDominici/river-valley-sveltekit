@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Hermann",
+    "county": "Gasconade",
+    "state": "MO",
+    "population": 2431,
+    "established": 1837,
+    "description": "Founded by German settlers in 1837, Hermann is renowned for its wineries and historic architecture. The town's German heritage is beautifully preserved in its brick buildings, wine cellars, and cultural festivals.",
+    "lat": 38.7041629915504,
+    "long": -91.4393435084909
+  },
+  {
+    "name": "New Haven",
+    "county": "Franklin",
+    "state": "MO",
+    "population": 2089,
+    "established": 1856,
+    "description": "New Haven, established in 1856, sits gracefully along the Missouri River. Known for its artistic community and riverside charm, the town offers a perfect blend of historic preservation and modern creativity.",
+    "lat": 38.6084781211209,
+    "long": -91.2195556111113
+  },
+  {
+    "name": "Gerald",
+    "county": "Franklin",
+    "state": "MO",
+    "population": 1345,
+    "established": 1901,
+    "description": "A welcoming community established along the railroad in 1901. Gerald combines traditional values with progressive development. The town is known for its annual Railroad Days festival and strong community spirit.",
+    "lat": 38.3996999348893,
+    "long": -91.3302221984299
+  },
+  {
+    "name": "Rosebud",
+    "county": "Gasconade",
+    "state": "MO",
+    "population": 409,
+    "established": 1908,
+    "description": "Named for the wild roses that once covered its hills, Rosebud is a charming small town known for its antique shops and friendly atmosphere. The town's well-preserved main street features historic buildings and unique local businesses.",
+    "lat": 38.387261234792,
+    "long": -91.4010406513727
+  },
+  {
+    "name": "Owensville",
+    "county": "Gasconade",
+    "state": "MO",
+    "population": 2676,
+    "established": 1886,
+    "description": "Founded in 1886, Owensville serves as a regional hub combining rural charm with modern amenities. The town is known for its excellent schools, community events, and the annual Gasconade County Fair.",
+    "lat": 38.3456785092646,
+    "long": -91.5013419762128
+  },
+  {
+    "name": "Stony Hill",
+    "county": "Gasconade",
+    "state": "MO",
+    "population": 149,
+    "established": 1883,
+    "description": "A historic community known for its scenic views and rich agricultural heritage. Stony Hill's elevated location offers panoramic views of the surrounding countryside and vineyards.",
+    "lat": 38.5430603977941,
+    "long": -91.3726320511841
+  },
+  {
+    "name": "Swiss",
+    "county": "Gasconade",
+    "state": "MO",
+    "population": 98,
+    "established": 1881,
+    "description": "Named for its early Swiss settlers, this small community preserves its unique cultural heritage. The area is known for its traditional architecture, dairy farming, and cheese-making traditions.",
+    "lat": 38.5615062875028,
+    "long": -91.470990243252
+  },
+  {
+    "name": "Berger",
+    "county": "Franklin",
+    "state": "MO",
+    "population": 221,
+    "established": 1871,
+    "description": "Situated along the Missouri River, Berger offers stunning river views and rich German heritage. The town is known for its historic buildings, traditional festivals, and proximity to wine country.",
+    "lat": 38.6741969911003,
+    "long": -91.3390347357491
+  }
+]
