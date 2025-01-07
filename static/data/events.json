@@ -38,5 +38,14 @@
     "Duration": "5 hours",
     "Price": "free",
     "id": ""
+  },
+  {
+    "Event Name": "test5",
+    "Date and Time": "2025-03-08T22:00:00.000Z",
+    "Location": "Hermann",
+    "Description": "test",
+    "Tags": "test",
+    "Duration": "5 hours",
+    "Price": "free"
   }
 ]
