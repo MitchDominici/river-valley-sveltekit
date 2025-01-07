@@ -1,38 +1,13 @@
-function exportEventCSV() {
-    var ui = SpreadsheetApp.getUi();
-
-    var yearResponse = ui.prompt('Enter Year (YYYY):', ui.ButtonSet.OK_CANCEL);
-    if (yearResponse.getSelectedButton() == ui.Button.CANCEL) return;
-    var year = yearResponse.getResponseText();
-
-    var monthResponse = ui.prompt('Enter Month (1-12):', ui.ButtonSet.OK_CANCEL);
-    if (monthResponse.getSelectedButton() == ui.Button.CANCEL) return;
-    var month = String(monthResponse.getResponseText()).padStart(2, '0');
-
+function exportEventJSON() {
     var sheet = SpreadsheetApp.getActiveSpreadsheet();
+
+    console.log('sheet:', sheet.getName());
+
     var folder = DriveApp.getFolderById('1lFnxG53DmyHbgo6MVYMy7aT7XrGONLyf');
 
-    var fileName = `${year}_${month}.csv`;
-    var eventSheet = sheet.getSheetByName(`${year}_${month}`);
-
-    if (!eventSheet) {
-        ui.alert(`Sheet ${year}_${month} not found`);
-        return;
-    }
-
     publishSheetToJson(sheet, folder)
-
-    // var csvContent = convertToCSV(eventSheet);
-    //
-    // var files = folder.getFilesByName(fileName);
-    // if (files.hasNext()) {
-    //     files.next().setContent(csvContent);
-    //     ui.alert('File updated successfully');
-    // } else {
-    //     folder.createFile(fileName, csvContent);
-    //     ui.alert('File created successfully');
-    // }
 }
+
 
 function publishSheetToJson(sheet, folder) {
     try {
@@ -58,6 +33,13 @@ function publishSheetToJson(sheet, folder) {
 
         combinedJsonData = combinedJsonData.concat(newJsonData); // Add new data
 
+        combinedJsonData = combinedJsonData.filter((value, index, self) =>
+            index === self.findIndex((t) => (
+                t['Event Name'] === value['Event Name']
+            ))
+        )
+
+
         const fileContent = JSON.stringify(combinedJsonData, null, 2);
 
         if (existingFile) {
@@ -72,24 +54,20 @@ function publishSheetToJson(sheet, folder) {
     }
 }
 
-function convertToCSV(sheet) {
-    var data = sheet.getDataRange().getValues();
-    return data.map(row => row.map(str => `"${str}"`).join(',')).join('\n');
-}
-
 function onOpen() {
     var ui = SpreadsheetApp.getUi();
     ui.createMenu('Publish')
-        .addItem('Publish to site', 'exportEventCSV')
+        .addItem('Publish to site', 'exportEventJSON')
         .addToUi();
 }
 
-function getOrCreateFolder(folderName) {
-    const folders = DriveApp.getFoldersByName(folderName);
-    return folders.hasNext() ? folders.next() : DriveApp.createFolder(folderName);
-}
 
 function getFileByName(folder, fileName) {
     const files = folder.getFilesByName(fileName);
     return files.hasNext() ? files.next() : null;
 }
+
+
+
+
+
