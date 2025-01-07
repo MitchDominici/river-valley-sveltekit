@@ -76,6 +76,11 @@ function createTownStore() {
                 business.town = business.town.trim();
             });
 
+            businesses.forEach(business => {
+                business.type = business.type.trim();
+                business.type = business.type.charAt(0).toUpperCase() + business.type.slice(1);
+            });
+
             // Enhance towns with image paths
             const towns = rawTowns.map(town => ({
                 ...town,

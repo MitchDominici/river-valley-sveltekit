@@ -71,30 +71,13 @@
         </div>
     </div>
 
-    <!-- View Selector -->
-    <div class="max-w-4xl mx-auto mb-8">
-        <div class="bg-white rounded-lg shadow p-4 border-2 border-primary-blue">
-            <h3 class="text-xl font-semibold text-primary-blue mb-4">Choose View Style</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {#each Object.entries(viewOptions) as [key, option]}
-                    <button
-                            class="p-3 rounded-lg border-2 transition-all duration-200 {selectedView === key ? 'border-primary-blue bg-blue-50' : 'border-gray-200 hover:border-primary-blue'}"
-                            on:click={() => selectedView = key}
-                    >
-                        <span class="block text-sm font-medium text-gray-700">{option.name}</span>
-                    </button>
-                {/each}
-            </div>
-        </div>
-    </div>
-
     <!-- Towns grid -->
-    <div class="grid {viewOptions[selectedView].cols} gap-4 px-4 md:px-8 lg:px-16">
+    <div class="grid {viewOptions.small.cols} gap-4 px-4 md:px-8 lg:px-16">
         {#each towns as town}
             <div class="town-wrapper">
                 <a
                 href="{base}/towns/{town.name.toLowerCase()}"
-                class="town-container block {viewOptions[selectedView].height}"
+                class="town-container block {viewOptions.small.height}"
                 class:list-view={selectedView === 'list'}
                 >
                 <div class="town-image-container">
@@ -104,7 +87,7 @@
                             class="town-image"
                     />
                     <div class="town-overlay">
-                        <h2 class="{viewOptions[selectedView].textSize} font-bold font-display">{town.name}</h2>
+                        <h2 class="{viewOptions.small.textSize} font-bold font-display">{town.name}</h2>
                         {#if selectedView === 'list'}
                             <p class="text-white text-lg mt-1">{town.county} County</p>
                         {/if}
