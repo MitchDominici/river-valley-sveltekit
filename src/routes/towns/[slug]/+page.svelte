@@ -48,7 +48,7 @@
             businesses = await townStore.getTownBusinesses(townName);
             availableTypes = [...new Set(businesses.map(b => b.type.toLowerCase()))]
                 .sort()
-                .map(type => type.charAt(0).toUpperCase() + type.slice(1));
+                .map(type => type.charAt(0).toUpperCase() + type.slice(1)).filter(type => type !== 'null' && type !== 'undefined' && type !== '');
             availableDays = ALL_DAYS.filter(day => businesses.some(business => business[day]));
             filteredBusinesses = businesses;
         } catch (error) {
