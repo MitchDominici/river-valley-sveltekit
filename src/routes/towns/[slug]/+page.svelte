@@ -189,7 +189,7 @@
                                 {/if}
 
                                 <div class="flex gap-4 mt-3 text-sm text-gray-600">
-                                    {#each ['sunday', 'monday', 'tuesday', 'wednesday'] as day}
+                                    {#each ALL_DAYS as day}
                                         {#if business[day]}
                                             <div>
                                                 <span class="font-medium text-primary-blue"><strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong> </span>
