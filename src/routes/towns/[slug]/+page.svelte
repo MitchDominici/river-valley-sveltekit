@@ -11,7 +11,7 @@
     let filteredBusinesses = [];
     let isFilterMenuOpen = false;
 
-    const ALL_DAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const ALL_DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', ];
     let availableDays: string[] = [];
     let selectedDay: string | null = null;
     let selectedType: string | null = null;
@@ -25,7 +25,7 @@
     function filterBusinesses() {
         filteredBusinesses = businesses.filter(business => {
             const matchesDay = !selectedDay || (business[selectedDay] && business[selectedDay].toLowerCase() !== 'closed');
-            const matchesType = !selectedType || business.type.toLowerCase() === selectedType.toLowerCase();
+            const matchesType = !selectedType || business.type.toLowerCase().includes(selectedType.toLowerCase());
             return matchesDay && matchesType;
         });
     }
@@ -49,6 +49,16 @@
             availableTypes = [...new Set(businesses.map(b => b.type.toLowerCase()))]
                 .sort()
                 .map(type => type.charAt(0).toUpperCase() + type.slice(1)).filter(type => type !== 'null' && type !== 'undefined' && type !== '');
+            for (let type of availableTypes) {
+                type = type.charAt(0).toUpperCase() + type.slice(1);
+                console.log(type);
+                if (type.includes(',')) {
+                    let subtypes = type.split(',');
+                    availableTypes = availableTypes.filter(t => t !== type);
+                    subtypes = subtypes.map(t => t.trim()).map(t => t.charAt(0).toUpperCase() + t.slice(1));
+                    availableTypes.push(...subtypes);
+                }
+            }
             availableDays = ALL_DAYS.filter(day => businesses.some(business => business[day]));
             filteredBusinesses = businesses;
         } catch (error) {
@@ -58,10 +68,10 @@
 </script>
 
 <!-- Main content -->
-<div id="town-page"  class="py-8 mt-4 ">
+<div id="town-page"  class="py-8 mt-8">
     {#if town}
         <!-- Town Header Info -->
-        <div class="container mx-auto px-4 pt-16">
+        <div class="container mx-auto pt-16">
             <div class="town-card bg-secondary-yellow rounded-lg shadow-lg p-8 mt-8 relative overflow-hidden border-2 border-dashed border-earthy-brown hover:border-warm-taupe transition-colors duration-300">
                 <div class="flex flex-col md:flex-row gap-8">
                     <!-- Town Shape with Main Image -->
