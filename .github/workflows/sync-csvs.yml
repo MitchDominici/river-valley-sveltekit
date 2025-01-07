@@ -13,11 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Download Main CSVs
+      - name: Download Main JSON
         run: |
-          curl -L "https://drive.google.com/uc?export=download&id=1LKTfbNJFvTpYJwNKZAZi5Et0xhio7izt" -o static/data/towns.json
-          curl -L "https://drive.google.com/uc?export=download&id=1n9lq1_OFQxLN_lGmsKisfcGgD9_iiPJ2" -o static/data/businesses.json
-          curl -L "https://drive.google.com/uc?export=download&id=1Sv-9H8K10OLbo4-inWcSrUeaSmu2fzgh" -o static/data/events.json
+#          curl -L "https://drive.google.com/uc?export=download&id=1LKTfbNJFvTpYJwNKZAZi5Et0xhio7izt" -o static/data/towns.json
+#          curl -L "https://drive.google.com/uc?export=download&id=1n9lq1_OFQxLN_lGmsKisfcGgD9_iiPJ2" -o static/data/businesses.json
+#          curl -L "https://drive.google.com/uc?export=download&id=1Sv-9H8K10OLbo4-inWcSrUeaSmu2fzgh" -o static/data/events.json
+
+          curl -c /tmp/cookies "https://drive.google.com/uc?export=download&id=1LKTfbNJFvTpYJwNKZAZi5Et0xhio7izt" > /tmp/intermediate.html
+          CONFIRM=$(grep -oP 'confirm=\K[^&]*' /tmp/intermediate.html)
+          curl -L -b /tmp/cookies "https://drive.google.com/uc?export=download&confirm=${CONFIRM}&id=1LKTfbNJFvTpYJwNKZAZi5Et0xhio7izt" -o static/data/towns.json
+
 
 
       - name: Commit changes
