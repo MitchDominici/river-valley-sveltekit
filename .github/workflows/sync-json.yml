@@ -15,7 +15,7 @@ jobs:
 
       - name: Download towns JSON
         run: |
-          curl -L "https://drive.google.com/uc?export=download&id=1LKTfbNJFvTpYJwNKZAZi5Et0xhio7izt" -o static/data/towns.json
+          curl -L "https://drive.google.com/uc?export=download&id=1XY8wEEKpzqycK7bNC90kwk3VkrAZJoWl" -o static/data/towns.json
 
       - name: Download businesses JSON
         run: |

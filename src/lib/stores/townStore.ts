@@ -93,7 +93,7 @@ function createTownStore() {
             });
 
             // Sort towns alphabetically by name
-            towns.sort((a, b) => a.name.localeCompare(b.name));
+            // towns.sort((a, b) => a.name.localeCompare(b.name));
 
             // Sort businesses alphabetically by name within each town
             businesses.sort((a, b) => {
