@@ -94,6 +94,24 @@ function createTownStore() {
 
             // Sort towns alphabetically by name
             // towns.sort((a, b) => a.name.localeCompare(b.name));
+            const townSortOrder = [
+                'New Haven',
+                'Gerald',
+                'Rosebud',
+                'Oensville',
+                'Swiss',
+                'Hermann',
+                'Berger',
+                'Stony Hill',
+                ];
+            // Sort towns based on the predefined order
+            for (let i = 0; i < townSortOrder.length; i++) {
+                const town = towns.find(t => t.name === townSortOrder[i]);
+                if (town) {
+                    towns.splice(towns.indexOf(town), 1);
+                    towns.splice(i, 0, town);
+                }
+            }
 
             // Sort businesses alphabetically by name within each town
             businesses.sort((a, b) => {
