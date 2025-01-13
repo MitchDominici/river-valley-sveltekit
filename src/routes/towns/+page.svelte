@@ -41,6 +41,7 @@
     onMount(async () => {
         if (!loaded) {
             await townStore.loadData();
+            console.log(towns);
         }
     });
 </script>
@@ -62,7 +63,7 @@
             <p class="text-gray-600 font-display text-3xl">Towns</p>
         </div>
         <div class="text-center">
-            <h3 class="text-4xl font-bold text-primary-blue">{businessesCount}+</h3>
+            <h3 class="text-4xl font-bold text-primary-blue">{businessesCount}</h3>
             <p class="text-gray-600 font-display text-3xl">Small Businesses</p>
         </div>
         <div class="text-center">
