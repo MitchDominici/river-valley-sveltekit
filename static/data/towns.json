@@ -1,15 +1,5 @@
 [
   {
-    "name": "Hermann",
-    "county": "Gasconade",
-    "state": "MO",
-    "population": 2431,
-    "established": 1837,
-    "description": "Founded by German settlers in 1837, Hermann is renowned for its wineries and historic architecture. The town's German heritage is beautifully preserved in its brick buildings, wine cellars, and cultural festivals.",
-    "lat": 38.7041629915504,
-    "long": -91.4393435084909
-  },
-  {
     "name": "New Haven",
     "county": "Franklin",
     "state": "MO",
@@ -50,16 +40,6 @@
     "long": -91.5013419762128
   },
   {
-    "name": "Stony Hill",
-    "county": "Gasconade",
-    "state": "MO",
-    "population": 149,
-    "established": 1883,
-    "description": "A historic community known for its scenic views and rich agricultural heritage. Stony Hill's elevated location offers panoramic views of the surrounding countryside and vineyards.",
-    "lat": 38.5430603977941,
-    "long": -91.3726320511841
-  },
-  {
     "name": "Swiss",
     "county": "Gasconade",
     "state": "MO",
@@ -70,6 +50,16 @@
     "long": -91.470990243252
   },
   {
+    "name": "Hermann",
+    "county": "Gasconade",
+    "state": "MO",
+    "population": 2431,
+    "established": 1837,
+    "description": "Founded by German settlers in 1837, Hermann is renowned for its wineries and historic architecture. The town's German heritage is beautifully preserved in its brick buildings, wine cellars, and cultural festivals.",
+    "lat": 38.7041629915504,
+    "long": -91.4393435084909
+  },
+  {
     "name": "Berger",
     "county": "Franklin",
     "state": "MO",
@@ -78,5 +68,15 @@
     "description": "Situated along the Missouri River, Berger offers stunning river views and rich German heritage. The town is known for its historic buildings, traditional festivals, and proximity to wine country.",
     "lat": 38.6741969911003,
     "long": -91.3390347357491
+  },
+  {
+    "name": "Stony Hill",
+    "county": "Gasconade",
+    "state": "MO",
+    "population": 149,
+    "established": 1883,
+    "description": "A historic community known for its scenic views and rich agricultural heritage. Stony Hill's elevated location offers panoramic views of the surrounding countryside and vineyards.",
+    "lat": 38.5430603977941,
+    "long": -91.3726320511841
   }
 ]
