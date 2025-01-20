@@ -130,7 +130,7 @@
                 Things to do in {town.name}
             </h2>
             <div class="mb-4 text-gray-600 font-display text-xl">
-                These are businesses we have personally visited and will vouch for their great service!
+                Every business takes pride in delivering personalized, high-quality experiences that make your visit memorable.
             </div>
 
             <div class="flex justify-end mb-4">
