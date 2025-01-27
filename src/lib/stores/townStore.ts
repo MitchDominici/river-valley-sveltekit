@@ -29,6 +29,10 @@ type Business = {
     monday?: string;
     tuesday?: string;
     wednesday?: string;
+    thursday?: string;
+    friday?: string;
+    saturday?: string;
+    phone?: string;
 };
 
 function createTownStore() {

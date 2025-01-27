@@ -70,7 +70,6 @@
                 </g>
             </svg>
 
-            <!-- Keep your existing clouds divs -->
             <div class="cloud cloud-1"></div>
             <div class="cloud cloud-2"></div>
             <div class="cloud cloud-3"></div>
@@ -78,13 +77,13 @@
 
         <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 to-transparent">
             <div class="text-center text-white z-10 px-4">
-                <div class="text-3xl md:text-4xl font-accent opacity-0 transform -translate-y-4 animate-fade-in">
+                <div class="text-4xl md:text-4xl font-accent opacity-0 transform -translate-y-4 animate-fade-in">
                     Welcome to the
                 </div>
-                <h1 class="font-display text-6xl md:text-8xl lg:text-9xl my-6 drop-shadow-lg opacity-0 transform -translate-y-4 animate-fade-in animation-delay-200">
-                    Missouri River<br/>Valley Loop
+                <h1 class="font-display text-6xl md:text-8xl lg:text-9xl my-6 drop-shadow-lg opacity-0 transform -translate-y-4 animate-fade-in animation-delay-200" style="text-shadow: 4px 4px 8px rgba(0, 0, 0, 1);">
+                    Missouri River<br/>Valley LOOP
                 </h1>
-                <p class="max-w-3xl mx-auto text-xl md:text-2xl opacity-0 transform -translate-y-4 animate-fade-in animation-delay-400 leading-relaxed">
+                <p class="max-w-3xl mx-auto text-xl md:text-2xl opacity-0 transform -translate-y-4 animate-fade-in animation-delay-400 leading-relaxed mt-4 pt-4">
                     Experience the charm of historic districts, winding trails, and vibrant local culture as
                     you journey through the heart of Missouri. Discover hidden gems and create unforgettable
                     memories along this carefully curated route.
@@ -93,7 +92,7 @@
                         class="mt-8 px-10 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors opacity-0 transform -translate-y-4 animate-fade-in animation-delay-600 font-fun text-2xl md:text-3xl inline-block"
                         href="{base}/towns"
                 >
-                    Start The Loop
+                    Start The LOOP
                 </a>
             </div>
         </div>

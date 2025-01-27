@@ -2,7 +2,7 @@
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <h3 class="text-lg font-semibold mb-4">Missouri River Valley Loop</h3>
+                <h3 class="text-lg font-semibold mb-4">Missouri River Valley LOOP</h3>
                 <p class="text-black">
                     Exploring the beauty and history of Missouri's river communities.
                 </p>
@@ -31,13 +31,13 @@
 
             <div>
                 <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
-                <p class="text-black">Email: MORiverValleyLoop@gmail.com</p>
+                <p class="text-black">Email: MORiverValleyLOOP@gmail.com</p>
                 <p class="text-black">Phone: Laura - 314.662.2299</p>
             </div>
         </div>
 
         <div class="mt-8 pt-8 border-t border-white text-center text-black">
-            <p>&copy; 2024 Missouri River Valley Loop. All rights reserved.</p>
+            <p>&copy; 2024 Missouri River Valley LOOP. All rights reserved.</p>
         </div>
     </div>
 </footer>

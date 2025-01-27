@@ -1,9 +1,9 @@
 <div class="px-4 py-8 mt-4" id="about-page">
     <!-- Hero Section -->
     <div class="max-w-4xl mx-auto text-center mb-20">
-        <h1 class="text-6xl font-fun text-primary-blue mb-8">Discover The Loop</h1>
+        <h1 class="text-6xl font-fun text-primary-blue mb-8">Discover The LOOP</h1>
         <p class="text-2xl font-display text-earthy-brown leading-relaxed">
-            Meandering through historic river towns, the Missouri River Valley Loop connects vibrant communities,
+            Meandering through historic river towns, the Missouri River Valley LOOP connects vibrant communities,
             like the river that binds us together, creating a current of growth and opportunity.
         </p>
     </div>
@@ -23,7 +23,7 @@
             <div class="order-1 md:order-2 space-y-6">
                 <h2 class="text-4xl font-display text-primary-blue">Our Mission</h2>
                 <p class="text-xl text-gray-700 leading-relaxed">
-                    The Missouri River Valley Loop is more than a route – it's a movement.
+                    The Missouri River Valley LOOP is more than a route – it's a movement.
                     We're building a powerful network of small businesses, entrepreneurs, and community supporters
                     who believe in the strength of rural economies and the magic of small-town charm.
                 </p>
@@ -102,7 +102,7 @@
                 </p>
                 <p class="text-lg">
                     <span class="font-bold text-primary-blue">Email:</span>
-                    <span class="text-earthy-brown"> MORiverValleyLoop@gmail.com</span>
+                    <span class="text-earthy-brown"> MORiverValleyLOOP@gmail.com</span>
                 </p>
                 <p class="text-lg">
                     <span class="font-bold text-primary-blue">Phone:</span>

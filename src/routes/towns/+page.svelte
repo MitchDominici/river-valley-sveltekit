@@ -46,13 +46,13 @@
     });
 </script>
 
-<div id="towns-page" class="px-4 py-8">
+<div id="towns-page" class="my-4 px-4 py-8">
     <!-- Header section -->
     <div class="text-center my-8">
         <h1 class="text-6xl mb-6 font-fun text-primary-blue">Historic River Towns</h1>
         <p class="text-3xl text-gray-700 max-w-3xl mx-auto">
             Discover the unique charm and rich history of the communities along the Missouri River Valley
-            Loop.
+            LOOP.
         </p>
     </div>
 
