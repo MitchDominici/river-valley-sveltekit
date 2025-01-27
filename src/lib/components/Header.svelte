@@ -16,7 +16,7 @@
         <div class="flex items-center justify-between">
             <a href="/">
                 <img
-                        alt="Missouri River Valley Loop logo"
+                        alt="Missouri River Valley LOOP logo"
                         class="h-28 hover:cursor-pointer"
                         src="{base}/images/main/logo-alt-1.png"
                 />
