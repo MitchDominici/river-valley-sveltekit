@@ -26,13 +26,22 @@
 
     function filterBusinesses() {
         filteredBusinesses = businesses.filter(business => {
+            const isByAppointmentOrAvailability = selectedDay === 'by appointment/availability';
             const matchesDay = !selectedDay ||
                 (business[selectedDay] && business[selectedDay].toLowerCase() !== 'closed'
-                    && business[selectedDay].toLowerCase().includes('am')
-                    && business[selectedDay].toLowerCase().includes('pm')
+                    && !business[selectedDay].toLowerCase().includes('by')
+                    && (business[selectedDay].toLowerCase().includes('am') || business[selectedDay].toLowerCase().includes('pm'))
                 );
+            let hasByInDays = false;
+            for (let day of ALL_DAYS) {
+                if (business[day] && business[day].toLowerCase().includes('by')) {
+                    hasByInDays = true;
+                }
+            }
+            // const byAppointment = isByAppointmentOrAvailability && (business[selectedDay] && business[selectedDay].toLowerCase().includes('by'));
+            // const byAvailability = isByAppointmentOrAvailability && (business[selectedDay] && business[selectedDay].toLowerCase().includes('by'));
             const matchesType = !selectedType || business.type.toLowerCase().includes(selectedType.toLowerCase());
-            return matchesDay && matchesType;
+            return (matchesDay || hasByInDays) && matchesType;
         });
     }
 
@@ -69,6 +78,8 @@
             availableTypes = [...new Set(availableTypes)].sort();
 
             availableDays = ALL_DAYS.filter(day => businesses.some(business => business[day]));
+            availableDays.push('by appointment/availability');
+
             filteredBusinesses = businesses;
         } catch (error) {
             console.error('Error loading town:', error);
@@ -209,7 +220,8 @@
                                     {/if}
 
                                     {#if business.address}
-                                        <strong>Address:</strong> {business.address} {business.town}, {business.state} {business.zip}
+                                        <strong>Address:</strong> {business.address} {business.town}
+                                        , {business.state} {business.zip}
                                     {/if}
                                 </p>
 
@@ -217,8 +229,7 @@
                                     {#each ALL_DAYS as day}
                                         {#if business[day]}
                                             <div>
-                                                <span class="font-medium text-primary-blue"><strong>{day.charAt(0).toUpperCase() + day.slice(1)}
-                                                    :</strong> </span>
+                                               <span class="font-medium text-primary-blue"><strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong> </span>
                                                 <span>{business[day]}</span>
                                             </div>
                                         {/if}
@@ -274,8 +285,10 @@
                                             title="Show on map"
                                     >
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                         </svg>
                                     </button>
                                 {/if}
