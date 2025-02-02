@@ -229,11 +229,11 @@
                                     {/if}
                                 </p>
 
-                                <div class="flex gap-4 mt-3 text-sm text-gray-600">
+                                <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-600">
                                     {#each ALL_DAYS as day}
                                         {#if business[day]}
-                                            <div>
-                                               <span class="font-medium text-primary-blue"><strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong> </span>
+                                            <div class="w-full md:w-auto">
+                                                <span class="font-medium text-primary-blue"><strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong> </span>
                                                 <span>{business[day]}</span>
                                             </div>
                                         {/if}
