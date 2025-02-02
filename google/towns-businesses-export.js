@@ -38,25 +38,25 @@ function publishSheetToJson(sheet, folder, newJsonData) {
         const fileName = `${sheet.getName()}.json`;
         const existingFile = getFileByName(folder, fileName);
 
-        let combinedJsonData = [];
-        if (existingFile) {
-            const content = existingFile.getBlob().getDataAsString();
-            combinedJsonData = JSON.parse(content); // Parse existing JSON data
-        }
+        // let combinedJsonData = [];
+        // if (existingFile) {
+        //     const content = existingFile.getBlob().getDataAsString();
+        //     combinedJsonData = JSON.parse(content); // Parse existing JSON data
+        // }
+        //
+        // // update existing data
+        // const existingData = combinedJsonData.filter(data => !newJsonData.some(newData => newData.name === data.name));
+        // for (let i = 0; i < combinedJsonData.length; i++) {
+        //     for (let j = 0; j < newJsonData.length; j++) {
+        //         if (combinedJsonData[i].name === newJsonData[j].name) {
+        //             combinedJsonData[i] = newJsonData[j];
+        //         }
+        //     }
+        // }
+        //
+        // combinedJsonData = existingData.concat(newJsonData);
 
-        // update existing data
-        const existingData = combinedJsonData.filter(data => !newJsonData.some(newData => newData.name === data.name));
-        for (let i = 0; i < combinedJsonData.length; i++) {
-            for (let j = 0; j < newJsonData.length; j++) {
-                if (combinedJsonData[i].name === newJsonData[j].name) {
-                    combinedJsonData[i] = newJsonData[j];
-                }
-            }
-        }
-
-        combinedJsonData = existingData.concat(newJsonData);
-
-        const fileContent = JSON.stringify(combinedJsonData, null, 2);
+        const fileContent = JSON.stringify(newJsonData, null, 2);
 
         if (existingFile) {
             existingFile.setContent(fileContent); // Update existing file
@@ -78,6 +78,8 @@ function getSheetAsJSON(sheet){
         headers.forEach((header, index) => {
             obj[header] = row[index];
         });
+        if (obj['name']==='') return;
+
         return obj;
     });
     return newJsonData;
