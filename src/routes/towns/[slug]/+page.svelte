@@ -63,10 +63,9 @@
             businesses = await townStore.getTownBusinesses(townName);
             availableTypes = [...new Set(businesses.map(b => b.type.toLowerCase()))]
                 .sort()
-                .map(type => type.charAt(0).toUpperCase() + type.slice(1)).filter(type => type !== 'null' && type !== 'undefined' && type !== '');
+                .map(type => type.charAt(0).toUpperCase() + type.slice(1)).filter(x => x !== 'null' && x !== 'undefined' && x !== '');
             for (let type of availableTypes) {
                 type = type.charAt(0).toUpperCase() + type.slice(1);
-                console.log(type);
                 if (type.includes(',')) {
                     let subtypes = type.split(',');
                     availableTypes = availableTypes.filter(t => t !== type);
@@ -87,7 +86,7 @@
     });
 
     function scrollToMap() {
-        document.getElementById('townMap')!.scrollIntoView({ behavior: 'smooth' })
+        document.getElementById('townMap')!.scrollIntoView({behavior: 'smooth'})
     }
 </script>
 
@@ -187,13 +186,17 @@
                         <h3 class="text-lg font-semibold mb-2">Business Type:</h3>
                         <div class="flex flex-wrap gap-2">
                             {#each availableTypes as type}
-                                <button
-                                        class="px-3 py-1 rounded-full text-sm {selectedType === type ? 'bg-primary-blue text-white' : 'bg-gray-200 text-gray-700'}
+                                {#if type !== ''}
+                                    <button
+                                            class="px-3 py-1 rounded-full text-sm {selectedType === type ? 'bg-primary-blue text-white' : 'bg-gray-200 text-gray-700'}
                 hover:bg-blue-700 hover:text-white transition-colors"
-                                        on:click={() => toggleTypeFilter(type)}
-                                >
-                                    {type}
-                                </button>
+                                            on:click={() => toggleTypeFilter(type)}
+                                    >
+                                        {type}
+                                    </button>
+                                {:else}
+                                    <span></span>
+                                {/if}
                             {/each}
                         </div>
                     </div>
@@ -233,7 +236,8 @@
                                     {#each ALL_DAYS as day}
                                         {#if business[day]}
                                             <div class="w-full md:w-auto">
-                                                <span class="font-medium text-primary-blue"><strong>{day.charAt(0).toUpperCase() + day.slice(1)}:</strong> </span>
+                                                <span class="font-medium text-primary-blue"><strong>{day.charAt(0).toUpperCase() + day.slice(1)}
+                                                    :</strong> </span>
                                                 <span>{business[day]}</span>
                                             </div>
                                         {/if}
@@ -288,7 +292,8 @@
                                             class="text-gray-600 hover:text-primary-blue transition-colors"
                                             title="Show on map"
                                     >
-                                        <a href="#townMap" on:click="{(event) => { event.preventDefault(); scrollToMap(); }}"></a>
+                                        <a href="#townMap"
+                                           on:click="{(event) => { event.preventDefault(); scrollToMap(); }}"></a>
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
