@@ -6,51 +6,37 @@ export const prerender = true;
 
 export async function load() {
     try {
-        // Read the towns CSV file
-        const townsData = await fs.readFile('static/data/towns.csv', 'utf-8');
+        // Read both JSON files
+        const [townsData, businessesData] = await Promise.all([
+            fs.readFile('static/data/towns.json', 'utf-8'),
+            fs.readFile('static/data/businesses.json', 'utf-8')
+        ]);
 
-        // Parse CSV to get town names (assuming first line is header)
-        const lines = townsData.split('\n');
-        const headers = lines[0].split(',');
-        const nameIndex = headers.findIndex(h => h.trim().toLowerCase() === 'name');
-
-        if (nameIndex === -1) {
-            // @ts-ignore
-            throw new error(500, 'Invalid towns data format');
-        }
-
-        // Get town names from CSV, skipping header
-        const towns = lines
-            .slice(1)
-            .map(line => {
-                const columns = line.split(',');
-                return columns[nameIndex]?.trim().toLowerCase() || '';
-            })
-            .filter(Boolean); // Remove empty entries
+        const towns = JSON.parse(townsData);
+        const businesses = JSON.parse(businessesData);
 
         return {
-            towns
+            towns,
+            businesses
         };
     } catch (err) {
-        console.error('Error loading towns:', err);
-        throw error(500, 'Could not load towns data');
+        console.error('Error loading data:', err);
+        throw error(500, 'Could not load data');
     }
 }
 
 export const entries = () => {
-    // Read the towns CSV synchronously for entries
-    const townsData = readFileSync('static/data/towns.csv', 'utf-8');
-    const lines = townsData.split('\n');
-    const headers = lines[0].split(',');
-    const nameIndex = headers.findIndex(h => h.trim().toLowerCase() === 'name');
+    try {
+        // Read towns data synchronously for entries
+        const townsData = readFileSync('static/data/towns.json', 'utf-8');
+        const towns = JSON.parse(townsData);
 
-    const towns = lines
-        .slice(1)
-        .map(line => {
-            const columns = line.split(',');
-            return columns[nameIndex]?.trim().toLowerCase() || '';
-        })
-        .filter(Boolean);
-
-    return towns.map(slug => ({ slug }));
+        // Return array of slug objects for each town
+        return towns.map((town: { name: string; }) => ({
+            slug: town.name.toLowerCase().replace(/\s+/g, '-')
+        }));
+    } catch (err) {
+        console.error('Error generating entries:', err);
+        return [];
+    }
 };
