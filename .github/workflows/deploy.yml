@@ -34,10 +34,10 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Handle symlinks
-        run: |
-          cd build
-          find . -type l -exec bash -c 'cp --remove-destination "$(readlink -f "$0")" "$0"' {} \;
+#      - name: Handle symlinks
+#        run: |
+#          cd build
+#          find . -type l -exec bash -c 'cp --remove-destination "$(readlink -f "$0")" "$0"' {} \;
 
 #      - name: Setup Pages
 #        uses: actions/configure-pages@v4
