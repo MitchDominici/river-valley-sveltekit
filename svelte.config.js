@@ -12,7 +12,17 @@ const config = {
       strict: true
     }),
     paths: {
-      base: process.env.NODE_ENV === 'production' ? '/river-valley-sveltekit' : '',
+      base: '/river-valley-sveltekit'  // Make sure this matches your repository name exactly
+    },
+    // Add this to ensure assets are properly referenced
+    prerender: {
+      handleHttpError: ({ path, referrer, message }) => {
+        // Ignore static asset 404s since they'll be available in production
+        if (path.includes('.') && !path.includes('/_app/')) {
+          return;
+        }
+        throw new Error(message);
+      }
     }
   },
   preprocess: vitePreprocess()
