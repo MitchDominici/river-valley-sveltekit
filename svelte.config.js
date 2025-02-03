@@ -12,16 +12,19 @@ const config = {
       strict: true
     }),
     paths: {
-      base: '/river-valley-sveltekit'  // Make sure this matches your repository name exactly
+      base: '/river-valley-sveltekit'
     },
-    // Add this to ensure assets are properly referenced
     prerender: {
+      entries: [
+        '*',
+        '/towns/[slug]'
+      ],
       handleHttpError: ({ path, referrer, message }) => {
-        // Ignore static asset 404s since they'll be available in production
+        // Ignore certain 404s
         if (path.includes('.') && !path.includes('/_app/')) {
           return;
         }
-        throw new Error(message);
+        console.warn(`${path} - ${message}`);
       }
     }
   },

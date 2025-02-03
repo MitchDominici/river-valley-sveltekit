@@ -1,7 +1,8 @@
-import type {Load} from '@sveltejs/kit';
+export const prerender = true;
 
-export const load = (async ({params}) => {
+export async function load({ params }) {
+    const { slug } = params;
     return {
-        slug: params.slug
+        slug
     };
-}) satisfies Load;
+}
