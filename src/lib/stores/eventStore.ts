@@ -29,7 +29,19 @@ function createEventStore() {
         try {
             // If we haven't loaded the events yet, fetch them
             const response = await fetch(`${base}/data/events.json`);
-            const allEvents: Event[] = await response.json();
+            let allEvents: Event[] = await response.json();
+
+
+            allEvents = allEvents.flatMap(event => {
+                const dates = event['Date and Time'].split(',');
+                return dates.map(date => ({
+                    ...event,
+                    'Date and Time': date.trim()
+                }));
+            });
+
+
+
 
             // Filter events for the current month
             const filteredEvents = allEvents.filter(event => {

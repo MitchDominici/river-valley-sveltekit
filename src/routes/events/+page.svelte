@@ -77,17 +77,26 @@
                             <span class="font-semibold text-gray-600 text-lg md:text-2xl">Location:</span>
                             <p class="text-gray-800 text-base md:text-xl">{event.Location}</p>
                         </div>
+                        {#if event.Duration}
                         <div>
                             <span class="font-semibold text-gray-600 text-lg md:text-2xl">Duration:</span>
                             <p class="text-gray-800 text-base md:text-xl">{event.Duration}</p>
                         </div>
+                        {/if}
+                        {#if event.Price}
                         <div>
                             <span class="font-semibold text-gray-600 text-lg md:text-2xl">Price:</span>
-                            <p class="text-gray-800 text-base md:text-xl">{event.Price}</p>
+                            <p class="text-gray-800 text-base md:text-xl">
+                                {#if typeof event.Price === 'number'}
+                                    {`$${event.Price.toFixed(2)}`}
+                                {:else} {event.Price}
+                                {/if}
+                            </p>
                         </div>
+                        {/if}
                         {#if event.Website}
                         <div>
-                            <a href="{event.Website}">More Information</a>
+                            <a href="{event.Website}" target="_blank" class="text-primary-blue underline md:text-xl text-lg">More Information</a>
                         </div>
                         {/if}
                     </div>
