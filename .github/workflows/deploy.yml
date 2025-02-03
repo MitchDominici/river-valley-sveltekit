@@ -32,6 +32,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Remove symlinks
+        run: find build -type l -exec rm -f {} +
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
