@@ -9,7 +9,7 @@ type Event = {
     Duration: string;
     Price: string;
     Tags: string;
-    id: string;
+    Website: string;
 };
 
 function createEventStore() {

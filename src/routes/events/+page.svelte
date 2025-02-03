@@ -85,6 +85,11 @@
                             <span class="font-semibold text-gray-600 text-lg md:text-2xl">Price:</span>
                             <p class="text-gray-800 text-base md:text-xl">{event.Price}</p>
                         </div>
+                        {#if event.Website}
+                        <div>
+                            <a href="{event.Website}">More Information</a>
+                        </div>
+                        {/if}
                     </div>
                     <div class="mt-4 flex flex-wrap gap-2">
                         {#each event.Tags.split(',') as tag}
