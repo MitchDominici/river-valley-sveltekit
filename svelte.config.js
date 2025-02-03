@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import {vitePreprocess} from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -12,20 +12,7 @@ const config = {
       strict: true
     }),
     paths: {
-      base: '/river-valley-sveltekit'
-    },
-    prerender: {
-      entries: [
-        '*',
-        '/towns/[slug]'
-      ],
-      handleHttpError: ({ path, referrer, message }) => {
-        // Ignore certain 404s
-        if (path.includes('.') && !path.includes('/_app/')) {
-          return;
-        }
-        console.warn(`${path} - ${message}`);
-      }
+      base: '',
     }
   },
   preprocess: vitePreprocess()
