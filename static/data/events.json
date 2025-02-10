@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "Event Name": "Winter Wine Walk",
+    "Date and Time": "2025-02-08T18:00:00.000Z",
+    "Location": "Rosebud",
+    "Description": "",
+    "Tags": "",
+    "Duration": "4 hours",
+    "Price": 20,
+    "Website": "https://www.facebook.com/share/1AMQ7XCfHN/"
+  },
+  {
+    "Event Name": "Treasure Days",
+    "Date and Time": "2025-05-03T14:00:00.000Z",
+    "Location": "Rosebud",
+    "Description": "",
+    "Tags": "",
+    "Duration": "7 hours",
+    "Price": "",
+    "Website": ""
+  },
+  {
+    "Event Name": "Miller's Landing Day ~ the Legend of John Colter",
+    "Date and Time": "2025-05-10T18:00:00.000Z",
+    "Location": "New Haven",
+    "Description": "",
+    "Tags": "",
+    "Duration": "9 hours",
+    "Price": " free",
+    "Website": ""
+  },
+  {
+    "Event Name": "Gasconade County Fair",
+    "Date and Time": "2025-07-01T06:00:00.000Z",
+    "Location": "Owensville",
+    "Description": "",
+    "Tags": "",
+    "Duration": "",
+    "Price": "",
+    "Website": ""
+  },
+  {
+    "Event Name": "Rosebud 4th of July Fireworks",
+    "Date and Time": "2025-07-01T06:00:00.000Z",
+    "Location": "Rosebud",
+    "Description": "",
+    "Tags": "",
+    "Duration": "",
+    "Price": "free",
+    "Website": ""
+  },
+  {
+    "Event Name": "Gasconade County Thresher Show",
+    "Date and Time": "7/18/2025, 7/19/2025, 7/20/2025",
+    "Location": "Rosebud",
+    "Description": "",
+    "Tags": "",
+    "Duration": "",
+    "Price": "free",
+    "Website": "https://gcta.us/2025-show"
+  }
+]
