@@ -64,7 +64,7 @@
                     <img
                             src={image}
                             alt={townName}
-                            class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300"
+                            class="w-full h-80 object-cover hover:scale-110 transition-transform duration-300"
                     />
                 </div>
             {/each}
