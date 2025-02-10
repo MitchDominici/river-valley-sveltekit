@@ -40,9 +40,6 @@ function createEventStore() {
                 }));
             });
 
-
-
-
             // Filter events for the current month
             const filteredEvents = allEvents.filter(event => {
                 const eventDate = new Date(event['Date and Time']);
@@ -99,10 +96,20 @@ function createEventStore() {
         });
     }
 
+    function reset() {
+        set({
+            currentDate: new Date(),
+            events: [],
+            allEvents: [],
+            loaded: false
+        });
+    }
+
     return {
         subscribe,
         loadEvents,
-        changeMonth
+        changeMonth,
+        reset
     };
 }
 
