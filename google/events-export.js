@@ -25,22 +25,22 @@ function publishSheetToJson(sheet, folder) {
         const fileName = `${sheet.getName()}.json`;
         const existingFile = getFileByName(folder, fileName);
 
-        let combinedJsonData = [];
-        if (existingFile) {
-            const content = existingFile.getBlob().getDataAsString();
-            combinedJsonData = JSON.parse(content); // Parse existing JSON data
-        }
+        // let combinedJsonData = [];
+        // if (existingFile) {
+        //     const content = existingFile.getBlob().getDataAsString();
+        //     combinedJsonData = JSON.parse(content); // Parse existing JSON data
+        // }
+        //
+        // combinedJsonData = combinedJsonData.concat(newJsonData); // Add new data
+        //
+        // combinedJsonData = combinedJsonData.filter((value, index, self) =>
+        //     index === self.findIndex((t) => (
+        //         t['Event Name'] === value['Event Name']
+        //     ))
+        // )
 
-        combinedJsonData = combinedJsonData.concat(newJsonData); // Add new data
 
-        combinedJsonData = combinedJsonData.filter((value, index, self) =>
-            index === self.findIndex((t) => (
-                t['Event Name'] === value['Event Name']
-            ))
-        )
-
-
-        const fileContent = JSON.stringify(combinedJsonData, null, 2);
+        const fileContent = JSON.stringify(newJsonData, null, 2);
 
         if (existingFile) {
             existingFile.setContent(fileContent); // Update existing file
