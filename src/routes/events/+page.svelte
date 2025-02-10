@@ -12,9 +12,9 @@
         eventStore.loadEvents();
     });
 
-    onDestroy(() => {
-        eventStore.reset();
-    });
+    // onDestroy(() => {
+    //     eventStore.reset();
+    // });
 
     function closeModal() {
         modal?.classList.add('hidden');
