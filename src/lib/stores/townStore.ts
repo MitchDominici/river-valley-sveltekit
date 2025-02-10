@@ -63,6 +63,10 @@ function createTownStore() {
         return imagePaths;
     }
 
+    function getMainImagePathForTown(images): string {
+        return images.find(image => image.includes('main'));
+    }
+
     async function loadData() {
         try {
             const [townsResponse, businessesResponse] = await Promise.all([
@@ -86,14 +90,14 @@ function createTownStore() {
             });
 
             // Enhance towns with image paths
-            const towns = rawTowns.map(town => ({
+            const towns = rawTowns.map((town: { name: string; }) => ({
                 ...town,
-                images: getImagePathsForTown(town.name.toLowerCase().replace(' ', '-'))
+                images: getImagePathsForTown(town.name.toLowerCase().replace(' ', '-')),
             }));
 
             // Add main image path for each town
-            towns.forEach(town => {
-                town.main_image = `/images/towns/${town.name.toLowerCase().replace(' ', '-')}/main.jpg`;
+            towns.forEach((town: { main_image: string; images: any; }) => {
+                town.main_image = getMainImagePathForTown(town.images);
             });
 
             // Sort towns alphabetically by name
