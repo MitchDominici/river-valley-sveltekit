@@ -14,7 +14,7 @@
             <div class="order-2 md:order-1">
                 <div class="rounded-2xl overflow-hidden border-4 border-dashed border-primary-blue">
                     <img
-                            src="/images/towns/new-haven/nh-2.jpg"
+                            src="/images/towns/new-haven/L. NH 10 .jpeg"
                             alt="Missouri River Valley"
                             class="w-full h-72 object-cover transform hover:scale-105 transition-transform duration-500"
                     />
