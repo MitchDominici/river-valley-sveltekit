@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {onMount} from 'svelte';
+    import {onDestroy, onMount} from 'svelte';
     import {eventStore} from '$lib/stores/eventStore';
 
     let modal;
@@ -10,6 +10,10 @@
 
     onMount(() => {
         eventStore.loadEvents();
+    });
+
+    onDestroy(() => {
+        eventStore.reset();
     });
 
     function closeModal() {
