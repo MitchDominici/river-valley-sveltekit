@@ -10,14 +10,31 @@
     let geocoder;
     let businessMarkers = new Map();
     let isMapInitialized = false;
+    let currentInfoWindow = null;
 
     // Explicitly export the centerOnBusiness function
     export function centerOnBusiness(businessName) {
         if (!isMapInitialized) return;
+        currentInfoWindow?.close();
         const marker = businessMarkers.get(businessName);
         if (marker) {
             map.panTo(marker.getPosition());
             map.setZoom(16);
+
+            // Create and show info window for this business
+            const business = businesses.find(b => b.name === businessName);
+            if (business) {
+                const content = `
+                <div class="p-2">
+                    <h3 class="font-bold">${business.name}</h3>
+                    <p class="text-sm text-gray-600">${business.type}</p>
+                    <p class="text-sm">${business.address}</p>
+                </div>
+            `;
+                const infoWindow = new window.google.maps.InfoWindow({ content });
+                infoWindow.open(map, marker);
+                currentInfoWindow = infoWindow;
+            }
         }
     }
 
@@ -39,7 +56,11 @@
         });
     }
 
-    async function initMap() {
+    export async function initMap(newTown) {
+        if (newTown) {
+            town = newTown;
+        }
+
         map = new window.google.maps.Map(mapElement, {
             center: { lat: parseFloat(town.lat), lng: parseFloat(town.long) },
             zoom: 14,
@@ -114,6 +135,7 @@
                         `;
                         infoWindow.setContent(content);
                         infoWindow.open(map, marker);
+                        currentInfoWindow = infoWindow;
                     });
 
                     markers.push(marker);
@@ -143,6 +165,10 @@
             markers.forEach(marker => marker.setMap(null));
             markers = [];
             businessMarkers.clear();
+
+            if (currentInfoWindow) {
+                currentInfoWindow.close();
+            }
         };
     });
 

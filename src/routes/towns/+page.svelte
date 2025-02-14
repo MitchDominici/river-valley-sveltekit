@@ -77,7 +77,7 @@
         {#each towns as town}
             <div class="town-wrapper">
                 <a
-                href="{base}/towns/{town.name.toLowerCase()}"
+                href="{base}/towns/{town.formattedName.toLowerCase()}"
                 class="town-container block {viewOptions.small.height}"
                 class:list-view={selectedView === 'list'}
                 >
