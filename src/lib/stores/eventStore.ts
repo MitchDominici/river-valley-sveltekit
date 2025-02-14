@@ -30,6 +30,7 @@ function createEventStore() {
             // If we haven't loaded the events yet, fetch them
             const response = await fetch(`${base}/data/events.json`);
             let allEvents: Event[] = await response.json();
+            console.log(allEvents);
 
 
             allEvents = allEvents.flatMap(event => {

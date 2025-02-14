@@ -5,6 +5,9 @@
     import {base} from '$app/paths';
     import ImageSlideshow from "$lib/components/ImageSlideshow.svelte";
     import TownMap from "$lib/components/TownMap.svelte";
+    import {goto} from '$app/navigation';
+
+    let loading = true;
 
     let town = null;
     let businesses = [];
@@ -51,13 +54,26 @@
         filterBusinesses();
     }
 
-    onMount(async () => {
-        const townName = $page.params.slug;
-
-        if (!$townStore.loaded) {
-            await townStore.loadData();
+    async function goToTown(direction) {
+        const townIndex = $townStore.towns.findIndex(t => t.name === town.name);
+        let newTownIndex = townIndex + direction;
+        if (newTownIndex < 0) {
+            newTownIndex = $townStore.towns.length - 1;
+        } else if (newTownIndex >= $townStore.towns.length) {
+            newTownIndex = 0;
         }
 
+        const newTown = $townStore.towns[newTownIndex].formattedName;
+        console.log('New town:', newTown);
+
+        await loadTown(newTown);
+
+        goto(`/towns/${newTown}`);
+
+    }
+
+    async function loadTown(townName){
+        loading = true;
         try {
             town = await townStore.getTown(townName);
             businesses = await townStore.getTownBusinesses(townName);
@@ -80,10 +96,32 @@
             availableDays.push('by appointment/availability');
 
             filteredBusinesses = businesses;
+
+            townMapComponent?.initMap(town);
         } catch (error) {
             console.error('Error loading town:', error);
+        } finally {
+            loading = false;
         }
+    }
+
+    onMount(async () => {
+        const townName = $page.params.slug;
+
+        loading = true;
+
+        if (!$townStore.loaded) {
+            await townStore.loadData();
+        }
+
+        await loadTown(townName);
     });
+
+    function businessMapClickHandler(businessName: string) {
+        console.log('Business clicked:', businessName);
+        townMapComponent?.centerOnBusiness(businessName)
+        scrollToMap();
+    }
 
     function scrollToMap() {
         document.getElementById('townMap')!.scrollIntoView({behavior: 'smooth'})
@@ -93,6 +131,15 @@
 
 <!-- Main content -->
 <div id="town-page" class="my-8 px-4 py-8">
+    {#if loading}
+        <div class="text-center">
+            <svg class="animate-spin h-12 w-12 text-primary-blue mx-auto" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0c4.418 0 8 3.582 8 8s-3.582 8-8 8V4a4 4 0 00-4 4H0v4h4a8 8 0 01-4-8z"></path>
+            </svg>
+        </div>
+    {/if}
     {#if town}
         <!-- Town Header Info -->
         <div class="container mx-auto pt-16">
@@ -288,12 +335,13 @@
 
                                 {#if business.address}
                                     <button
-                                            on:click={() => townMapComponent?.centerOnBusiness(business.name)}
+                                            on:click={() => businessMapClickHandler(business.name)}
                                             class="text-gray-600 hover:text-primary-blue transition-colors"
                                             title="Show on map"
+                                            id="{business.name}-map-button"
                                     >
-                                        <a href="#townMap"
-                                           on:click="{(event) => { event.preventDefault(); scrollToMap(); }}"></a>
+                                        <!--                                        <a href="#townMap"-->
+                                        <!--                                           on:click="{(event) => { event.preventDefault(); scrollToMap(); }}"></a>-->
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
@@ -322,6 +370,22 @@
 
             <div class="my-4 px-4 py-8" id="townMap">
                 <TownMap bind:this={townMapComponent} {town} {businesses}/>
+            </div>
+
+
+            <div id="page-navigation" class="flex justify-center mt-8 space-x-4">
+                <button
+                        class="bg-primary-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                        on:click={() => goToTown(-1)}
+                >
+                    Previous Town
+                </button>
+                <button
+                        class="bg-primary-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                        on:click={() => goToTown(1)}
+                >
+                    Next Town
+                </button>
             </div>
         </div>
     {/if}

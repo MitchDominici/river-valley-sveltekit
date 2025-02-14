@@ -1,8 +1,9 @@
-import { writable } from 'svelte/store';
-import { base } from '$app/paths';
+import {writable} from 'svelte/store';
+import {base} from '$app/paths';
 
 type Town = {
     name: string;
+    formattedName: string;
     county: string;
     population: string;
     established: string;
@@ -18,6 +19,7 @@ type Business = {
     name: string;
     type: string;
     town: string;
+    townNameFormatted: string;
     address?: string;
     state?: string;
     zip?: string;
@@ -36,7 +38,7 @@ type Business = {
 };
 
 function createTownStore() {
-    const { subscribe, set, update } = writable<{
+    const {subscribe, set, update} = writable<{
         towns: Town[];
         businesses: Business[];
         loaded: boolean;
@@ -82,6 +84,7 @@ function createTownStore() {
             // trim whitespace from business town
             businesses.forEach(business => {
                 business.town = business.town.trim();
+                business.townNameFormatted = business.town.toLowerCase().replace(' ', '-');
             });
 
             businesses.forEach(business => {
@@ -93,6 +96,7 @@ function createTownStore() {
             const towns = rawTowns.map((town: { name: string; }) => ({
                 ...town,
                 images: getImagePathsForTown(town.name.toLowerCase().replace(' ', '-')),
+                formattedName: town.name.toLowerCase().replace(' ', '-'),
             }));
 
             // Add main image path for each town
@@ -111,7 +115,7 @@ function createTownStore() {
                 'Hermann',
                 'Berger',
                 'Stony Hill',
-                ];
+            ];
             // Sort towns based on the predefined order
             for (let i = 0; i < townSortOrder.length; i++) {
                 const town = towns.find(t => t.name === townSortOrder[i]);
@@ -147,10 +151,10 @@ function createTownStore() {
 
     function getTown(townName: string) {
         return new Promise<Town>((resolve, reject) => {
-            subscribe(({ towns, loaded }) => {
+            subscribe(({towns, loaded}) => {
                 if (loaded) {
                     const town = towns.find(
-                        t => t.name.toLowerCase() === townName.toLowerCase()
+                        t => (t.name.toLowerCase() === townName.toLowerCase()) || (t.formattedName === townName)
                     );
                     if (town) resolve(town);
                     else reject(new Error(`Town ${townName} not found`));
@@ -161,11 +165,11 @@ function createTownStore() {
 
     function getTownBusinesses(townName: string) {
         return new Promise<Business[]>((resolve) => {
-            subscribe(({ businesses, loaded }) => {
+            subscribe(({businesses, loaded}) => {
                 if (loaded) {
                     resolve(
                         businesses.filter(
-                            b => b.town.toLowerCase() === townName.toLowerCase()
+                            b => (b.town.toLowerCase() === townName.toLowerCase()) || (b.townNameFormatted === townName)
                         )
                     );
                 }
