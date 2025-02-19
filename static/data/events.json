@@ -17,7 +17,7 @@
     "Tags": "",
     "Duration": "7 hours",
     "Price": "",
-    "Website": ""
+    "Website": "https://www.facebook.com/events/1136339244371971/?acontext=%7B%22event_action_history%22%3A[%7B%22mechanism%22%3A%22attachment%22%2C%22surface%22%3A%22newsfeed%22%7D]%2C%22ref_notif_type%22%3Anull%7D"
   },
   {
     "Event Name": "Miller's Landing Day ~ the Legend of John Colter",
@@ -58,5 +58,15 @@
     "Duration": "",
     "Price": "free",
     "Website": "https://gcta.us/2025-show"
+  },
+  {
+    "Event Name": "Shamrock Scavenger Hunt ",
+    "Date and Time": "2025-03-01T16:00:00.000Z",
+    "Location": "Rosebud ",
+    "Description": "scavenger hunt",
+    "Tags": "",
+    "Duration": "7 hours",
+    "Price": "",
+    "Website": "https://www.facebook.com/events/1628765071363799/?post_id=1634019264171713&acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22notifications_tab%22%7D%2C%7B%22mechanism%22%3A%22footer_attachment%22%2C%22surface%22%3A%22newsfeed%22%7D]%2C%22ref_notif_type%22%3A%22comment_mention%22%7D"
   }
 ]
