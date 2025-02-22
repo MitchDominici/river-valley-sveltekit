@@ -34,24 +34,56 @@
     }
 
     function filterBusinesses() {
-        filteredBusinesses = businesses.filter(business => {
-            const isByAppointmentOrAvailability = selectedDay === 'by appointment/availability';
-            const matchesDay = !selectedDay ||
-                (business[selectedDay] && business[selectedDay].toLowerCase() !== 'closed'
-                    && !business[selectedDay].toLowerCase().includes('by')
-                    && (business[selectedDay].toLowerCase().includes('am') || business[selectedDay].toLowerCase().includes('pm'))
-                );
-            let hasByInDays = false;
-            for (let day of ALL_DAYS) {
-                if (business[day] && business[day].toLowerCase().includes('by')) {
-                    hasByInDays = true;
-                }
-            }
-            // const byAppointment = isByAppointmentOrAvailability && (business[selectedDay] && business[selectedDay].toLowerCase().includes('by'));
-            // const byAvailability = isByAppointmentOrAvailability && (business[selectedDay] && business[selectedDay].toLowerCase().includes('by'));
-            const matchesType = !selectedType || business.type.toLowerCase().includes(selectedType.toLowerCase());
-            return (matchesDay || hasByInDays) && matchesType;
-        });
+        if (selectedDay && selectedDay.includes('by')) {
+            // Show only businesses that have "by" in any day
+            filteredBusinesses = businesses.filter(business =>
+                ALL_DAYS.some(day => business[day] && business[day].toLowerCase().includes('by'))
+            );
+        } else if (selectedDay) {
+            // Show businesses that are available on the selected day, but exclude "by"
+            filteredBusinesses = businesses.filter(business =>
+                business[selectedDay] && business[selectedDay].toLowerCase() !== 'closed' && !business[selectedDay].toLowerCase().includes('by')
+            );
+        } else {
+            // No day filter, show all businesses
+            filteredBusinesses = [...businesses];
+        }
+
+        if (selectedType) {
+            filteredBusinesses = filteredBusinesses.filter(business => business.type.toLowerCase().includes(selectedType.toLowerCase()));
+        }
+
+
+        // filteredBusinesses = businesses.filter(business => {
+        //     console.log('business:', business.name);
+        //     if(selectedDay){
+        //         const selectedDayValue = business[selectedDay];
+        //         console.log('Selected day:', selectedDay, selectedDayValue);
+        //
+        //
+        //
+        //
+        //         if(business[selectedDay]){
+        //             const matchesDay = !selectedDay ||
+        //                 (business[selectedDay] && business[selectedDay].toLowerCase() !== 'closed'
+        //                     && !business[selectedDay].toLowerCase().includes('by')
+        //                     && (business[selectedDay].toLowerCase().includes('am') || business[selectedDay].toLowerCase().includes('pm'))
+        //                 );
+        //             let hasByInDays = false;
+        //             for (let day of ALL_DAYS) {
+        //                 if (business[day] && business[day].toLowerCase().includes('by')) {
+        //                     hasByInDays = true;
+        //                 }
+        //             }
+        //             // const byAppointment = isByAppointmentOrAvailability && (business[selectedDay] && business[selectedDay].toLowerCase().includes('by'));
+        //             // const byAvailability = isByAppointmentOrAvailability && (business[selectedDay] && business[selectedDay].toLowerCase().includes('by'));
+        //             const matchesType = !selectedType || business.type.toLowerCase().includes(selectedType.toLowerCase());
+        //             return (matchesDay || hasByInDays) && matchesType;
+        //         }
+        //     }
+        //
+        //     return true;
+        // });
     }
 
     // Add type filter toggle
