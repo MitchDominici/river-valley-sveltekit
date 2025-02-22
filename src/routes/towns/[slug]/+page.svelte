@@ -27,6 +27,12 @@
         filterBusinesses();
     }
 
+    function clearAllFilters() {
+        selectedDay = null;
+        selectedType = null;
+        filterBusinesses();
+    }
+
     function filterBusinesses() {
         filteredBusinesses = businesses.filter(business => {
             const isByAppointmentOrAvailability = selectedDay === 'by appointment/availability';
@@ -205,12 +211,18 @@
                 memorable.
             </div>
 
-            <div class="flex justify-end mb-4">
+            <div class="flex justify-end mb-4 space-x-4">
                 <button
                         class="bg-primary-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700"
                         on:click={() => isFilterMenuOpen = !isFilterMenuOpen}
                 >
                     Filter
+                </button>
+                <button
+                        class="bg-primary-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                        on:click={() => clearAllFilters()}
+                >
+                    Clear Filters
                 </button>
             </div>
 
