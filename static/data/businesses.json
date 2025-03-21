@@ -15,7 +15,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -35,7 +35,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -55,7 +55,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -75,9 +75,9 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "10am-4pm",
-    "friday ": "10am-6pm",
+    "friday": "10am-6pm",
     "saturday": "10am-6pm",
-    "": "starting 2/20/25"
+    "": ""
   },
   {
     "name": "Jam Hut Hermann Horse RVPark ",
@@ -95,7 +95,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -115,7 +115,7 @@
     "tuesday": "11am-7pm",
     "wednesday": "11am-7pm",
     "thursday": "11am-7pm",
-    "friday ": "11am-8pm",
+    "friday": "11am-8pm",
     "saturday": "11am-8pm",
     "": ""
   },
@@ -135,7 +135,7 @@
     "tuesday": "24 hrs/day",
     "wednesday": "25 hrs/day",
     "thursday": "26 hrs/day",
-    "friday ": "27 hrs/day",
+    "friday": "27 hrs/day",
     "saturday": "28 hrs/day",
     "": ""
   },
@@ -155,7 +155,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -175,7 +175,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -195,7 +195,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -215,7 +215,7 @@
     "tuesday": "8:30am-4pm",
     "wednesday": "8:30am-4pm",
     "thursday": "8:30am-4pm",
-    "friday ": "8:30am-11:30am",
+    "friday": "8:30am-11:30am",
     "saturday": "",
     "": ""
   },
@@ -235,7 +235,7 @@
     "tuesday": "11am-3pm",
     "wednesday": "11am-5pm",
     "thursday": "11am-5pm",
-    "friday ": "11am-5pm",
+    "friday": "11am-5pm",
     "saturday": "10am-6pm",
     "": "may change with seasons"
   },
@@ -255,7 +255,7 @@
     "tuesday": "8:30am-5:30pm",
     "wednesday": "8:30am-5:30pm",
     "thursday": "8:30am-5:30pm",
-    "friday ": "8:30am-5:30pm",
+    "friday": "8:30am-5:30pm",
     "saturday": "9:30am-2pm",
     "": ""
   },
@@ -275,7 +275,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "10am-6pm",
+    "friday": "10am-6pm",
     "saturday": "10am-6pm",
     "": ""
   },
@@ -295,7 +295,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": "25+ years selling Missouri real estate"
   },
@@ -315,7 +315,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -335,7 +335,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "4pm-6pm",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": "May - December"
   },
@@ -355,7 +355,7 @@
     "tuesday": "by appointment",
     "wednesday": "10am-5pm",
     "thursday": "10am-5pm",
-    "friday ": "10am-5pm",
+    "friday": "10am-5pm",
     "saturday": "10am-3pm",
     "": ""
   },
@@ -375,7 +375,7 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "closed",
-    "friday ": "4pm-8pm",
+    "friday": "4pm-8pm",
     "saturday": "10am-5pm",
     "": ""
   },
@@ -395,7 +395,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -415,7 +415,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -435,7 +435,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -455,7 +455,7 @@
     "tuesday": "closed",
     "wednesday": "12pm-5pm",
     "thursday": "12pm-5pm",
-    "friday ": "12pm-5pm",
+    "friday": "12pm-5pm",
     "saturday": "10am-5pm ",
     "": ""
   },
@@ -475,7 +475,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -495,7 +495,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -515,7 +515,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -535,7 +535,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -555,7 +555,7 @@
     "tuesday": "10am-4pm",
     "wednesday": "10am-4pm",
     "thursday": "10am-4pm",
-    "friday ": "10am-4pm",
+    "friday": "10am-4pm",
     "saturday": "10am-5pm",
     "": ""
   },
@@ -575,7 +575,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -595,7 +595,7 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "closed",
-    "friday ": "closed",
+    "friday": "closed",
     "saturday": "10am-4pm",
     "": ""
   },
@@ -615,7 +615,7 @@
     "tuesday": "7am-9pm",
     "wednesday": "7am-9pm",
     "thursday": "7am-9pm",
-    "friday ": "7am-10pm",
+    "friday": "7am-10pm",
     "saturday": "7am-10pm",
     "": ""
   },
@@ -635,7 +635,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -655,7 +655,7 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "closed",
-    "friday ": "Showtime:  7pm",
+    "friday": "Showtime:  7pm",
     "saturday": "Showtime:  7pm",
     "": ""
   },
@@ -675,7 +675,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -695,7 +695,7 @@
     "tuesday": "by appointment",
     "wednesday": "8:am wall yoga, 9:15am chair yoga, 4:pm wall yoga",
     "thursday": "6:15pm wall yoga ",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -715,7 +715,7 @@
     "tuesday": "9am-5pm",
     "wednesday": "9am-5pm",
     "thursday": "9am-5pm",
-    "friday ": "9am-5pm",
+    "friday": "9am-5pm",
     "saturday": "closed",
     "": ""
   },
@@ -735,7 +735,7 @@
     "tuesday": "9am-4pm archives",
     "wednesday": "9am-4pm archives",
     "thursday": "9am-4pm archives",
-    "friday ": "11am-3pm  museum ",
+    "friday": "11am-3pm  museum ",
     "saturday": "11am-3pm  museum ",
     "": "March - December - Museum"
   },
@@ -755,7 +755,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -775,7 +775,7 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "10am-6pm",
-    "friday ": "10am-6pm",
+    "friday": "10am-6pm",
     "saturday": "10am-6pm",
     "": "May - June"
   },
@@ -795,7 +795,7 @@
     "tuesday": "11am-5pm",
     "wednesday": "11am-5pm",
     "thursday": "11am-5pm",
-    "friday ": "11am-8:30pm",
+    "friday": "11am-8:30pm",
     "saturday": "11am-8:30pm",
     "": ""
   },
@@ -815,7 +815,7 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "10am-5pm",
-    "friday ": "10am-5pm",
+    "friday": "10am-5pm",
     "saturday": "9am-12pm",
     "": ""
   },
@@ -835,7 +835,7 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "closed",
-    "friday ": "11am-4pm",
+    "friday": "11am-4pm",
     "saturday": "10am-4pm",
     "": ""
   },
@@ -855,7 +855,7 @@
     "tuesday": "Kithcen:  11am - 8:30pm, Bar: 11am-10pm",
     "wednesday": "Kithcen:  11am - 8:30pm, Bar: 11am-10pm",
     "thursday": "Kithcen:  11am - 8:30pm, Bar: 11am-10pm",
-    "friday ": "Kithcen:  11am - 8:30pm, Bar: 11am-10pm",
+    "friday": "Kithcen:  11am - 8:30pm, Bar: 11am-10pm",
     "saturday": "Kithcen:  11am - 8:30pm, Bar: 11am-10pm",
     "": ""
   },
@@ -875,7 +875,7 @@
     "tuesday": "3pm-8pm",
     "wednesday": "11am-8pm",
     "thursday": "11am-8pm",
-    "friday ": "11am-9pm",
+    "friday": "11am-9pm",
     "saturday": "closed",
     "": ""
   },
@@ -895,7 +895,7 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "closed",
-    "friday ": "10am-5pm",
+    "friday": "10am-5pm",
     "saturday": "10am-5pm",
     "": ""
   },
@@ -915,7 +915,7 @@
     "tuesday": "10am-5pm",
     "wednesday": "10am-5pm",
     "thursday": "10am-5pm",
-    "friday ": "10am-5pm",
+    "friday": "10am-5pm",
     "saturday": "10am-5pm",
     "": ""
   },
@@ -935,7 +935,7 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "closed",
-    "friday ": "10am-4pm",
+    "friday": "10am-4pm",
     "saturday": "10am-4pm",
     "": ""
   },
@@ -955,7 +955,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -975,7 +975,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -995,7 +995,7 @@
     "tuesday": "4am-10pm",
     "wednesday": "4am-10pm",
     "thursday": "4am-10pm",
-    "friday ": "4am-10pm",
+    "friday": "4am-10pm",
     "saturday": "5am-10pm",
     "": ""
   },
@@ -1015,7 +1015,7 @@
     "tuesday": "by availability ",
     "wednesday": "by availability ",
     "thursday": "by availability ",
-    "friday ": "by availability ",
+    "friday": "by availability ",
     "saturday": "by availability ",
     "": ""
   },
@@ -1035,7 +1035,7 @@
     "tuesday": "9am-5pm",
     "wednesday": "9am-5pm",
     "thursday": "9am-5pm",
-    "friday ": "9am-5pm",
+    "friday": "9am-5pm",
     "saturday": "9am-5pm",
     "": ""
   },
@@ -1055,7 +1055,7 @@
     "tuesday": "7am-4pm",
     "wednesday": "7am-4pm",
     "thursday": "7am-8pm",
-    "friday ": "6am-9pm",
+    "friday": "6am-9pm",
     "saturday": "6am-9pm",
     "": ""
   },
@@ -1075,7 +1075,7 @@
     "tuesday": "Opening Spring 2025",
     "wednesday": "Opening Spring 2025",
     "thursday": "Opening Spring 2025",
-    "friday ": "Opening Spring 2025",
+    "friday": "Opening Spring 2025",
     "saturday": "Opening Spring 2025",
     "": ""
   },
@@ -1095,7 +1095,7 @@
     "tuesday": "10am-6pm",
     "wednesday": "10am-6pm",
     "thursday": "10am-6pm",
-    "friday ": "10am-6pm",
+    "friday": "10am-6pm",
     "saturday": "10am-6pm",
     "": "April - December"
   },
@@ -1115,7 +1115,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": ""
   },
@@ -1135,7 +1135,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": ""
   },
@@ -1155,7 +1155,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": "openin spring 2025"
   },
@@ -1175,7 +1175,7 @@
     "tuesday": "closed",
     "wednesday": "closed",
     "thursday": "3pm-8pm",
-    "friday ": "11am-9pm",
+    "friday": "11am-9pm",
     "saturday": "11am-9pm",
     "": ""
   },
@@ -1195,7 +1195,7 @@
     "tuesday": "by appointment",
     "wednesday": "by appointment",
     "thursday": "by appointment",
-    "friday ": "by appointment",
+    "friday": "by appointment",
     "saturday": "by appointment",
     "": "573-368-1523"
   },
@@ -1215,7 +1215,7 @@
     "tuesday": "by availability",
     "wednesday": "by availability",
     "thursday": "by availability",
-    "friday ": "by availability",
+    "friday": "by availability",
     "saturday": "by availability",
     "": "starting 3/2025"
   },
@@ -1235,7 +1235,7 @@
     "tuesday": "8am-4:30pm",
     "wednesday": "8am-4:30pm",
     "thursday": "8am-4:30pm",
-    "friday ": "8am-4:30pm",
+    "friday": "8am-4:30pm",
     "saturday": "8am-12pm (closed Jan&Feb)",
     "": "closed saturday in Jan & Feb "
   },
