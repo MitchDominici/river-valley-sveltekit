@@ -23,7 +23,7 @@ jobs:
 
       - name: Download events JSON
         run: |
-          curl -L "https://drive.google.com/uc?export=download&id=1Sv-9H8K10OLbo4-inWcSrUeaSmu2fzgh" -o static/data/events.json
+          curl -L "https://drive.google.com/uc?export=download&id=1Ngmub82f1MkAljVk_lPPnCx6Pv8pbMfA" -o static/data/events.json
 
 
       - name: Commit changes

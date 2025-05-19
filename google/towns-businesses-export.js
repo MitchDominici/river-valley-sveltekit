@@ -35,7 +35,7 @@ function onOpen() {
 
 function publishSheetToJson(sheet, folder, newJsonData) {
     try {
-        const fileName = `${sheet.getName()}.json`;
+        const fileName = `${sheet.getName()}1.json`;
         const existingFile = getFileByName(folder, fileName);
 
         // let combinedJsonData = [];
@@ -57,6 +57,15 @@ function publishSheetToJson(sheet, folder, newJsonData) {
         // combinedJsonData = existingData.concat(newJsonData);
 
         const fileContent = JSON.stringify(newJsonData, null, 2);
+        const fileJson = JSON.parse(fileContent);
+        // trim keys and values
+        for (let i = 0; i < fileJson.length; i++) {
+            for (let key in fileJson[i]) {
+                if (fileJson[i].hasOwnProperty(key)) {
+                    fileJson[i][key] = fileJson[i][key].trim();
+                }
+            }
+        }
 
         if (existingFile) {
             existingFile.setContent(fileContent); // Update existing file
