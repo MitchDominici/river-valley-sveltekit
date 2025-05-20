@@ -2,8 +2,8 @@
     import {onDestroy, onMount} from 'svelte';
     import {eventStore} from '$lib/stores/eventStore';
 
-    let modal;
-    let selectedEvents = [];
+    let modal: any;
+    let selectedEvents: any[] = [];
 
     $: currentDate = $eventStore.currentDate;
     $: events = $eventStore.events;
@@ -12,26 +12,27 @@
         eventStore.loadEvents();
     });
 
-    // onDestroy(() => {
-    //     eventStore.reset();
-    // });
-
     function closeModal() {
         modal?.classList.add('hidden');
     }
 
-    function showEvents(dayEvents) {
+    function showEvents(dayEvents: any) {
         selectedEvents = dayEvents;
         modal?.classList.remove('hidden');
     }
 
-    function handleModalClick(e) {
+    function handleModalClick(e: any) {
         if (e.target === modal) {
             closeModal();
         }
     }
 
-    function getDaysInMonth(date) {
+    function formatTime(timeString: any) {
+        if (!timeString) return '';
+        return eventStore.normalizeTimeString(timeString);
+    }
+
+    function getDaysInMonth(date: any) {
         const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         const days = [];
@@ -44,9 +45,29 @@
         // Add days of the month
         for (let day = 1; day <= lastDay.getDate(); day++) {
             const currentDate = new Date(date.getFullYear(), date.getMonth(), day);
-            const dayEvents = events.filter(
-                (event) => new Date(event['Date and Time']).toDateString() === currentDate.toDateString()
-            );
+
+            // Filter events for this day using the new Dates field
+            const dayEvents = events.filter(event => {
+                if (!event.Dates) return false;
+
+                const dates = event.Dates.split(',');
+                return dates.some(dateStr => {
+                    const datePart = dateStr.trim();
+                    // If it's already a date string with ISO format, parse it directly
+                    if (datePart.includes('-')) {
+                        const eventDate = new Date(datePart);
+                        return eventDate.toDateString() === currentDate.toDateString();
+                    }
+                    // Handle format like "7/18/2025"
+                    const [month, dayOfMonth, year] = datePart.split('/');
+                    if (month && dayOfMonth && year) {
+                        const eventDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(dayOfMonth));
+                        return eventDate.toDateString() === currentDate.toDateString();
+                    }
+                    return false;
+                });
+            });
+
             days.push({day, events: dayEvents, date: currentDate});
         }
 
@@ -58,15 +79,16 @@
     $: weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 </script>
 <!-- Event Modal -->
-<div
-        bind:this={modal}
-        class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
-        on:click={handleModalClick}
+<!-- svelte-ignore <code> -->
+<div on:click={handleModalClick} bind:this={modal}
+     class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
 >
     <div class="relative top-20 mx-auto p-5 border w-full max-w-xl bg-white rounded-lg shadow-xl m-4">
         <div class="flex justify-between items-center border-b pb-4">
             <h3 class="text-xl md:text-2xl font-fun text-primary-blue">
-                {selectedEvents[0] ? new Date(selectedEvents[0]['Date and Time']).toLocaleDateString() : ''}
+                {#if selectedEvents.length > 0}
+                    {new Date(selectedEvents[0].Dates?.split(',')[0] || selectedEvents[0]['Date and Time']).toLocaleDateString()}
+                {/if}
             </h3>
             <button class="text-gray-600 hover:text-gray-800 text-2xl" on:click={closeModal}>&times;</button>
         </div>
@@ -74,7 +96,16 @@
             {#each selectedEvents as event}
                 <div class="mb-6 p-6 border rounded-lg hover:shadow-lg transition-shadow">
                     <h4 class="text-2xl md:text-4xl text-bold font-display text-primary-blue mb-2">{event['Event Name']}</h4>
-                    <p class="text-xl md:text-3xl text-primary-blue">{new Date(event['Date and Time']).toLocaleTimeString()}</p>
+
+                    <!-- Show time information -->
+                    <div class="text-xl md:text-3xl text-primary-blue">
+                        {#if event['Start Time'] && event['End Time']}
+                            {formatTime(event['Start Time'])} - {formatTime(event['End Time'])}
+                        {:else if event['Start Time']}
+                            {formatTime(event['Start Time'])}
+                        {/if}
+                    </div>
+
                     <p class="text-lg md:text-3xl text-gray-700 mt-3">{event.Description}</p>
                     <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -82,35 +113,40 @@
                             <p class="text-gray-800 text-base md:text-xl">{event.Location}</p>
                         </div>
                         {#if event.Duration}
-                        <div>
-                            <span class="font-semibold text-gray-600 text-lg md:text-2xl">Duration:</span>
-                            <p class="text-gray-800 text-base md:text-xl">{event.Duration}</p>
-                        </div>
+                            <div>
+                                <span class="font-semibold text-gray-600 text-lg md:text-2xl">Duration:</span>
+                                <p class="text-gray-800 text-base md:text-xl">{event.Duration}</p>
+                            </div>
                         {/if}
                         {#if event.Price}
-                        <div>
-                            <span class="font-semibold text-gray-600 text-lg md:text-2xl">Price:</span>
-                            <p class="text-gray-800 text-base md:text-xl">
-                                {#if typeof event.Price === 'number'}
-                                    {`$${event.Price.toFixed(2)}`}
-                                {:else} {event.Price}
-                                {/if}
-                            </p>
-                        </div>
+                            <div>
+                                <span class="font-semibold text-gray-600 text-lg md:text-2xl">Price:</span>
+                                <p class="text-gray-800 text-base md:text-xl">
+                                    {#if typeof event.Price === 'number'}
+                                        {`$${event.Price.toFixed(2)}`}
+                                    {:else} {event.Price}
+                                    {/if}
+                                </p>
+                            </div>
                         {/if}
                         {#if event.Website}
-                        <div>
-                            <a href="{event.Website}" target="_blank" class="text-primary-blue underline md:text-xl text-lg">More Information</a>
-                        </div>
+                            <div>
+                                <a href="{event.Website}" target="_blank"
+                                   class="text-primary-blue underline md:text-xl text-lg">More Information</a>
+                            </div>
                         {/if}
                     </div>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        {#each event.Tags.split(',') as tag}
-              <span class="px-3 py-1 bg-blue-50 text-primary-blue rounded-full text-sm">
-                {tag.trim()}
-              </span>
-                        {/each}
-                    </div>
+                    {#if event.Tags}
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            {#each event.Tags.split(',') as tag}
+                                {#if tag.trim()}
+                                <span class="px-3 py-1 bg-blue-50 text-primary-blue rounded-full text-sm">
+                                    {tag.trim()}
+                                </span>
+                                {/if}
+                            {/each}
+                        </div>
+                    {/if}
                 </div>
             {/each}
         </div>

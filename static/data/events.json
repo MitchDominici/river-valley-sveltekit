@@ -1,52 +1,67 @@
 [
   {
     "Event Name": "Gasconade County Fair",
-    "Date and Time": "2025-07-01T06:00:00.000Z",
     "Location": "Owensville",
-    "Description": "",
-    "Tags": "",
     "Duration": "",
     "Price": "",
-    "Website": ""
+    "Website": "",
+    "Dates": "7/1/2025",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Tags": "",
+    "Date and Time": "2025-07-01T06:00:00.000Z"
   },
   {
     "Event Name": "Rosebud 4th of July Fireworks",
-    "Date and Time": "2025-07-01T06:00:00.000Z",
     "Location": "Rosebud",
-    "Description": "",
-    "Tags": "",
     "Duration": "",
     "Price": "free",
-    "Website": ""
+    "Website": "",
+    "Dates": "7/1/2025",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Tags": "",
+    "Date and Time": "2025-07-01T06:00:00.000Z"
   },
   {
     "Event Name": "Gasconade County Thresher Show",
-    "Date and Time": "7/18/2025, 7/19/2025, 7/20/2025",
     "Location": "Rosebud",
-    "Description": "",
-    "Tags": "",
     "Duration": "",
     "Price": "free",
-    "Website": "https://gcta.us/2025-show"
+    "Website": "https://gcta.us/2025-show",
+    "Dates": "7/18/2025, 7/19/2025, 7/20/2025",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Tags": "",
+    "Date and Time": "7/18/2025, 7/19/2025, 7/20/2025"
   },
   {
     "Event Name": "Fugitive Bluff Maifest BBQ & Live Music",
-    "Date and Time": "5/17/2025 12 - 6:00 pm ",
     "Location": "Berger",
-    "Description": "",
-    "Tags": "",
     "Duration": "6 hours",
     "Price": "free",
-    "Website": "https://www.facebook.com/share/16Dg14zRCx/"
+    "Website": "https://www.facebook.com/share/16Dg14zRCx/",
+    "Dates": "5/17/2025",
+    "Start Time": "12:00:00 PM",
+    "End Time": "6:00:00 PM",
+    "Description": "",
+    "Tags": "",
+    "Date and Time": "5/17/2025 12 - 6:00 pm "
   },
   {
     "Event Name": "Family Fun Day- Camp Trinity",
-    "Date and Time": "5/31/2025 7 - 11:30am ",
     "Location": "New Haven",
-    "Description": "",
-    "Tags": "",
     "Duration": "4.5 hours",
     "Price": 20,
-    "Website": "https://www.facebook.com/share/1De9b7d2kg/"
+    "Website": "https://www.facebook.com/share/1De9b7d2kg/",
+    "Dates": "5/31/2025",
+    "Start Time": "7:00:00 PM",
+    "End Time": "11:30:00 AM",
+    "Description": "",
+    "Tags": "",
+    "Date and Time": "5/31/2025 7 - 11:30am "
   }
 ]
