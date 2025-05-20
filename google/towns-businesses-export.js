@@ -35,37 +35,37 @@ function onOpen() {
 
 function publishSheetToJson(sheet, folder, newJsonData) {
     try {
-        const fileName = `${sheet.getName()}1.json`;
+        const fileName = `${sheet.getName()}.json`;
         const existingFile = getFileByName(folder, fileName);
 
-        // let combinedJsonData = [];
-        // if (existingFile) {
-        //     const content = existingFile.getBlob().getDataAsString();
-        //     combinedJsonData = JSON.parse(content); // Parse existing JSON data
-        // }
-        //
-        // // update existing data
-        // const existingData = combinedJsonData.filter(data => !newJsonData.some(newData => newData.name === data.name));
-        // for (let i = 0; i < combinedJsonData.length; i++) {
-        //     for (let j = 0; j < newJsonData.length; j++) {
-        //         if (combinedJsonData[i].name === newJsonData[j].name) {
-        //             combinedJsonData[i] = newJsonData[j];
-        //         }
-        //     }
-        // }
-        //
-        // combinedJsonData = existingData.concat(newJsonData);
+        let combinedJsonData = [];
+        if (existingFile) {
+            const content = existingFile.getBlob().getDataAsString();
+            combinedJsonData = JSON.parse(content); // Parse existing JSON data
+        }
 
-        const fileContent = JSON.stringify(newJsonData, null, 2);
-        const fileJson = JSON.parse(fileContent);
-        // trim keys and values
-        for (let i = 0; i < fileJson.length; i++) {
-            for (let key in fileJson[i]) {
-                if (fileJson[i].hasOwnProperty(key)) {
-                    fileJson[i][key] = fileJson[i][key].trim();
+        // update existing data
+        const existingData = combinedJsonData.filter(data => !newJsonData.some(newData => newData.name === data.name));
+        for (let i = 0; i < combinedJsonData.length; i++) {
+            for (let j = 0; j < newJsonData.length; j++) {
+                if (combinedJsonData[i].name === newJsonData[j].name) {
+                    combinedJsonData[i] = newJsonData[j];
                 }
             }
         }
+
+        combinedJsonData = existingData.concat(newJsonData);
+        // trim values with spaces
+        combinedJsonData = combinedJsonData.map(data => {
+            for (const key in data) {
+                if (typeof data[key] === 'string') {
+                    data[key] = data[key].trim();
+                }
+            }
+            return data;
+        });
+
+        const fileContent = JSON.stringify(combinedJsonData, null, 2);
 
         if (existingFile) {
             existingFile.setContent(fileContent); // Update existing file
@@ -87,8 +87,6 @@ function getSheetAsJSON(sheet){
         headers.forEach((header, index) => {
             obj[header] = row[index];
         });
-        if (obj['name']==='') return;
-
         return obj;
     });
     return newJsonData;
