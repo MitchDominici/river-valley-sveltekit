@@ -1,72 +1,67 @@
 [
   {
-    "Event Name": "Winter Wine Walk",
-    "Date and Time": "2025-02-08T18:00:00.000Z",
-    "Location": "Rosebud",
-    "Description": "",
-    "Tags": "",
-    "Duration": "4 hours",
-    "Price": 20,
-    "Website": "https://www.facebook.com/share/1AMQ7XCfHN/"
-  },
-  {
-    "Event Name": "Treasure Days",
-    "Date and Time": "2025-05-03T14:00:00.000Z",
-    "Location": "Rosebud",
-    "Description": "",
-    "Tags": "",
-    "Duration": "7 hours",
-    "Price": "",
-    "Website": "https://www.facebook.com/events/1136339244371971/?acontext=%7B%22event_action_history%22%3A[%7B%22mechanism%22%3A%22attachment%22%2C%22surface%22%3A%22newsfeed%22%7D]%2C%22ref_notif_type%22%3Anull%7D"
-  },
-  {
-    "Event Name": "Miller's Landing Day ~ the Legend of John Colter",
-    "Date and Time": "2025-05-10T18:00:00.000Z",
-    "Location": "New Haven",
-    "Description": "Town celebration:  live music, food and art vendors, fireworks",
-    "Tags": "",
-    "Duration": "9 hours",
-    "Price": " free",
-    "Website": "https://www.facebook.com/MillersLandingDay"
-  },
-  {
     "Event Name": "Gasconade County Fair",
-    "Date and Time": "2025-07-01T06:00:00.000Z",
     "Location": "Owensville",
-    "Description": "",
-    "Tags": "",
     "Duration": "",
     "Price": "",
-    "Website": ""
+    "Website": "",
+    "Dates": "2025-07-01T06:00:00.000Z",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Tags": "",
+    "Date and Time": "2025-07-01T06:00:00.000Z"
   },
   {
     "Event Name": "Rosebud 4th of July Fireworks",
-    "Date and Time": "2025-07-01T06:00:00.000Z",
     "Location": "Rosebud",
-    "Description": "",
-    "Tags": "",
     "Duration": "",
     "Price": "free",
-    "Website": ""
+    "Website": "",
+    "Dates": "2025-07-01T06:00:00.000Z",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Tags": "",
+    "Date and Time": "2025-07-01T06:00:00.000Z"
   },
   {
     "Event Name": "Gasconade County Thresher Show",
-    "Date and Time": "7/18/2025, 7/19/2025, 7/20/2025",
     "Location": "Rosebud",
-    "Description": "",
-    "Tags": "",
     "Duration": "",
     "Price": "free",
-    "Website": "https://gcta.us/2025-show"
+    "Website": "https://gcta.us/2025-show",
+    "Dates": "7/18/2025, 7/19/2025, 7/20/2025",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Tags": "",
+    "Date and Time": "7/18/2025, 7/19/2025, 7/20/2025"
   },
   {
-    "Event Name": "Shamrock Scavenger Hunt ",
-    "Date and Time": "2025-03-01T16:00:00.000Z",
-    "Location": "Rosebud ",
-    "Description": "scavenger hunt",
+    "Event Name": "Fugitive Bluff Maifest BBQ & Live Music",
+    "Location": "Berger",
+    "Duration": "6 hours",
+    "Price": "free",
+    "Website": "https://www.facebook.com/share/16Dg14zRCx/",
+    "Dates": "5/17/2025",
+    "Start Time": "1899-12-30T18:36:36.000Z",
+    "End Time": "1899-12-31T00:36:36.000Z",
+    "Description": "",
     "Tags": "",
-    "Duration": "7 hours",
-    "Price": "",
-    "Website": "https://www.facebook.com/events/1628765071363799/?post_id=1634019264171713&acontext=%7B%22event_action_history%22%3A[%7B%22surface%22%3A%22notifications_tab%22%7D%2C%7B%22mechanism%22%3A%22footer_attachment%22%2C%22surface%22%3A%22newsfeed%22%7D]%2C%22ref_notif_type%22%3A%22comment_mention%22%7D"
+    "Date and Time": "5/17/2025 12 - 6:00 pm "
+  },
+  {
+    "Event Name": "Family Fun Day- Camp Trinity",
+    "Location": "New Haven",
+    "Duration": "4.5 hours",
+    "Price": 20,
+    "Website": "https://www.facebook.com/share/1De9b7d2kg/",
+    "Dates": "5/31/2025",
+    "Start Time": "1899-12-31T01:36:36.000Z",
+    "End Time": "1899-12-30T18:06:36.000Z",
+    "Description": "",
+    "Tags": "",
+    "Date and Time": "5/31/2025 7 - 11:30am "
   }
 ]
