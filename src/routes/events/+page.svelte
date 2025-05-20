@@ -2,8 +2,8 @@
     import {onDestroy, onMount} from 'svelte';
     import {eventStore} from '$lib/stores/eventStore';
 
-    let modal;
-    let selectedEvents = [];
+    let modal: any;
+    let selectedEvents: any[] = [];
 
     $: currentDate = $eventStore.currentDate;
     $: events = $eventStore.events;
@@ -16,34 +16,23 @@
         modal?.classList.add('hidden');
     }
 
-    function showEvents(dayEvents) {
+    function showEvents(dayEvents: any) {
         selectedEvents = dayEvents;
         modal?.classList.remove('hidden');
     }
 
-    function handleModalClick(e) {
+    function handleModalClick(e: any) {
         if (e.target === modal) {
             closeModal();
         }
     }
 
-    function formatTime(timeString) {
+    function formatTime(timeString: any) {
         if (!timeString) return '';
-
-        // Handle dates that might come from Google Sheets
-        if (timeString.includes('T')) {
-            const date = new Date(timeString);
-            return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-        }
-
-        // Handle regular time strings
-        return new Date(`1970-01-01 ${timeString}`).toLocaleTimeString([], {
-            hour: 'numeric',
-            minute: '2-digit'
-        });
+        return eventStore.normalizeTimeString(timeString);
     }
 
-    function getDaysInMonth(date) {
+    function getDaysInMonth(date: any) {
         const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         const days = [];
@@ -90,10 +79,9 @@
     $: weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 </script>
 <!-- Event Modal -->
-<div
-        bind:this={modal}
-        class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
-        on:click={handleModalClick}
+<!-- svelte-ignore <code> -->
+<div on:click={handleModalClick} bind:this={modal}
+     class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
 >
     <div class="relative top-20 mx-auto p-5 border w-full max-w-xl bg-white rounded-lg shadow-xl m-4">
         <div class="flex justify-between items-center border-b pb-4">
@@ -143,7 +131,8 @@
                         {/if}
                         {#if event.Website}
                             <div>
-                                <a href="{event.Website}" target="_blank" class="text-primary-blue underline md:text-xl text-lg">More Information</a>
+                                <a href="{event.Website}" target="_blank"
+                                   class="text-primary-blue underline md:text-xl text-lg">More Information</a>
                             </div>
                         {/if}
                     </div>

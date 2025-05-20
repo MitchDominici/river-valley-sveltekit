@@ -31,8 +31,11 @@ function createEventStore() {
     function calculateDuration(startTime: string | undefined, endTime: string | undefined): string | undefined {
         if (!startTime || !endTime) return undefined;
 
-        const start = new Date(`1970-01-01 ${startTime}`);
-        const end = new Date(`1970-01-01 ${endTime}`);
+        const normalizedStart = normalizeTimeString(startTime);
+        const normalizedEnd = normalizeTimeString(endTime);
+
+        const start = new Date(`1970-01-01 ${normalizedStart}`);
+        const end = new Date(`1970-01-01 ${normalizedEnd}`);
 
         if (isNaN(start.getTime()) || isNaN(end.getTime())) return undefined;
 
@@ -49,18 +52,71 @@ function createEventStore() {
         }
     }
 
+    // Add this function to the event store
+    function normalizeTimeString(timeString: string | undefined): string | undefined {
+        if (!timeString) return undefined;
+
+        // If already in full format (12:00:00 PM), return as is
+        if (/\d{1,2}:\d{2}:\d{2}\s[AP]M/.test(timeString)) {
+            return timeString;
+        }
+
+        // Handle simple formats like "12 PM" or "7 AM"
+        const simpleTimeMatch = timeString.match(/(\d{1,2})\s*([AP]M)/i);
+        if (simpleTimeMatch) {
+            const [, hour, ampm] = simpleTimeMatch;
+            return `${hour}:00:00 ${ampm.toUpperCase()}`;
+        }
+
+        // Try to parse as a date if it contains 'T' (ISO format)
+        if (timeString.includes('T')) {
+            try {
+                const date = new Date(timeString);
+                if (!isNaN(date.getTime())) {
+                    return date.toLocaleTimeString('en-US', {
+                        hour: 'numeric',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true
+                    });
+                }
+            } catch (e) {
+                console.error('Failed to parse time:', e);
+            }
+        }
+
+        // Return original if we can't normalize
+        return timeString;
+    }
+
     // Helper function to get date from event
     function getEventDate(event: Event, dateStr: string): Date {
         const datePart = dateStr.trim();
-        const timePart = event['Start Time'] || '12:00:00 PM';
-        return new Date(`${datePart} ${timePart}`);
+        const timePart = normalizeTimeString(event['Start Time']) || '12:00:00 PM';
+
+        try {
+            const dateObj = new Date(`${datePart} ${timePart}`);
+            if (!isNaN(dateObj.getTime())) {
+                return dateObj;
+            }
+        } catch (e) {
+            console.error('Error parsing date:', e);
+        }
+
+        // Fallback approach for problematic date formats
+        if (datePart.includes('/')) {
+            const [month, day, year] = datePart.split('/');
+            return new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 12, 0, 0);
+        }
+
+        // Return default date as last resort
+        return new Date();
     }
 
     async function loadEvents(date: Date = new Date()) {
         try {
             const response = await fetch(`${base}/data/events.json`);
             let allEvents: Event[] = await response.json();
-            console.log(allEvents);
 
             // Process events with multiple dates
             allEvents = allEvents.flatMap(event => {
@@ -105,6 +161,8 @@ function createEventStore() {
                 const bDate = getEventDate(b, b.Dates);
                 return aDate.getTime() - bDate.getTime();
             });
+
+            console.log(allEvents);
 
             update(state => ({
                 ...state,
@@ -165,6 +223,7 @@ function createEventStore() {
         subscribe,
         loadEvents,
         changeMonth,
+        normalizeTimeString,
         reset
     };
 }
