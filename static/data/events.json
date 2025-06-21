@@ -1,1 +1,98 @@
-<!DOCTYPE html><html><head><title>Google Drive - Virus scan warning</title><meta http-equiv="content-type" content="text/html; charset=utf-8"/><style nonce="BhE55ui8BOTyfDuxMFIMBw">.goog-link-button{position:relative;color:#15c;text-decoration:underline;cursor:pointer}.goog-link-button-disabled{color:#ccc;text-decoration:none;cursor:default}body{color:#222;font:normal 13px/1.4 arial,sans-serif;margin:0}.grecaptcha-badge{visibility:hidden}.uc-main{padding-top:50px;text-align:center}#uc-dl-icon{display:inline-block;margin-top:16px;padding-right:1em;vertical-align:top}#uc-text{display:inline-block;max-width:68ex;text-align:left}.uc-error-caption,.uc-warning-caption{color:#222;font-size:16px}#uc-download-link{text-decoration:none}.uc-name-size a{color:#15c;text-decoration:none}.uc-name-size a:visited{color:#61c;text-decoration:none}.uc-name-size a:active{color:#d14836;text-decoration:none}.uc-footer{color:#777;font-size:11px;padding-bottom:5ex;padding-top:5ex;text-align:center}.uc-footer a{color:#15c}.uc-footer a:visited{color:#61c}.uc-footer a:active{color:#d14836}.uc-footer-divider{color:#ccc;width:100%}.goog-inline-block{position:relative;display:-moz-inline-box;display:inline-block}* html .goog-inline-block{display:inline}*:first-child+html .goog-inline-block{display:inline}sentinel{}</style><link rel="icon" href="//ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png"/></head><body><div class="uc-main"><div id="uc-dl-icon" class="image-container"><div class="drive-sprite-aux-download-file"></div></div><div id="uc-text"><p class="uc-warning-caption">Google Drive can't scan this file for viruses.</p><p class="uc-warning-subcaption">We are experiencing technical difficulties. Would you still like to download this file? <span class="uc-name-size"><a href="/open?id=1Ngmub82f1MkAljVk_lPPnCx6Pv8pbMfA">events.json</a> (2.3k)</span></p><form id="download-form" action="https://drive.usercontent.google.com/download" method="get"><input type="submit" id="uc-download-link" class="goog-inline-block jfk-button jfk-button-action" value="Download anyway"/><input type="hidden" name="id" value="1Ngmub82f1MkAljVk_lPPnCx6Pv8pbMfA"><input type="hidden" name="export" value="download"><input type="hidden" name="confirm" value="t"><input type="hidden" name="uuid" value="e046f518-8992-4ca8-a765-7b2c94362058"></form></div></div><div class="uc-footer"><hr class="uc-footer-divider"></div></body></html>
+[
+  {
+    "Event Name": "Gasconade County Fair",
+    "Location": "Owensville",
+    "Duration": "",
+    "Price": "",
+    "Website": "",
+    "Dates": "7/1/2025",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Tags": ""
+  },
+  {
+    "Event Name": "Rosebud 4th of July Fireworks",
+    "Location": "Rosebud",
+    "Duration": "",
+    "Price": "free",
+    "Website": "",
+    "Dates": "7/1/2025",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Tags": ""
+  },
+  {
+    "Event Name": "Gasconade County Thresher Show",
+    "Location": "Rosebud",
+    "Duration": "",
+    "Price": "free",
+    "Website": "https://gcta.us/2025-show",
+    "Dates": "7/18/2025, 7/19/2025, 7/20/2025",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Tags": ""
+  },
+  {
+    "Event Name": "Family Fun Day- Camp Trinity",
+    "Location": "New Haven",
+    "Duration": "4.5 hours",
+    "Price": 20,
+    "Website": "https://www.facebook.com/share/1De9b7d2kg/",
+    "Dates": "5/31/2025",
+    "Start Time": "7:00:00 AM",
+    "End Time": "11:30:00 AM",
+    "Description": "",
+    "Tags": ""
+  },
+  {
+    "Event Name": "Rosebud City Wide Garage and Sidewalk Sale",
+    "Location": "Rosebud",
+    "Duration": "",
+    "Price": "free ",
+    "Website": "https://www.facebook.com/events/683827951065188",
+    "Dates": "2025-06-02T06:00:00.000Z",
+    "Start Time": "1899-12-30T15:36:36.000Z",
+    "End Time": "",
+    "Description": "",
+    "Tags": ""
+  },
+  {
+    "Event Name": "Rosebud Craft Beer Festival",
+    "Location": "Rosebud",
+    "Duration": "",
+    "Price": 30,
+    "Website": "https://www.facebook.com/events/1003459688626580",
+    "Dates": "2025-08-02T06:00:00.000Z",
+    "Start Time": "1899-12-30T18:36:36.000Z",
+    "End Time": "3:00 PM",
+    "Description": "",
+    "Tags": ""
+  },
+  {
+    "Event Name": "Christmas in Rosebud",
+    "Location": "Rosebud",
+    "Duration": "",
+    "Price": "free",
+    "Website": "",
+    "Dates": "2025-10-03T06:00:00.000Z",
+    "Start Time": "1899-12-30T18:36:36.000Z",
+    "End Time": "5:00 PM ",
+    "Description": "",
+    "Tags": ""
+  },
+  {
+    "Event Name": "Rosebud Fall Treasure Day",
+    "Location": "Rosebud",
+    "Duration": "",
+    "Price": "free",
+    "Website": "",
+    "Dates": "2025-10-04T06:00:00.000Z",
+    "Start Time": "1899-12-30T14:36:36.000Z",
+    "End Time": "3:00 PM",
+    "Description": "",
+    "Tags": ""
+  }
+]
