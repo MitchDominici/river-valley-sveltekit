@@ -1,17 +1,5 @@
 [
   {
-    "Event Name": "Rosebud Craft Beer Festival",
-    "Location": "Rosebud",
-    "Duration": "",
-    "Price": 30,
-    "Website": "https://www.facebook.com/events/1003459688626580",
-    "Dates": "2025-08-02T06:00:00.000Z",
-    "Start Time": "1899-12-30T18:36:36.000Z",
-    "End Time": "3:00 PM",
-    "Description": "",
-    "Tags": ""
-  },
-  {
     "Event Name": "Christmas in Rosebud",
     "Location": "Rosebud",
     "Duration": "",
@@ -57,6 +45,18 @@
     "Start Time": "1899-12-30T21:36:36.000Z",
     "End Time": "5:00 PM ",
     "Description": "Free balloon race, watch as the colorful hot air balloon \"Hare\" and \"Hounds\"  take off from New Haven City Park and have a race to the finish, food vendors, fun for the whole family.  Event is weather permitting. ",
+    "Tags": ""
+  },
+  {
+    "Event Name": "LOOP Scavenger Hunt ",
+    "Location": "all around the LOOP",
+    "Duration": "",
+    "Price": "free",
+    "Website": "https://www.facebook.com/share/1HNnBnUkMc/",
+    "Dates": "9/26, 9/27, 9/28",
+    "Start Time": "10:00 AM",
+    "End Time": "4:00 PM",
+    "Description": "An Exciting Scavenger Hunt all Aound the LOOP - 8 towns, $500 worth of prizes - locals & tourists join us in an exciting adventure!!!",
     "Tags": ""
   }
 ]
