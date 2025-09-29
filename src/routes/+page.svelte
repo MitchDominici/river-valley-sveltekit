@@ -35,7 +35,7 @@
                 clearInterval(checkDataLoaded);
                 setTimeout(() => {
                     bottleVisible = true;
-                }, 2000);
+                }, 500);
             }
         }, 100);
 
@@ -173,32 +173,46 @@
                     <div class="bottle-glow"></div>
                 </div>
 
-                {#if scrollOpen}
-                    <div class="scroll-overlay" on:click={closeScroll}>
-                        <div class="scroll-container" on:click={(e) => e.stopPropagation()}>
-                            <div class="scroll-paper">
-                                <h3 class="scroll-title">Special Upcoming Events</h3>
-                                <div class="scroll-events">
-                                    {#each specialEvents?.slice(0, 4) as event}
-                                        <div class="event-item">
-                                            <h4>{event['Event Name']}</h4>
-                                            <p class="event-date">{event.Dates}</p>
-                                            <p class="event-description">{event.Description || 'Join us for this special event!'}</p>
-                                            {#if event.Website}
-                                                <a href="{event.Website}" class="event-link">Learn more →</a>
-                                            {:else}
-                                                <a href="{base}/events" class="event-link">See all events →</a>
-                                            {/if}
-                                        </div>
-                                    {/each}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {/if}
             </div>
         {/if}
     </div>
+
+    {#if scrollOpen}
+        <div class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4 animate-fade-in" on:click={closeScroll}>
+            <div class="bg-cream-100 border-4 border-amber-800 rounded-xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl animate-slide-up relative" on:click={(e) => e.stopPropagation()}>
+                <button
+                        class="absolute top-4 right-4 bg-amber-800 text-white rounded-full w-9 h-9 flex items-center justify-center hover:bg-amber-900 transition-colors z-10"
+                        on:click={closeScroll}
+                >
+                    ×
+                </button>
+
+                <h3 class="text-3xl font-serif font-bold text-blue-900 text-center px-12 py-8 border-b-2 border-dashed border-amber-800">
+                    Special Upcoming Events
+                </h3>
+
+                <div class="flex-1 overflow-y-auto p-8">
+                    {#each specialEvents?.slice(0, 4) as event}
+                        <div class="mb-5 p-5 bg-white rounded-lg border border-amber-200 shadow-sm last:mb-0">
+                            <h4 class="text-xl font-bold text-blue-900 mb-2">{event['Event Name']}</h4>
+                            <p class="text-amber-800 font-medium mb-3">{event.Dates}</p>
+                            <p class="text-gray-700 mb-3 leading-relaxed">{event.Description || 'Join us for this special event!'}</p>
+                            {#if event.Website}
+                                <a href="{event.Website}" class="inline-block text-blue-900 font-bold hover:underline">
+                                    Learn more →
+                                </a>
+                            {:else}
+                                <a href="{base}/events" class="inline-block text-blue-900 font-bold hover:underline">
+                                    See all events →
+                                </a>
+                            {/if}
+                        </div>
+                    {/each}
+                </div>
+            </div>
+        </div>
+    {/if}
+
 </div>
 
 <style>
@@ -395,72 +409,6 @@
         }
     }
 
-    /* Scroll Overlay */
-    .scroll-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: fadeIn 0.3s ease-out;
-        padding: 20px; /* Add padding to prevent edge touching */
-    }
-
-    .scroll-container {
-        animation: slideUp 0.4s ease-out;
-    }
-
-    /* Updated Scroll Overlay styles */
-    /*.scroll-paper {*/
-    /*    background: #FFF8DC;  !* Changed to cream color for better readability *!*/
-    /*    background-image:*/
-    /*            repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(139, 69, 19, 0.05) 30px, rgba(139, 69, 19, 0.05) 31px);*/
-    /*    border: 3px solid #8B4513;*/
-    /*    padding: 50px 40px 40px 40px;*/
-    /*    max-width: 600px;*/
-    /*    max-height: 80vh;*/
-    /*    overflow-y: auto;*/
-    /*    position: relative;*/
-    /*    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);*/
-    /*    border-radius: 10px;*/
-    /*}*/
-
-    .scroll-paper {
-        background: #FFF8DC;
-        background-image:
-                repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(139, 69, 19, 0.05) 30px, rgba(139, 69, 19, 0.05) 31px);
-        border: 3px solid #8B4513;
-        padding: 50px 40px 40px 40px;
-        max-width: 600px;
-        max-height: 80vh; /* Keep this */
-        overflow-y: auto; /* Keep scrolling here */
-        position: relative;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
-    }
-
-    .scroll-title {
-        font-family: Georgia, serif; /* More readable than Brush Script */
-        font-size: 28px;
-        color: #2C5282;
-        text-align: center;
-        margin-bottom: 30px;
-        font-weight: bold;
-    }
-
-    .event-item {
-        margin-bottom: 25px;
-        padding: 20px;
-        background: white;
-        border-radius: 8px;
-        border: 1px solid #E8D4A3;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
 
     .event-item h4 {
         font-size: 22px;
@@ -469,38 +417,19 @@
         font-weight: bold;
     }
 
-    .event-date {
-        font-size: 16px;
-        color: #8B4513;
-        margin: 0 0 12px 0;
-        font-weight: 500;
-    }
-
-    .event-description {
-        font-size: 16px;
-        color: #333;
-        margin: 0 0 12px 0;
-        line-height: 1.5;
-    }
-
-    .event-link {
-        color: #2C5282;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 16px;
-        display: inline-block;
-        margin-top: 8px;
-    }
-
-    .event-link:hover {
-        text-decoration: underline;
-    }
 
     @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
         from {
+            transform: translateY(-30px);
             opacity: 0;
         }
         to {
+            transform: translateY(0);
             opacity: 1;
         }
     }
@@ -513,25 +442,6 @@
         to {
             transform: translateY(0);
             opacity: 1;
-        }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .postcard-container {
-            right: 20px;
-            top: 20px; /* Keep at top on mobile */
-            transform: rotate(2deg) scale(0.8);
-        }
-
-        .bottle-container {
-            left: 20px;
-            bottom: 80px;
-        }
-
-        .scroll-paper {
-            margin: 20px;
-            padding: 30px 20px;
         }
     }
 </style>
