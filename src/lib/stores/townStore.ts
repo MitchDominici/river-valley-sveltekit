@@ -35,16 +35,21 @@ type Business = {
     friday?: string;
     saturday?: string;
     phone?: string;
+    image?: string;
+    description?: string;
+    'business of the month'?: string;
 };
 
 function createTownStore() {
     const {subscribe, set, update} = writable<{
         towns: Town[];
         businesses: Business[];
+        businessOfTheMonth?: Business | null;
         loaded: boolean;
     }>({
         towns: [],
         businesses: [],
+        businessOfTheMonth: null,
         loaded: false
     });
 
@@ -65,8 +70,8 @@ function createTownStore() {
         return imagePaths;
     }
 
-    function getMainImagePathForTown(images): string {
-        return images.find(image => image.includes('main'));
+    function getMainImagePathForTown(images: any): string {
+        return images.find((image: any) => image.includes('main'));
     }
 
     async function loadData() {
@@ -82,12 +87,12 @@ function createTownStore() {
             ]);
 
             // trim whitespace from business town
-            businesses.forEach(business => {
+            businesses.forEach((business: any) => {
                 business.town = business.town.trim();
                 business.townNameFormatted = business.town.toLowerCase().replace(' ', '-');
             });
 
-            businesses.forEach(business => {
+            businesses.forEach((business: any) => {
                 business.type = business.type.trim();
                 business.type = business.type.charAt(0).toUpperCase() + business.type.slice(1);
             });
@@ -118,7 +123,7 @@ function createTownStore() {
             ];
             // Sort towns based on the predefined order
             for (let i = 0; i < townSortOrder.length; i++) {
-                const town = towns.find(t => t.name === townSortOrder[i]);
+                const town = towns.find((t: any) => t.name === townSortOrder[i]);
                 if (town) {
                     towns.splice(towns.indexOf(town), 1);
                     towns.splice(i, 0, town);
@@ -126,7 +131,7 @@ function createTownStore() {
             }
 
             // Sort businesses alphabetically by name within each town
-            businesses.sort((a, b) => {
+            businesses.sort((a: any, b: any) => {
                 const townCompare = a.town.localeCompare(b.town);
                 if (townCompare === 0) {
                     return a.name.localeCompare(b.name);
@@ -134,12 +139,17 @@ function createTownStore() {
                 return townCompare;
             });
 
+            // Get business of the month
+            const businessOfTheMonth = getBusinessOfTheMonth(businesses);
+
             update(state => ({
                 ...state,
                 towns,
                 businesses,
+                businessOfTheMonth,
                 loaded: true
             }));
+            console.log('Towns and businesses loaded');
         } catch (error) {
             console.error('Error loading data:', error);
             update(state => ({
@@ -177,11 +187,40 @@ function createTownStore() {
         });
     }
 
+    function getBusinessOfTheMonth(businesses: Business[]) {
+        const currentMonth = new Date().getMonth();
+        const currentYear = new Date().getFullYear();
+
+        const businessOfTheMonth = businesses.filter(b => {
+            const businessMonth = b['business of the month'];
+            if (!businessMonth) return false;
+            // Expecting format "YYYY-MM-DDT06:00:00.000Z"
+            const [year, month] = businessMonth.split('-').map(Number);
+            return year === currentYear && (month - 1) === currentMonth;
+        });
+
+        // Add default image and description if not present
+        if (businessOfTheMonth[0]) {
+            const business = businessOfTheMonth[0];
+            // Add a placeholder image if none exists
+            if (!business.image) {
+                business.image = `${base}/images/placeholder-business.jpg`; // You'll need to add this
+            }
+            // Generate a description from available data
+            if (!business.description) {
+                business.description = `Visit ${business.name} in ${business.town}. ${business.type} serving our community with pride.`;
+            }
+        }
+
+        return businessOfTheMonth[0] || null;
+    }
+
     return {
         subscribe,
         loadData,
         getTown,
-        getTownBusinesses
+        getTownBusinesses,
+        getBusinessOfTheMonth
     };
 }
 
