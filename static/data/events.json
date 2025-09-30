@@ -9,7 +9,8 @@
     "Start Time": "1899-12-30T18:36:36.000Z",
     "End Time": "5:00 PM ",
     "Description": "",
-    "Tags": ""
+    "Tags": "",
+    "SpecialEvent": false
   },
   {
     "Event Name": "Rosebud Fall Treasure Day",
@@ -21,7 +22,8 @@
     "Start Time": "1899-12-30T14:36:36.000Z",
     "End Time": "3:00 PM",
     "Description": "",
-    "Tags": ""
+    "Tags": "",
+    "SpecialEvent": false
   },
   {
     "Event Name": "New Haven Balloon Glow ",
@@ -33,7 +35,8 @@
     "Start Time": "1899-12-30T22:36:36.000Z",
     "End Time": "8:30 PM",
     "Description": "Free balloon glow in New Haven City Park, food vendors, fun for the whole family.  Event is weather permitting.",
-    "Tags": ""
+    "Tags": "",
+    "SpecialEvent": false
   },
   {
     "Event Name": "New Haven Balloon Race",
@@ -45,7 +48,8 @@
     "Start Time": "1899-12-30T21:36:36.000Z",
     "End Time": "5:00 PM ",
     "Description": "Free balloon race, watch as the colorful hot air balloon \"Hare\" and \"Hounds\"  take off from New Haven City Park and have a race to the finish, food vendors, fun for the whole family.  Event is weather permitting. ",
-    "Tags": ""
+    "Tags": "",
+    "SpecialEvent": false
   },
   {
     "Event Name": "LOOP Scavenger Hunt ",
@@ -57,7 +61,8 @@
     "Start Time": "10:00 AM",
     "End Time": "4:00 PM",
     "Description": "An Exciting Scavenger Hunt all Aound the LOOP - 8 towns, $500 worth of prizes - locals & tourists join us in an exciting adventure!!!",
-    "Tags": ""
+    "Tags": "",
+    "SpecialEvent": false
   },
   {
     "Event Name": "SHOVELFEST - Ride In Motorcycle Show",
@@ -69,7 +74,8 @@
     "Start Time": "11:00 ",
     "End Time": "close",
     "Description": "10 Year Anniversary!  Ride In Motorcycle Show!  Live Music, Vendors, Good Food!",
-    "Tags": ""
+    "Tags": "",
+    "SpecialEvent": false
   },
   {
     "Event Name": "Hermann Harvest Festival",
@@ -81,7 +87,8 @@
     "Start Time": "10:00 am ",
     "End Time": "5:00 pm",
     "Description": "Clara Eitmann Messmer Ampitheater - Your one stop shop for all thing Autumn!",
-    "Tags": ""
+    "Tags": "",
+    "SpecialEvent": false
   },
   {
     "Event Name": "Fall Into Healthy Choices Health Fair",
@@ -93,7 +100,8 @@
     "Start Time": "11:00 am ",
     "End Time": "2:00 pm",
     "Description": "112 W. Lincoln Ave, Owensville.   Vendors - a variety of information, Freebies, Attendance Prizes Throughout the Day",
-    "Tags": ""
+    "Tags": "",
+    "SpecialEvent": false
   },
   {
     "Event Name": "Rock the Trail Music Fest",
@@ -105,6 +113,7 @@
     "Start Time": "12:00 pm ",
     "End Time": "8:00 pm",
     "Description": "Gerald City Park:  12:00 pm - Gates open, 1:00 pm - Josh Wuerfful, 2:30 pm - Pam Setser, 4:30 pm - The Malpass Borthers, 6:30 pm - The Amanda Cook Band.  All ticket, food, and drink proceeds to benefit the extension of the Rock Island Trail from Gerald to Rosebud.  ",
-    "Tags": ""
+    "Tags": "",
+    "SpecialEvent": true
   }
 ]
