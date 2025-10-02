@@ -300,7 +300,8 @@
     .bottle-container {
         position: absolute;
         left: 80px;
-        bottom: 180px;
+        bottom: 300px;
+        top: auto;
         z-index: 20;
         opacity: 0;
         transform: translateY(20px);
