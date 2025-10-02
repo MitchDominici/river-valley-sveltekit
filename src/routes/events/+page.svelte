@@ -100,9 +100,9 @@
                     <!-- Show time information -->
                     <div class="text-xl md:text-3xl text-primary-blue">
                         {#if event['Start Time'] && event['End Time']}
-                            {formatTime(event['Start Time'])} - {formatTime(event['End Time'])}
+                            {event['Start Time']} - {event['End Time']}
                         {:else if event['Start Time']}
-                            {formatTime(event['Start Time'])}
+                            {event['Start Time']}
                         {/if}
                     </div>
 

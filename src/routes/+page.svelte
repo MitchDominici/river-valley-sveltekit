@@ -153,7 +153,7 @@
                     <div class="postcard-stamp">{new Date().toLocaleString('default', {month: 'short'})}</div>
                     <div class="postcard-content">
                         <div class="postcard-image">
-                            <img src="{businessOfTheMonth.image}" alt="{businessOfTheMonth.name}"/>
+                            <img src="{base}images/misc/missouri.jpg" alt="{businessOfTheMonth.name}"/>
                         </div>
                         <div class="postcard-info">
                             <h3 class="postcard-title">Business of the Month</h3>
@@ -195,7 +195,7 @@
                     {#each specialEvents?.slice(0, 4) as event}
                         <div class="mb-5 p-5 bg-white rounded-lg border border-amber-200 shadow-sm last:mb-0">
                             <h4 class="text-xl font-bold text-blue-900 mb-2">{event['Event Name']}</h4>
-                            <p class="text-amber-800 font-medium mb-3">{event.Dates}</p>
+                            <p class="text-amber-800 font-medium mb-3">{event.Dates.replace('T06:00:00.000Z', '')}</p>
                             <p class="text-gray-700 mb-3 leading-relaxed">{event.Description || 'Join us for this special event!'}</p>
                             {#if event.Website}
                                 <a href="{event.Website}" class="inline-block text-blue-900 font-bold hover:underline">
@@ -313,7 +313,7 @@
     }
 
     .bottle-container::after {
-        content: 'Click me!';
+        content: 'See Special Events!';
         position: absolute;
         bottom: -30px;
         left: 50%;
