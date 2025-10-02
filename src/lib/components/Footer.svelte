@@ -1,3 +1,7 @@
+<script>
+    const currentYear = new Date().getFullYear();
+</script>
+
 <footer class="bg-soft-sky-blue text-black border border-t-2 border-white">
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -37,7 +41,7 @@
         </div>
 
         <div class="mt-8 pt-8 border-t border-white text-center text-black">
-            <p>&copy; 2024 Missouri River Valley LOOP. All rights reserved.</p>
+            <p>&copy; {currentYear} Missouri River Valley LOOP. All rights reserved.</p>
         </div>
     </div>
 </footer>

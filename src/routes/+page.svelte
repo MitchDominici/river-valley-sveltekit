@@ -1,10 +1,59 @@
-<script>
+<script lang="ts">
     import {onMount} from 'svelte';
     import {base} from '$app/paths';
+    import {townStore} from '$lib/stores/townStore';
+    import {eventStore} from '$lib/stores/eventStore';
 
-    onMount(() => {
-        // Any JavaScript initialization for animations can go here
+    let businessOfTheMonth: any = null;
+    let specialEvents: any[] | undefined = [];
+    let loaded = false;
+    let bottleVisible = false;
+    let scrollOpen = false;
+    let popSound: any = null;
+
+    // Subscribe to the store
+    $: ({loaded: townsLoaded} = $townStore);
+    $: if (townsLoaded) {
+        businessOfTheMonth = $townStore.businessOfTheMonth
+    }
+
+    $: ({loaded: eventsLoaded} = $eventStore);
+    $: if (eventsLoaded) {
+        specialEvents = $eventStore.specialEvents
+    }
+
+    onMount(async () => {
+        if (!loaded) {
+            await townStore.loadData();
+            await eventStore.loadEvents();
+            loaded = true;
+        }
+
+        // Show bottle after data is loaded
+        const checkDataLoaded = setInterval(() => {
+            if ($townStore.loaded && $eventStore.loaded && $eventStore.specialEvents?.length! > 0) {
+                clearInterval(checkDataLoaded);
+                setTimeout(() => {
+                    bottleVisible = true;
+                }, 500);
+            }
+        }, 100);
+
+        // Create pop sound
+        popSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQoGAABhYP7/nmD//5lg//+UYP//kGD//4pg//+FYP//gGD//3pg//91YP//cGD//2pg//9lYP//YGD//1pg//9VYP//UGD//0pg//9FYP//QGD//zpg//81YP//MGD//ypg//8lYP//IGD//xpg//8VYP//EGD//wpg//8FYP//AGD///lf///0X///7l///+lf///kX///3l///9lf///UX///zl///8lf///EX///vl///7lf///0X///r1///6pf///lX///oF///5pf///VX///kF///4pf///FX///gF///3pf//91X///cF///2pf//9lX///YF///1pf//9VX///UF///0pf//9FX///QF///zpf//81X///MF///ypf//8lX///IF///xpf//8VX///EF///wpf//8FX///AF///+le///4Xv//+F7///de///2Xv//9F7///Je///yXv//8F7///he///3Xv//9l7///Ve///0Xv//857///Oe///yXv//8Z7///Ce///vne//7p3v//6d7//+He///m3v//4t7//97e///a3v//1t7//9Le///O3v//yt7//8be///C3v//vt7//7re//+23v//st7//67e//+q3v//pt7//6Le//+e3v//mt7//5be//+S3v//jt7//4re//+G3v//gt7//37e//963v//dt7//3Le//9u3v//at7//2be//9i3v//Xt7//1re//9W3v//Ut7//07e//9K3v//Rt7//0Le//8+3v//Ot7//zbe//8y3v//Lt7//yre//8m3v//It7//x7e//8a3v//Ft7//xLe//8O3v//Ct7//wbe//8C3v///t3//');
     });
+
+    function toggleScroll() {
+        scrollOpen = !scrollOpen;
+        if (scrollOpen && popSound) {
+            popSound.play();
+        }
+    }
+
+    function closeScroll() {
+        scrollOpen = false;
+        console.log('Scroll closed');
+    }
 </script>
 
 <div class="min-h-screen">
@@ -80,7 +129,8 @@
                 <div class="text-4xl md:text-4xl font-accent opacity-0 transform -translate-y-4 animate-fade-in">
                     Welcome to the
                 </div>
-                <h1 class="font-display text-6xl md:text-8xl lg:text-9xl my-6 drop-shadow-lg opacity-0 transform -translate-y-4 animate-fade-in animation-delay-200" style="text-shadow: 4px 4px 8px rgba(0, 0, 0, 1);">
+                <h1 class="font-display text-6xl md:text-8xl lg:text-9xl my-6 drop-shadow-lg opacity-0 transform -translate-y-4 animate-fade-in animation-delay-200"
+                    style="text-shadow: 4px 4px 8px rgba(0, 0, 0, 1);">
                     Missouri River<br/>Valley LOOP
                 </h1>
                 <p class="max-w-3xl mx-auto text-xl md:text-2xl opacity-0 transform -translate-y-4 animate-fade-in animation-delay-400 leading-relaxed mt-4 pt-4">
@@ -96,5 +146,302 @@
                 </a>
             </div>
         </div>
+
+        {#if businessOfTheMonth}
+            <div class="postcard-container">
+                <div class="postcard">
+                    <div class="postcard-stamp">{new Date().toLocaleString('default', {month: 'short'})}</div>
+                    <div class="postcard-content">
+                        <div class="postcard-image">
+                            <img src="{base}images/misc/missouri.jpg" alt="{businessOfTheMonth.name}"/>
+                        </div>
+                        <div class="postcard-info">
+                            <h3 class="postcard-title">Business of the Month</h3>
+                            <h4 class="postcard-business">{businessOfTheMonth.name}</h4>
+                            <p class="postcard-description">{businessOfTheMonth.description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {/if}
+
+        {#if specialEvents && specialEvents.length > 0}
+            <div class="bottle-container {bottleVisible ? 'visible' : ''}">
+                <div class="bottle" on:click={toggleScroll}>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 150'%3E%3C!-- Cork --%3E%3Crect x='20' y='5' width='20' height='20' fill='%236B4423' rx='2'/%3E%3C!-- Neck and body --%3E%3Cpath d='M25 25 L25 50 L15 90 L15 130 Q15 140 30 140 Q45 140 45 130 L45 90 L35 50 L35 25 Z' fill='%232d5a2d' opacity='0.7'/%3E%3C!-- Highlight --%3E%3Cpath d='M20 40 L20 80 L18 100 L18 120 Q18 125 20 125 L22 125 Q24 125 24 120 L24 100 L22 80 L22 40 Z' fill='%23ffffff' opacity='0.2'/%3E%3C!-- Paper --%3E%3Crect x='25' y='60' width='10' height='60' fill='%23F4E4C1' opacity='0.8' rx='2'/%3E%3C/svg%3E"
+                         alt="Message in a bottle"/>
+                    <div class="bottle-glow"></div>
+                </div>
+
+            </div>
+        {/if}
     </div>
+
+    {#if scrollOpen}
+        <div class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4 animate-fade-in" on:click={closeScroll}>
+            <div class="bg-cream-100 border-4 border-amber-800 rounded-xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl animate-slide-up relative" on:click={(e) => e.stopPropagation()}>
+                <button
+                        class="absolute top-4 right-4 bg-amber-800 text-white rounded-full w-9 h-9 flex items-center justify-center hover:bg-amber-900 transition-colors z-10"
+                        on:click={closeScroll}
+                >
+                    ×
+                </button>
+
+                <h3 class="text-3xl font-serif font-bold text-blue-900 text-center px-12 py-8 border-b-2 border-dashed border-amber-800">
+                    Special Upcoming Events
+                </h3>
+
+                <div class="flex-1 overflow-y-auto p-8">
+                    {#each specialEvents?.slice(0, 4) as event}
+                        <div class="mb-5 p-5 bg-white rounded-lg border border-amber-200 shadow-sm last:mb-0">
+                            <h4 class="text-xl font-bold text-blue-900 mb-2">{event['Event Name']}</h4>
+                            <p class="text-amber-800 font-medium mb-3">{event.Dates.replace('T06:00:00.000Z', '')}</p>
+                            <p class="text-gray-700 mb-3 leading-relaxed">{event.Description || 'Join us for this special event!'}</p>
+                            {#if event.Website}
+                                <a href="{event.Website}" class="inline-block text-blue-900 font-bold hover:underline">
+                                    Learn more →
+                                </a>
+                            {:else}
+                                <a href="{base}/events" class="inline-block text-blue-900 font-bold hover:underline">
+                                    See all events →
+                                </a>
+                            {/if}
+                        </div>
+                    {/each}
+                </div>
+            </div>
+        </div>
+    {/if}
+
 </div>
+
+<style>
+    /* Postcard Styles */
+    .postcard-container {
+        position: absolute;
+        right: 60px;
+        top: 60px; /* Changed from 50% to fixed top position */
+        transform: rotate(3deg); /* Removed translateY */
+        z-index: 20;
+    }
+
+    .postcard {
+        background: #FFF8DC;
+        border: 8px solid;
+        border-image: repeating-linear-gradient(45deg, #FF0000, #FF0000 10px, #0000FF 10px, #0000FF 20px) 8;
+        padding: 30px 20px 20px 20px; /* Added more top padding */
+        width: 320px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        position: relative;
+    }
+
+    .postcard-stamp {
+        position: absolute;
+        top: -25px; /* Moved further up */
+        right: -25px; /* Moved further right */
+        background: #FF6B6B;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        transform: rotate(-15deg);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        z-index: 10; /* Ensure it's above other elements */
+    }
+
+    .postcard-content {
+        display: flex;
+        gap: 15px;
+    }
+
+    .postcard-image {
+        width: 120px;
+        height: 120px;
+        flex-shrink: 0;
+    }
+
+    .postcard-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 3px solid white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .postcard-info {
+        flex: 1;
+    }
+
+    .postcard-title {
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+    }
+
+    .postcard-business {
+        font-family: 'Brush Script MT', cursive;
+        font-size: 22px;
+        color: #2C5282;
+        margin: 5px 0;
+    }
+
+    .postcard-description {
+        font-size: 14px;
+        color: #4A5568;
+        line-height: 1.4;
+    }
+
+    /* Message in a Bottle Styles */
+    .bottle-container {
+        position: absolute;
+        left: 80px;
+        bottom: 180px;
+        z-index: 20;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease-out;
+    }
+
+    .bottle-container.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .bottle-container::after {
+        content: 'See Special Events!';
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 14px;
+        color: #2C5282;
+        font-weight: bold;
+        animation: fadeInOut 3s ease-in-out infinite;
+        pointer-events: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fadeInOut {
+        0%, 100% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+
+    .bottle {
+        width: 60px;
+        height: 120px;
+        cursor: pointer;
+        position: relative;
+        animation: bob 3s ease-in-out infinite;
+        transition: transform 0.3s ease;
+    }
+
+    .bottle:hover {
+        animation-play-state: paused;
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .bottle img {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+    }
+
+    .bottle-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle, rgba(255, 223, 0, 0.3) 0%, transparent 70%);
+        pointer-events: none;
+        animation: pulse 2s ease-in-out infinite;
+        border-radius: 50%; /* Add this to make it circular */
+    }
+
+    /* Simplified hover effect */
+    .bottle:hover .bottle-glow {
+        animation: pulseBright 1s ease-in-out infinite;
+    }
+
+
+    @keyframes bob {
+        0%, 100% {
+            transform: translateY(0) rotate(-5deg);
+        }
+        50% {
+            transform: translateY(-15px) rotate(5deg);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 0.5;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+    }
+
+    @keyframes pulseBright {
+        0%, 100% {
+            opacity: 0.8;
+            transform: translate(-50%, -50%) scale(1.5);
+            box-shadow: 0 0 30px rgba(255, 223, 0, 0.5);
+        }
+        50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(2);
+        }
+    }
+
+
+    .event-item h4 {
+        font-size: 22px;
+        color: #2C5282;
+        margin: 0 0 8px 0;
+        font-weight: bold;
+    }
+
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>

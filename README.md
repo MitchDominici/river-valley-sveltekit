@@ -1,47 +1,53 @@
-# Svelte + TS + Vite
+# Missouri River Valley LOOP
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+A web application showcasing the historic towns, small businesses, and events along the Missouri River Valley LOOP.
 
-## Recommended IDE Setup
+## Overview
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+The Missouri River Valley LOOP website serves as a digital guide to the charming communities along the Missouri River. This platform helps visitors discover local businesses, plan their journey through interactive maps, and learn about the rich history of each town.
 
-## Need an official Svelte framework?
+## Features
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+### Towns Directory
+- Browse all towns in the LOOP with beautiful image cards
+- View detailed town pages with:
+    - Population, county, and founding information
+    - Rich descriptions and image galleries
+    - Interactive business listings with filtering options
 
-## Technical considerations
+### Business Directory
+- Complete listings of local businesses in each town
+- Filter businesses by day of operation or business type
+- Business details including:
+    - Hours of operation
+    - Contact information
+    - Social media links
+    - Location data for map integration
 
-**Why use this over SvelteKit?**
+### Interactive Map
+- Explore the entire LOOP region
+- Get directions between towns or to specific locations
+- Integration with Google Maps for navigation
+- Option to use current location for directions
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+### Visual Design
+- River-themed layout with animated boat navigation
+- Responsive design for all devices
+- Visually appealing image galleries and town showcases
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+## Technical Information
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+### Built With
+- Svelte/SvelteKit - Frontend framework
+- Tailwind CSS - Styling
+- Google Maps API - Map functionality
+- SVG animations - River and boat effects
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+### Data Structure
+The application uses JSON data stores for:
+- Town information (towns.json)
+- Business listings (businesses.json)
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+## License
 
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `allowJs` in the TS template?**
-
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+© 2024 Missouri River Valley LOOP. All rights reserved.

@@ -12,6 +12,7 @@ type Event = {
     Dates: string;
     'Start Time'?: string;
     'End Time'?: string;
+    SpecialEvent?: boolean;
 };
 
 function createEventStore() {
@@ -20,10 +21,12 @@ function createEventStore() {
         events: Event[];
         loaded: boolean;
         allEvents: Event[];
+        specialEvents?: Event[];
     }>({
         currentDate: new Date(),
         events: [],
         allEvents: [],
+        specialEvents: [],
         loaded: false
     });
 
@@ -164,11 +167,14 @@ function createEventStore() {
 
             console.log(allEvents);
 
+            const specialEvents = allEvents.filter(event => event.SpecialEvent);
+
             update(state => ({
                 ...state,
                 events: sortedEvents,
                 allEvents,
                 currentDate: date,
+                specialEvents,
                 loaded: true
             }));
         } catch (error) {
@@ -219,12 +225,25 @@ function createEventStore() {
         });
     }
 
+    function getSpecialEvents() {
+        let specialEvents: Event[] = [];
+        return new Promise<Event[]>((resolve) => {
+            subscribe(({allEvents, loaded}) => {
+                if (loaded) {
+                    specialEvents = allEvents.filter(event => event.SpecialEvent);
+                    resolve(specialEvents);
+                }
+            })();
+        });
+    }
+
     return {
         subscribe,
         loadEvents,
         changeMonth,
         normalizeTimeString,
-        reset
+        reset,
+        getSpecialEvents
     };
 }
 
