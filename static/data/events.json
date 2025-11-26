@@ -13,19 +13,6 @@
     "Tags": ""
   },
   {
-    "Event Name": "Christmas Open House Tour ",
-    "Location": "New Haven ",
-    "Duration": "",
-    "Price": "free",
-    "Website": "https://www.facebook.com/share/1A9eDoz75F/",
-    "Dates": "11/15/2025 & 11/16/2025",
-    "Start Time": "",
-    "End Time": "",
-    "SpecialEvent": "yes",
-    "Description": "Quaint boutiques ready for you and the holiday season.  Come enjoy the magic of the season.  Tanglewood Cottage and A Buschel & A Peck both in New Haven",
-    "Tags": ""
-  },
-  {
     "Event Name": "Christmas in Rosebud",
     "Location": "Rosebud ",
     "Duration": "",
@@ -70,7 +57,7 @@
     "Duration": "",
     "Price": 25,
     "Website": "https://www.facebook.com/share/1DG48dGqKV/",
-    "Dates": "12/19/2025 & 12/20/2025",
+    "Dates": "2025-12-19T06:00:00.000Z",
     "Start Time": "11am",
     "End Time": "5pm",
     "SpecialEvent": "yes",
@@ -88,6 +75,19 @@
     "End Time": "8:30pm",
     "SpecialEvent": "yes",
     "Description": "Come join us for 2 Friday evening to begin your Christmas Tradions in a Small town Christmas fashion:  Lighting of the town Christmas Tree, Carolers, Bonfires, Shopping, Santa, Tree Decorating Contest, Face Painting & Crafts for the kids, and the JOY of the season!  ",
+    "Tags": ""
+  },
+  {
+    "Event Name": "8th Annual Hermann Cookie Walk",
+    "Location": "Hermann",
+    "Duration": "",
+    "Price": 25,
+    "Website": "https://www.facebook.com/share/1DG48dGqKV/",
+    "Dates": "2025-12-20T06:00:00.000Z",
+    "Start Time": "11am",
+    "End Time": "5pm",
+    "SpecialEvent": "yes",
+    "Description": "Get ready to shop, stroll, and sample sweet treats in beautiful downtown Hermann, Missouri.  Downtown shops will be offering specials and dressed up in their holiday best, making this a perfect way to support local while enjoying the season.",
     "Tags": ""
   }
 ]
