@@ -81,31 +81,31 @@
                 <div class="flex flex-col space-y-3">
                     <a
                             class="text-left text-gray-600 hover:text-gray-900"
-                            href="/"
+                            href="{base}/"
                     >
                         Home
                     </a>
                     <a
                             class="text-left text-gray-600 hover:text-gray-900"
-                            href="/towns"
+                            href="{base}/towns"
                     >
                         Towns
                     </a>
                     <a
                             class="text-left text-gray-600 hover:text-gray-900"
-                            href="/events"
+                            href="{base}/events"
                     >
                         Events
                     </a>
                     <a
                             class="text-left text-gray-600 hover:text-gray-900"
-                            href="/map"
+                            href="{base}/map"
                     >
                         Map
                     </a>
                     <a
                             class="text-left text-gray-600 hover:text-gray-900"
-                            href="/about"
+                            href="{base}/about"
                     >
                         About
                     </a>
