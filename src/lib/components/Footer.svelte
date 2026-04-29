@@ -1,4 +1,6 @@
 <script>
+    import {base} from '$app/paths';
+
     const currentYear = new Date().getFullYear();
 </script>
 
@@ -16,19 +18,19 @@
                 <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                 <ul class="space-y-2">
                     <li>
-                        <a class="text-black hover:text-white" href="/">Home</a>
+                        <a class="text-black hover:text-white" href="{base}/">Home</a>
                     </li>
                     <li>
-                        <a class="text-black hover:text-white" href="/towns">Towns</a>
+                        <a class="text-black hover:text-white" href="{base}/towns">Towns</a>
                     </li>
                     <li>
-                        <a class="text-black hover:text-white" href="/events">Events</a>
+                        <a class="text-black hover:text-white" href="{base}/events">Events</a>
                     </li>
                     <li>
-                        <a class="text-black hover:text-white" href="/map">Map</a>
+                        <a class="text-black hover:text-white" href="{base}/map">Map</a>
                     </li>
                     <li>
-                        <a class="text-black hover:text-white" href="/about">About</a>
+                        <a class="text-black hover:text-white" href="{base}/about">About</a>
                     </li>
                 </ul>
             </div>
